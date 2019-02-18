@@ -12,9 +12,9 @@ namespace QuizIt.Models
         public string Title { get; set; }
         public string Artist { get; set; }
 
-        public Question Question { get; set; }
-        public int QuestionId { get; set; }
+        //public Question Question { get; set; }
+        //public int QuestionId { get; set; }
 
-        public List<Question> Questions { get; set; } //Behövs kanske ej?
+        public List<Question> Questions { get; set; }
     }
 }
