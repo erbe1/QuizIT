@@ -45,5 +45,9 @@ namespace QuizIt.Data
             //base.OnModelCreating;
         }
 
+        public DbSet<QuizIt.Models.Question> Question { get; set; }
+
+        public DbSet<QuizIt.Models.Track> Track { get; set; }
+
     }
 }
