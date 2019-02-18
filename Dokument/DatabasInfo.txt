@@ -1,0 +1,11 @@
+Databas-grejer
+
+Many-to-many: Ett quiz kan ha många frågor; och en fråga kan finnas på många quiz.
+
+One-to-many: En fråga kan endast ha en låt, eftersom en fråga innehåller svar. Svaret på frågan 'Vad heter artisten?' är kopplat till en specifik låt. En låt kan emellertid ha många frågor.
+
+När man väljer MVC-projekt som tillåter olika användare skapas automatiskt tabeller i databasen med AspNetUsers osv. 
+För att ett musikquiz ska kunna kopplas till en viss användare kan man i Quiz.cs ha en property där man hänvisar till IdentityUser.
+
+I nuvarande versionen av webapplikationen finns det ej tävlande i databasen, skulle också kunna vara en add-on.
+
