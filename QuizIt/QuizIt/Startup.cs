@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuizIt.Services.Spotify;
 
 namespace QuizIt
 {
@@ -39,6 +40,10 @@ namespace QuizIt
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSingleton<Services.Spotify.IAuthenticationService, Services.Spotify.AuthenticationService>();
+            services.AddSingleton<IPlaybackService, PlaybackService>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
