@@ -13,6 +13,8 @@ using QuizIt.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuizIt.Services.Spotify;
+using QuizIt.Services;
+using QuizIt.Models;
 
 namespace QuizIt
 {
@@ -38,13 +40,16 @@ namespace QuizIt
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
             services.AddSingleton<Services.Spotify.IAuthenticationService, Services.Spotify.AuthenticationService>();
             services.AddSingleton<IPlaybackService, PlaybackService>();
 
-
+            services.AddTransient<AuthService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

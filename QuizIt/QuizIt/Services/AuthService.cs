@@ -10,18 +10,18 @@ namespace QuizIt.Services
 {
     public class AuthService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
+        public AuthService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
         }
 
-        internal async Task<ApplicationUser> GetUserByEmail(string email)
+        internal async Task<IdentityUser> GetUserByEmail(string email)
         {
             return await _userManager.FindByEmailAsync(email);
         }
@@ -42,15 +42,39 @@ namespace QuizIt.Services
             return await _roleManager.RoleExistsAsync(rolename);
         }
 
-        public async Task CreateRoleAsync(string rolename)
-        {
-            await _roleManager.CreateAsync(new ApplicationRole(rolename));
-        }
+        //public async Task CreateRoleAsync(string rolename)
+        //{
+        //    await _roleManager.CreateAsync(new ApplicationRole(rolename));
+        //}
 
         public async Task AddToRoleAsync(string email, string rolename)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            await _userManager.AddToRoleAsync(user, rolename);
+
+            bool roleExist = await RoleExistsAsync(rolename);
+
+            if (!roleExist)
+            {
+                IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(rolename));
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Couldn't create role");
+                }
+                //IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole(role));
+                //if (!result.Succeeded)
+                //    throw new Exception("Couldn't create role");
+            }
+
+            // Sätt användare till rollen
+
+            if (!await _userManager.IsInRoleAsync(user, rolename))
+            {
+                IdentityResult result = await _userManager.AddToRoleAsync(user, rolename);
+                if (!result.Succeeded)
+                    throw new Exception("Couldn't set user for role");
+            }
+
+            //await _userManager.AddToRoleAsync(user, rolename);
         }
 
         public async Task CreateAdminIfNotExist()
@@ -62,13 +86,13 @@ namespace QuizIt.Services
 
             // Skapa användare
 
-            ApplicationUser user = await _userManager.FindByNameAsync(email);
+            IdentityUser user = await _userManager.FindByNameAsync(email);
 
             if (user == null)
             {
-                IdentityResult result = await _userManager.CreateAsync(new ApplicationUser(email), password);
-                if (!result.Succeeded)
-                    throw new Exception("Couldn't create superadmin");
+                //IdentityResult result = await _userManager.CreateAsync(new ApplicationUser(email), password);
+                //if (!result.Succeeded)
+                //    throw new Exception("Couldn't create superadmin");
             }
 
             // Skapa roll
@@ -77,9 +101,9 @@ namespace QuizIt.Services
 
             if (!roleExist)
             {
-                IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole(role));
-                if (!result.Succeeded)
-                    throw new Exception("Couldn't create role");
+                //IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole(role));
+                //if (!result.Succeeded)
+                //    throw new Exception("Couldn't create role");
             }
 
             // Sätt användare till rollen
