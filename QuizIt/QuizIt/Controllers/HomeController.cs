@@ -15,6 +15,11 @@ namespace QuizIt.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            return Ok("test");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
