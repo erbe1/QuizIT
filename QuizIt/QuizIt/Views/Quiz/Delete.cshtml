@@ -1,0 +1,25 @@
+﻿@model QuizIt.Models.Quiz
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Ta bort quiz</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Namn
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /> |
+        <a asp-action="Index">Se alla quiz</a>
+    </form>
+</div>

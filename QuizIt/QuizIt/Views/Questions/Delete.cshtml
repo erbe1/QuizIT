@@ -1,0 +1,36 @@
+﻿@model QuizIt.Models.Question
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Ta bort fråga</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Fråga
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TrackQuestion)
+        </dd>
+        <dt>
+            Svar
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+        <dt>
+            Låt
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Track.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /> |
+        <a asp-action="Index">Se alla frågor</a>
+    </form>
+</div>
