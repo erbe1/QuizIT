@@ -1,3 +1,13 @@
-Bra länkar:
+﻿Bra länkar:
 
+Widget play-button:
 https://developer.spotify.com/documentation/widgets/guides/adding-a-spotify-play-button/
+
+Authorization Guide
+https://developer.spotify.com/documentation/general/guides/authorization-guide/
+
+Pause a Users Playback
+https://developer.spotify.com/documentation/web-api/reference/player/pause-a-users-playback/
+
+Get info from tracks
+https://developer.spotify.com/documentation/web-api/reference-beta/#category-tracks
