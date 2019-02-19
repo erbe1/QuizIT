@@ -1,40 +1,37 @@
 ﻿@model QuizIt.Models.Question
 
-@{
-    ViewData["Title"] = "Create";
-}
+<h2>Skapa ny fråga</h2>
 
-<h2>Create</h2>
-
-<h4>Question</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+
+            <div class="form-group">
+                <label asp-for="TrackId" class="control-label">Låt</label>
+                <select asp-for="TrackId" class="form-control" asp-items="ViewBag.TrackId"></select>
+            </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TrackQuestion" class="control-label"></label>
+                <label asp-for="TrackQuestion" class="control-label">Fråga</label>
                 <input asp-for="TrackQuestion" class="form-control" />
                 <span asp-validation-for="TrackQuestion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Answer" class="control-label"></label>
+                <label asp-for="Answer" class="control-label">Svar</label>
                 <input asp-for="Answer" class="form-control" />
                 <span asp-validation-for="Answer" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="TrackId" class="control-label"></label>
-                <select asp-for="TrackId" class ="form-control" asp-items="ViewBag.TrackId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Skapa fråga" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Se alla frågor</a>
 </div>
 
 @section Scripts {

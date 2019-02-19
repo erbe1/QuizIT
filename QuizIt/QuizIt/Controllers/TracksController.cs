@@ -22,7 +22,18 @@ namespace QuizIt.Controllers
         // GET: Tracks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Track.ToListAsync());
+            var tracksVm = new TracksViewModel();
+            tracksVm.Tracks = await _context.Track.ToListAsync();
+            return View(tracksVm);
+        }
+
+        public async Task<IActionResult> Search(Track track)
+        {
+            var tracksVm = new TracksViewModel();
+
+            tracksVm.Tracks = await _context.Tracks.Where(t => t.Title.Contains(track.Title) || t.Artist.Contains(track.Artist)).ToListAsync();
+
+            return View("Index", tracksVm);
         }
 
         // GET: Tracks/Details/5
