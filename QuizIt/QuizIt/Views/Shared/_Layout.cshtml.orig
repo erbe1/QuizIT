@@ -35,14 +35,19 @@
                     <li><a asp-area="" asp-controller="Questions" asp-action="Index">Frågor*</a></li>
                     <li><a asp-area="" asp-controller="Tracks" asp-action="Index">Låtar*</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakta oss</a></li>
+<<<<<<< HEAD
                     @if (User.IsInRole("Admin"))
                     {
                         <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index">Admin</a></li>
-                    }                  
-<li>
-                        <a asp-controller="Spotify" asp-action="Authorize">Spotify</a>
-                    </li>
+                    }
+                        <li>
+                            <a asp-controller="Spotify" asp-action="Authorize">Spotify</a>
+                        </li>
+                    </ul>
+=======
+                    <li><a asp-controller="Spotify" asp-action="Authorize">Spotify</a></li>
                 </ul>
+>>>>>>> 1e5f32694caa3a0a0616b37d29b99f5f3f315eda
                 <partial name="_LoginPartial" />
             </div>
         </div>
