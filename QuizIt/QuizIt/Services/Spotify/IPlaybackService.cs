@@ -12,12 +12,12 @@ namespace QuizIt.Services.Spotify
     {
         Task<HttpStatusCode> Pause(UserAccesstokenModel user);
         Task<HttpStatusCode> Play(UserAccesstokenModel user);
-        Task<HttpStatusCode> Search(UserAccesstokenModel user);
+        Task<HttpStatusCode> Search(UserAccesstokenModel user, string search);
 
 
         Task<HttpStatusCode> Pause();
         Task<HttpStatusCode> Play();
-        Task<HttpStatusCode> Search();
+        Task<HttpStatusCode> Search(string search);
 
 
         void SetUser(UserAccesstokenModel user);
