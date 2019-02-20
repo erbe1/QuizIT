@@ -53,7 +53,8 @@ namespace QuizIt.Controllers
 
         public async Task<IActionResult> Search()
         {
-            var result = await _playbackService.Search();
+            string search = "clutch";
+            var result = await _playbackService.Search(search);
             return View("Index");
         }
 
