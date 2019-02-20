@@ -31,6 +31,10 @@ namespace QuizIt.Services.Spotify
             }
         }
 
+        //Här göra Get metod för tracks
+        //Fråga Oscar hur testa på postman? Lista på det som matchar
+
+
         public async Task<HttpStatusCode> Pause(UserAccesstokenModel user)
         {
             return await Put(UrlPause, user);

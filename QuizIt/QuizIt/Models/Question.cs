@@ -13,6 +13,6 @@ namespace QuizIt.Models
         public string Answer { get; set; }
 
         public Track Track { get; set; }
-        public int TrackId { get; set; }
+        public int TrackId { get; set; } //Ev behöva ändra till string, ändra i databasen i såna fall, trackid ska heller inte autogenereras
     }
 }
