@@ -47,18 +47,18 @@ namespace QuizIt.Test
         public async Task<string> Get(string url, UserAccesstokenModel user)
         {
             using (HttpClient client = new HttpClient())
-            using (HttpResponseMessage response = await client.GetAsync(url))
-            using (HttpContent content = response.Content)
             {
                 client.DefaultRequestHeaders.Clear();
-
-                string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
+                string authorizationHeaderValue = "Bearer BQCJrOfTS6cvO9ISosuxLd3oHZV4ybaL9asvvg0YTjd6gDT-Ox9GbaSSbB-8z5W9487oQj7v4MiHPH7NJVUOiRUJSw8MWSx2wNKGPI2cKrCrBAeAqpOxfg0Qly5m15XLjkkreqY7Z6dRHc6ZZb0J";
+                //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
+
+                HttpResponseMessage response = await client.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
                     throw new Exception(response.ReasonPhrase);
 
-                return await content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync();
             }
         }
 
@@ -115,6 +115,6 @@ namespace QuizIt.Test
             return await Put(UrlPlay, User, body);
 
         }
-    
-}
+
+    }
 }
