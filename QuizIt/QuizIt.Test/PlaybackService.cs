@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizIt.Services.Spotify
+namespace QuizIt.Test
 {
-    public class PlaybackService : IPlaybackService
+    public class PlaybackService
     {
         const string UrlPause = "https://api.spotify.com/v1/me/player/pause";
         const string UrlPlay = "https://api.spotify.com/v1/me/player/play";
@@ -31,25 +31,36 @@ namespace QuizIt.Services.Spotify
             }
         }
 
-        public async Task<HttpStatusCode> Get(string url, UserAccesstokenModel user, FormUrlEncodedContent body = null)
+        //public async Task<Rootobject> GetMeteorologicalForecast(decimal longitude, decimal latitude)
+        //{
+
+        //    string sLongitude = Math.Round(longitude, 3).ToString(new CultureInfo("en"));
+        //    string sLatitude = Math.Round(latitude, 3).ToString(new CultureInfo("en"));
+
+        //    string page = $"https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/{sLongitude}/lat/{sLatitude}/data.json";
+
+        //    string result = await Get(page);
+
+        //    return JsonConvert.DeserializeObject<Rootobject>(result);
+        //}
+
+        public async Task<string> Get(string url, UserAccesstokenModel user)
         {
-            Uri uri = new Uri(url);
-
             using (HttpClient client = new HttpClient())
+            using (HttpResponseMessage response = await client.GetAsync(url))
+            using (HttpContent content = response.Content)
             {
-                //client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Clear();
 
-                //string authorizationHeaderValue = ("Bearer " + user.access_token);
-                //client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
-                HttpResponseMessage response = await client.GetAsync(url);
+                string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
-                return response.StatusCode;
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception(response.ReasonPhrase);
+
+                return await content.ReadAsStringAsync();
             }
         }
-
-
-        //Här göra Get metod för tracks, kolla på SMHI uppgiften
-        //Fråga Oscar hur testa på postman? Lista på det som matchar
 
 
         public async Task<HttpStatusCode> Pause(UserAccesstokenModel user)
@@ -72,15 +83,19 @@ namespace QuizIt.Services.Spotify
             return await Put(UrlPlay, User);
         }
 
-        public async Task<HttpStatusCode> Search(UserAccesstokenModel user, string search)
+        public async Task<string> Search(UserAccesstokenModel user, string search)
         {
-            return await Get(UrlSearch, user);
+            //return await Get(UrlSearch, user);
+            return await Get(search, user);
+
         }
 
-        public async Task<HttpStatusCode> Search(string search)
+        public async Task<string> Search(string search)
         {
             //q=name:abacab&type=album,track
-            return await Get(UrlSearch, User);
+            //return await Get(UrlSearch, User);
+            return await Get(search, User);
+
         }
 
         public void SetUser(UserAccesstokenModel user)
@@ -100,5 +115,6 @@ namespace QuizIt.Services.Spotify
             return await Put(UrlPlay, User, body);
 
         }
-    }
+    
+}
 }
