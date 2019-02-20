@@ -51,6 +51,12 @@ namespace QuizIt.Controllers
             return View("Index");
         }
 
+        public async Task<IActionResult> Search()
+        {
+            var result = await _playbackService.Search();
+            return View("Index");
+        }
+
         //public async Task<IActionResult> horror()
         //{
         //    var statuscode = await _playbackService.Horror();

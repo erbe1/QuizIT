@@ -13,6 +13,7 @@ namespace QuizIt.Services.Spotify
     {
         const string UrlPause = "https://api.spotify.com/v1/me/player/pause";
         const string UrlPlay = "https://api.spotify.com/v1/me/player/play";
+        const string UrlSearch = "https://api.spotify.com/v1/search";
         public UserAccesstokenModel User { get; set; }
 
         public async Task<HttpStatusCode> Put(string url, UserAccesstokenModel user, FormUrlEncodedContent body = null)
@@ -48,6 +49,16 @@ namespace QuizIt.Services.Spotify
         public async Task<HttpStatusCode> Play()
         {
             return await Put(UrlPlay, User);
+        }
+
+        public async Task<HttpStatusCode> Search(UserAccesstokenModel user)
+        {
+            return await Put(UrlSearch, user);
+        }
+
+        public async Task<HttpStatusCode> Search()
+        {
+            return await Put(UrlSearch, User);
         }
 
         public void SetUser(UserAccesstokenModel user)
