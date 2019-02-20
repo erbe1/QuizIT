@@ -1,4 +1,5 @@
-﻿<div class="centerContent">
+﻿
+<div class="centerContent">
     <div class="tileContainer">
         <a asp-action="Play" class="menueButton">Play</a>
     </div>
@@ -15,8 +16,19 @@
         @{string track = "1rnP8PfxOWOGrDYcqKDOXw";
         }
 
-        
-            <iframe src=@string.Format("https://open.spotify.com/embed/track/" + track) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            
+
+        <iframe src=@string.Format("https://open.spotify.com/embed/track/" + track) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
     </div>
+
+    @*<form asp-action="Search" method="get">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Search" class="control-label"></label>
+            <input asp-for="Search" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Ok" class="btn btn-default" />
+        </div>
+    </form>*@
 </div>

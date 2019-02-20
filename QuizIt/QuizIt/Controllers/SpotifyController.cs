@@ -31,13 +31,11 @@ namespace QuizIt.Controllers
             return Redirect(_authenticationService.GetRequestURI());
         }
 
-
         public async Task<IActionResult> Callback(string code)
         {
             var user = await _authenticationService.RequestRefreshAndAccessTokens(code);
             _playbackService.SetUser(user);
             return RedirectToAction("Index");
-
         }
 
         public async Task<IActionResult> Play()

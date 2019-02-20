@@ -14,5 +14,7 @@ namespace QuizIt.Models
 
         public Track Track { get; set; }
         public int TrackId { get; set; }
+
+        //public string Search { get; set; }
     }
 }
