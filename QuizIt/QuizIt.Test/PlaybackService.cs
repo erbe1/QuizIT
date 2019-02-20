@@ -1,4 +1,5 @@
-﻿using QuizIt.Models.Spotify.API;
+﻿using Newtonsoft.Json;
+using QuizIt.Models.Spotify.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static QuizIt.Test.SpotifyClasses;
 
 namespace QuizIt.Test
 {
@@ -31,20 +33,16 @@ namespace QuizIt.Test
             }
         }
 
-        //public async Task<Rootobject> GetMeteorologicalForecast(decimal longitude, decimal latitude)
-        //{
+        public async Task<Rootobject> GetSpotifyTracks()
+        {
+            string page = $"https://api.spotify.com/v1/search?q=popular&type=track";
 
-        //    string sLongitude = Math.Round(longitude, 3).ToString(new CultureInfo("en"));
-        //    string sLatitude = Math.Round(latitude, 3).ToString(new CultureInfo("en"));
+            string result = await Get(page);
 
-        //    string page = $"https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/{sLongitude}/lat/{sLatitude}/data.json";
+            return JsonConvert.DeserializeObject<Rootobject>(result);
+        }
 
-        //    string result = await Get(page);
-
-        //    return JsonConvert.DeserializeObject<Rootobject>(result);
-        //}
-
-        public async Task<string> Get(string url, UserAccesstokenModel user)
+        public async Task<string> Get(string url)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -86,7 +84,7 @@ namespace QuizIt.Test
         public async Task<string> Search(UserAccesstokenModel user, string search)
         {
             //return await Get(UrlSearch, user);
-            return await Get(search, user);
+            return await Get(search);
 
         }
 
@@ -94,7 +92,15 @@ namespace QuizIt.Test
         {
             //q=name:abacab&type=album,track
             //return await Get(UrlSearch, User);
-            return await Get(search, User);
+            return await Get(search);
+
+        }
+
+        public async Task<Rootobject> Search2(string search)
+        {
+            //q=name:abacab&type=album,track
+            //return await Get(UrlSearch, User);
+            return await GetSpotifyTracks();
 
         }
 
