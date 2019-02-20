@@ -31,6 +31,10 @@ namespace QuizIt.Services.Spotify
             }
         }
 
+        //Här göra Get metod för tracks
+        //Fråga Oscar hur testa på postman? Lista på det som matchar
+
+
         public async Task<HttpStatusCode> Pause(UserAccesstokenModel user)
         {
             return await Put(UrlPause, user);
@@ -51,13 +55,14 @@ namespace QuizIt.Services.Spotify
             return await Put(UrlPlay, User);
         }
 
-        public async Task<HttpStatusCode> Search(UserAccesstokenModel user)
+        public async Task<HttpStatusCode> Search(UserAccesstokenModel user, string search)
         {
             return await Put(UrlSearch, user);
         }
 
-        public async Task<HttpStatusCode> Search()
+        public async Task<HttpStatusCode> Search(string search)
         {
+            //q=name:abacab&type=album,track
             return await Put(UrlSearch, User);
         }
 
