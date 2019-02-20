@@ -57,7 +57,6 @@ namespace QuizIt.Services.Spotify
             {
                 return await GetModel<UserAccesstokenModel>(response.Content);
             }
-
         }
 
         public async Task<HttpStatusCode> Pause(UserAccesstokenModel user)
@@ -73,8 +72,6 @@ namespace QuizIt.Services.Spotify
             {
                 return response.StatusCode;
             }
-
-
         }
 
         private async Task<T> GetModel<T>(HttpContent content)

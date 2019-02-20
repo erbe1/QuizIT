@@ -6,4 +6,17 @@
 
         <a asp-action="Paus" class="menueButton">Paus</a>
     </div>
+
+    <div>
+
+        @*I den här vyn vill vi skicka in ett quiz*@
+        @*För varje fråga i List<Questions> som ett Quiz har, så ska frågan, svaret och en playknapp skrivas ut med den specifika låtens id.*@
+
+        @{string track = "1rnP8PfxOWOGrDYcqKDOXw";
+        }
+
+        
+            <iframe src="https://open.spotify.com/embed/track/1rnP8PfxOWOGrDYcqKDOXw" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            
+    </div>
 </div>
