@@ -48,7 +48,9 @@ namespace QuizIt.Controllers
         // GET: Questions/Create
         public IActionResult Create()
         {
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id");
+            // ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id");
+            ViewBag.TrackId = new SelectList(_context.Set<Track>(), "Id", "Title");
+                        
             return View();
         }
 
@@ -65,7 +67,7 @@ namespace QuizIt.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id", question.TrackId);
+            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
@@ -82,7 +84,7 @@ namespace QuizIt.Controllers
             {
                 return NotFound();
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id", question.TrackId);
+            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
@@ -118,7 +120,7 @@ namespace QuizIt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id", question.TrackId);
+            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 

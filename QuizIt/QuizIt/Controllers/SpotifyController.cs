@@ -35,7 +35,9 @@ namespace QuizIt.Controllers
         {
             var user = await _authenticationService.RequestRefreshAndAccessTokens(code);
             _playbackService.SetUser(user);
-            return RedirectToAction("Index");
+            return Ok(user.access_token);
+            //return RedirectToAction("Index");
+
         }
 
         public async Task<IActionResult> Play()

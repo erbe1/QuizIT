@@ -22,9 +22,16 @@ body {
 
 .navbar {
     background: linear-gradient(0.30turn, #7E39B0, #CE255F, #F80308, #F96501, #F8D000, 0.7);
-    
     transition: opacity 2s;
-
+    font-family: Bahnschrift;
+}
+.nav-list-item a {
+    text-decoration: none;
+    color: #000000;
+    font-family: Amatic SC;
+    font-size: medium;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 #grad {
