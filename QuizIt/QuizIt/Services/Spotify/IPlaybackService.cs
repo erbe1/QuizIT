@@ -19,7 +19,7 @@ namespace QuizIt.Services.Spotify
         Task<HttpStatusCode> Pause();
         Task<HttpStatusCode> Play();
         Task<string> Search(string search);
-        Task<Rootobject> SearchForTrack(string search);
+        //Task<Rootobject> SearchForTrack(string search);
 
         void SetUser(UserAccesstokenModel user);
 

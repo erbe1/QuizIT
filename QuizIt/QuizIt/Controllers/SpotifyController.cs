@@ -52,10 +52,10 @@ namespace QuizIt.Controllers
             return View("Index");
         }
 
-        public async Task<IActionResult> Search()
+        public async Task<IActionResult> Search(Question q)
         {
             var service = new PlaybackService();
-            var result = service.SearchForTrack($"https://api.spotify.com/v1/search?q={search}&type=track").Result;
+            var result = service.GetSpotifyTracks(q.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
 
             Question question = new Question();
             question.TrackQuestion = "Vad heter låten?";

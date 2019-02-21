@@ -38,7 +38,7 @@ namespace QuizIt.Services.Spotify
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                string authorizationHeaderValue = "Bearer BQBJlJMEp2m7p2G04SE93-67qhgdt1G6ieUs_zk-qfHYPXEqr92oelJbtPFtHKTpHD0rReuLwHkkzqYlAtgoPeromuhCppth5ZaWsROo4bK0fNs8jPUt0PA-Hk3HA0ucwRAdwcmD7cXyOhyL5yCq";
+                string authorizationHeaderValue = "Bearer BQAKW0cCXFEYehNrmhMK8So-cXwX-yhQyrZ4vDVIp90ZVKh--5s33RHGk2EoXFZeaMtCEw3hKTAs-Xz36AwQ4zeSWaKZ4rJjUnEu4MBqYBrrmpZKB6md3yCzutb3FGwA-FPZOga-K_pmOusa5IOS";
                 //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
@@ -51,9 +51,9 @@ namespace QuizIt.Services.Spotify
             }
         }
 
-        public async Task<Rootobject> GetSpotifyTracks()
+        public async Task<Rootobject> GetSpotifyTracks(string title)
         {
-            string page = $"https://api.spotify.com/v1/search?q=popular&type=track";
+            string page = $"https://api.spotify.com/v1/search?q={title}&type=track";
 
             string result = await Get(page);
 
@@ -97,12 +97,12 @@ namespace QuizIt.Services.Spotify
             return await Get(search);
         }
 
-        public async Task<Rootobject> SearchForTrack(string search)
-        {
-            //q=name:abacab&type=album,track
-            //return await Get(UrlSearch, User);
-            return await GetSpotifyTracks();
-        }
+        //public async Task<Rootobject> SearchForTrack(string search)
+        //{
+        //    //q=name:abacab&type=album,track
+        //    //return await Get(UrlSearch, User);
+        //    return await GetSpotifyTracks();
+        //}
 
         public void SetUser(UserAccesstokenModel user)
         {

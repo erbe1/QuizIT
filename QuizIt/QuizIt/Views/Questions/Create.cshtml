@@ -9,7 +9,7 @@
         <form asp-controller="Spotify" asp-action="Search">
             <div class="form-group">
                 <label asp-for="TrackTitle" class="control-label">Låt</label>
-                <input asp-for="TrackTitle" class="form-control" />
+                <input asp-for="TrackTitle" asp-route="search" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Sök låt" class="btn btn-default" />
