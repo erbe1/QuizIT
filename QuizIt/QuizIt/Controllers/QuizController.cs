@@ -65,7 +65,7 @@ namespace QuizIt.Controllers
 
                 CreateQuizVM vm = new CreateQuizVM();
                 vm.Quiz = quiz;
-                return RedirectToAction("Create", "Questions", new {quizName=vm.Quiz.Name}); //varför följer inte värdet för vm med, den är satt till null i create.cshtml??
+                return RedirectToAction("Create", "Questions", new {quizName=vm.Quiz.Name, quizId=vm.Quiz.Id}); //varför följer inte värdet för vm med, den är satt till null i create.cshtml??
             }
             return View(quiz);
         }
