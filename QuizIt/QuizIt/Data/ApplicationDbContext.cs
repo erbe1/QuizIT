@@ -16,7 +16,8 @@ namespace QuizIt.Data
 
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Track> Tracks { get; set; }
+        public DbSet<QuizIt.Models.Question> Question { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,30 +25,6 @@ namespace QuizIt.Data
                 .HasKey(x => new { x.QuizId, x.QuestionId });
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Battle>()
-            //    .HasOne(p => p.BattleLog)
-            //    .WithOne(i => i.Battle)
-            //    .HasForeignKey<BattleLog>(b => b.BattleId);
-
-
-            //modelBuilder.Entity<Samurai>()
-            //    .HasOne(p => p.SecretIdentity)
-            //    .WithOne(i => i.Samurai)
-            //    .HasForeignKey<SecretIdentity>(s => s.SamuraiId);
-
-            //modelBuilder.Entity<Battle>()
-            //    .HasOne(p => p.BattleLog)
-            //    .WithOne(i => i.Battle)
-            //    .HasForeignKey<BattleLog>(b => b.BattleId);
-
-            //modelBuilder.Entity<SamuraiBattle>().
-            //    HasKey(x => new { x.SamuraiId, x.BattleId });
-            //base.OnModelCreating;
         }
-
-        public DbSet<QuizIt.Models.Question> Question { get; set; }
-
-        public DbSet<QuizIt.Models.Track> Track { get; set; }
-
     }
 }

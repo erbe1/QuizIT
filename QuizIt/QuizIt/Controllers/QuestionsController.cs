@@ -86,7 +86,6 @@ namespace QuizIt.Controllers
             {
                 return NotFound();
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
@@ -122,7 +121,6 @@ namespace QuizIt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
