@@ -64,13 +64,15 @@
 
     @if (ViewBag.IsQuiz == true)
     {
-        <img class="img-responsive" src = "/images/musicbackground.jpg" />
+        <img class="img-responsive" src="/images/musicbackground.jpg" />
     }
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
+            <img src="~/css/quizitluna.png" style="height:50px" />
+            <p>Kontakta oss: quizit@academy.se</p>
             <p>&copy; 2019 - QuizIt</p>
         </footer>
     </div>
