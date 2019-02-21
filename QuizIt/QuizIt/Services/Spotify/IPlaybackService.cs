@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static QuizIt.Models.Spotify.SpotifyClasses;
 
 namespace QuizIt.Services.Spotify
 {
@@ -12,13 +13,13 @@ namespace QuizIt.Services.Spotify
     {
         Task<HttpStatusCode> Pause(UserAccesstokenModel user);
         Task<HttpStatusCode> Play(UserAccesstokenModel user);
-        Task<HttpStatusCode> Search(UserAccesstokenModel user, string search);
+        Task<string> Search(UserAccesstokenModel user, string search);
 
 
         Task<HttpStatusCode> Pause();
         Task<HttpStatusCode> Play();
-        Task<HttpStatusCode> Search(string search);
-
+        Task<string> Search(string search);
+        Task<Rootobject> SearchForTrack(string search);
 
         void SetUser(UserAccesstokenModel user);
 

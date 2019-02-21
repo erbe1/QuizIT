@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizIt.Models;
 using QuizIt.Services.Spotify;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace QuizIt.Controllers
 {
     public class SpotifyController : Controller
     {
-        private Services.Spotify.IAuthenticationService _authenticationService;
+        private IAuthenticationService _authenticationService;
         private IPlaybackService _playbackService;
 
 
-        public SpotifyController(Services.Spotify.IAuthenticationService authenticationService, IPlaybackService playbackService)
+        public SpotifyController(IAuthenticationService authenticationService, IPlaybackService playbackService)
         {
             _authenticationService = authenticationService;
             _playbackService = playbackService;
@@ -53,9 +54,16 @@ namespace QuizIt.Controllers
 
         public async Task<IActionResult> Search()
         {
-            string search = "clutch";
-            var result = await _playbackService.Search(search);
-            return View("Index");
+            var service = new PlaybackService();
+            var result = service.SearchForTrack($"https://api.spotify.com/v1/search?q={search}&type=track").Result;
+
+            Question question = new Question();
+            question.TrackQuestion = "Vad heter låten?";
+            question.Answer = "Popular";
+            question.TrackId = result.tracks.items[0].id;
+            question.TrackTitle = result.tracks.items[0].name;
+
+            return View("Index", question);
         }
 
         //public async Task<IActionResult> horror()

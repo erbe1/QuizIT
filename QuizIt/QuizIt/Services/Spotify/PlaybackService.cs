@@ -1,4 +1,5 @@
-﻿using QuizIt.Models.Spotify.API;
+﻿using Newtonsoft.Json;
+using QuizIt.Models.Spotify.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static QuizIt.Models.Spotify.SpotifyClasses;
 
 namespace QuizIt.Services.Spotify
 {
@@ -31,22 +33,32 @@ namespace QuizIt.Services.Spotify
             }
         }
 
-        public async Task<HttpStatusCode> Get(string url, UserAccesstokenModel user, FormUrlEncodedContent body = null)
+        public async Task<string> Get(string url)
         {
-            Uri uri = new Uri(url);
-
             using (HttpClient client = new HttpClient())
             {
-                //client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Clear();
+                string authorizationHeaderValue = "Bearer BQBJlJMEp2m7p2G04SE93-67qhgdt1G6ieUs_zk-qfHYPXEqr92oelJbtPFtHKTpHD0rReuLwHkkzqYlAtgoPeromuhCppth5ZaWsROo4bK0fNs8jPUt0PA-Hk3HA0ucwRAdwcmD7cXyOhyL5yCq";
+                //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
-                //string authorizationHeaderValue = ("Bearer " + user.access_token);
-                //client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
                 HttpResponseMessage response = await client.GetAsync(url);
 
-                return response.StatusCode;
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception(response.ReasonPhrase);
+
+                return await response.Content.ReadAsStringAsync();
             }
         }
 
+        public async Task<Rootobject> GetSpotifyTracks()
+        {
+            string page = $"https://api.spotify.com/v1/search?q=popular&type=track";
+
+            string result = await Get(page);
+
+            return JsonConvert.DeserializeObject<Rootobject>(result);
+        }
 
         //Här göra Get metod för tracks, kolla på SMHI uppgiften
         //Fråga Oscar hur testa på postman? Lista på det som matchar
@@ -72,15 +84,24 @@ namespace QuizIt.Services.Spotify
             return await Put(UrlPlay, User);
         }
 
-        public async Task<HttpStatusCode> Search(UserAccesstokenModel user, string search)
+        public async Task<string> Search(UserAccesstokenModel user, string search)
         {
-            return await Get(UrlSearch, user);
+            //return await Get(UrlSearch, user);
+            return await Get(search);
         }
 
-        public async Task<HttpStatusCode> Search(string search)
+        public async Task<string> Search(string search)
         {
             //q=name:abacab&type=album,track
-            return await Get(UrlSearch, User);
+            //return await Get(UrlSearch, User);
+            return await Get(search);
+        }
+
+        public async Task<Rootobject> SearchForTrack(string search)
+        {
+            //q=name:abacab&type=album,track
+            //return await Get(UrlSearch, User);
+            return await GetSpotifyTracks();
         }
 
         public void SetUser(UserAccesstokenModel user)
