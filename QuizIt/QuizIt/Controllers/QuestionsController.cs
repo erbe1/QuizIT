@@ -47,11 +47,14 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(CreateQuizVM createquizvm)
+        public IActionResult Create(CreateQuizVM createquizvm, string quizName)
         {
             // ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id");
             //ViewBag.TrackId = new SelectList(_context.Set<Track>(), "Id", "Title");
-                        
+            ViewData["Name"] = quizName;
+            //ViewData["Name"] = createquizvm.Quiz.Name; //varför funkar inte viewdata och/eller viewbag?
+            //ViewBag.Name = createquizvm.Quiz.Name;
+
             return View(createquizvm);
         }
 
