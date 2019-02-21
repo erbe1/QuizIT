@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizIt.Models;
+using QuizIt.Models.ViewModels;
 using QuizIt.Services.Spotify;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,11 @@ namespace QuizIt.Controllers
 {
     public class SpotifyController : Controller
     {
-        private Services.Spotify.IAuthenticationService _authenticationService;
+        private IAuthenticationService _authenticationService;
         private IPlaybackService _playbackService;
+        public static string _token;
 
-
-        public SpotifyController(Services.Spotify.IAuthenticationService authenticationService, IPlaybackService playbackService)
+        public SpotifyController(IAuthenticationService authenticationService, IPlaybackService playbackService)
         {
             _authenticationService = authenticationService;
             _playbackService = playbackService;
@@ -35,8 +37,8 @@ namespace QuizIt.Controllers
         {
             var user = await _authenticationService.RequestRefreshAndAccessTokens(code);
             _playbackService.SetUser(user);
-            return Ok(user.access_token);
-            //return RedirectToAction("Index");
+            _token = user.access_token;
+            return RedirectToAction("Index", "Quiz");
 
         }
 
@@ -51,11 +53,27 @@ namespace QuizIt.Controllers
             return View("Index");
         }
 
-        public async Task<IActionResult> Search()
+
+        public async Task<IActionResult> Search(CreateQuizVM createquizvm)
         {
-            string search = "clutch";
-            var result = await _playbackService.Search(search);
-            return View("Index");
+            var service = new PlaybackService();
+            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+
+            Question question = new Question();
+            question.TrackQuestion = "Vad heter låten?";
+            question.Answer = "Popular";
+            question.TrackId = result.tracks.items[0].id; //Dessa värdena ska sparas 
+            question.TrackTitle = result.tracks.items[0].name;
+
+            return View("Index", question);
+        }
+
+        public IActionResult SearchApi(string term)
+        {
+            var service = new PlaybackService();
+            var result = service.GetSpotifyTracks(term).Result; 
+
+            return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
         }
 
         //public async Task<IActionResult> horror()

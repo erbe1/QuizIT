@@ -1,27 +1,40 @@
-﻿@model QuizIt.Models.Question
+﻿@model QuizIt.Models.ViewModels.CreateQuizVM
 
 <h2>Skapa ny fråga</h2>
+
+<h4>@ViewData["Name"]</h4>
+<h4>@ViewBag.Name</h4>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
 
-            @*<div class="form-group">
-                <label asp-for="TrackId" class="control-label">Låt</label>
-                <select asp-for="TrackId" class="form-control" asp-items="ViewBag.TrackId"></select>
-                <input asp-action="Search"/>
-            </div>*@
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Spotify" asp-action="Search">
             <div class="form-group">
-                <label asp-for="TrackQuestion" class="control-label">Fråga</label>
-                <input asp-for="TrackQuestion" class="form-control" />
-                <span asp-validation-for="TrackQuestion" class="text-danger"></span>
+                <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
+                <input asp-for="Question.TrackTitle" asp-route="search" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Answer" class="control-label">Svar</label>
-                <input asp-for="Answer" class="form-control" />
-                <span asp-validation-for="Answer" class="text-danger"></span>
+                <input type="submit" value="Sök låt" class="btn btn-default" />
+            </div>
+        </form>
+
+        <form asp-action="Create">
+
+            <div class="form-group">
+                <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
+                <input asp-for="Question.TrackTitle" class="form-control" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Question.TrackQuestion" class="control-label">Fråga</label>
+                <input asp-for="Question.TrackQuestion" class="form-control" />
+                <span asp-validation-for="Question.TrackQuestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question.Answer" class="control-label">Svar</label>
+                <input asp-for="Question.Answer" class="form-control" />
+                <span asp-validation-for="Question.Answer" class="text-danger"></span>
             </div>
 
             <div class="form-group">

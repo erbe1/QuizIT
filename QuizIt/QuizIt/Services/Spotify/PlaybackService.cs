@@ -1,4 +1,6 @@
-﻿using QuizIt.Models.Spotify.API;
+﻿using Newtonsoft.Json;
+using QuizIt.Controllers;
+using QuizIt.Models.Spotify.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static QuizIt.Models.Spotify.SpotifyClasses;
 
 namespace QuizIt.Services.Spotify
 {
@@ -31,22 +34,32 @@ namespace QuizIt.Services.Spotify
             }
         }
 
-        public async Task<HttpStatusCode> Get(string url, UserAccesstokenModel user, FormUrlEncodedContent body = null)
+        public async Task<string> Get(string url)
         {
-            Uri uri = new Uri(url);
-
             using (HttpClient client = new HttpClient())
             {
-                //client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Clear();
+                //string authorizationHeaderValue = "Bearer BQAKW0cCXFEYehNrmhMK8So-cXwX-yhQyrZ4vDVIp90ZVKh--5s33RHGk2EoXFZeaMtCEw3hKTAs-Xz36AwQ4zeSWaKZ4rJjUnEu4MBqYBrrmpZKB6md3yCzutb3FGwA-FPZOga-K_pmOusa5IOS";
+                string authorizationHeaderValue = ("Bearer " + SpotifyController._token);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
-                //string authorizationHeaderValue = ("Bearer " + user.access_token);
-                //client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
                 HttpResponseMessage response = await client.GetAsync(url);
 
-                return response.StatusCode;
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception(response.ReasonPhrase);
+
+                return await response.Content.ReadAsStringAsync();
             }
         }
 
+        public async Task<Rootobject> GetSpotifyTracks(string title)
+        {
+            string page = $"https://api.spotify.com/v1/search?q={title}&type=track";
+
+            string result = await Get(page);
+
+            return JsonConvert.DeserializeObject<Rootobject>(result);
+        }
 
         //Här göra Get metod för tracks, kolla på SMHI uppgiften
         //Fråga Oscar hur testa på postman? Lista på det som matchar
@@ -72,16 +85,25 @@ namespace QuizIt.Services.Spotify
             return await Put(UrlPlay, User);
         }
 
-        public async Task<HttpStatusCode> Search(UserAccesstokenModel user, string search)
+        public async Task<string> Search(UserAccesstokenModel user, string search)
         {
-            return await Get(UrlSearch, user);
+            //return await Get(UrlSearch, user);
+            return await Get(search);
         }
 
-        public async Task<HttpStatusCode> Search(string search)
+        public async Task<string> Search(string search)
         {
             //q=name:abacab&type=album,track
-            return await Get(UrlSearch, User);
+            //return await Get(UrlSearch, User);
+            return await Get(search);
         }
+
+        //public async Task<Rootobject> SearchForTrack(string search)
+        //{
+        //    //q=name:abacab&type=album,track
+        //    //return await Get(UrlSearch, User);
+        //    return await GetSpotifyTracks();
+        //}
 
         public void SetUser(UserAccesstokenModel user)
         {

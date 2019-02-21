@@ -47,7 +47,7 @@ namespace QuizIt.Test
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                string authorizationHeaderValue = "Bearer BQCJrOfTS6cvO9ISosuxLd3oHZV4ybaL9asvvg0YTjd6gDT-Ox9GbaSSbB-8z5W9487oQj7v4MiHPH7NJVUOiRUJSw8MWSx2wNKGPI2cKrCrBAeAqpOxfg0Qly5m15XLjkkreqY7Z6dRHc6ZZb0J";
+                string authorizationHeaderValue = "Bearer BQBJlJMEp2m7p2G04SE93-67qhgdt1G6ieUs_zk-qfHYPXEqr92oelJbtPFtHKTpHD0rReuLwHkkzqYlAtgoPeromuhCppth5ZaWsROo4bK0fNs8jPUt0PA-Hk3HA0ucwRAdwcmD7cXyOhyL5yCq";
                 //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
@@ -96,7 +96,7 @@ namespace QuizIt.Test
 
         }
 
-        public async Task<Rootobject> Search2(string search)
+        public async Task<Rootobject> SearchForTrack(string search)
         {
             //q=name:abacab&type=album,track
             //return await Get(UrlSearch, User);
