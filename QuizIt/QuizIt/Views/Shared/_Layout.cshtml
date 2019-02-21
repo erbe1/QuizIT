@@ -33,7 +33,7 @@
                 </button>
                 @*<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">QuizIt</a>*@
             </div>
-            <div class="navbar-collapse collapse" style="height: 60px">
+            <div class="navbar-collapse collapse" style="height: 50px">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Om QuizIt</a></li>
                     <li><a asp-controller="Spotify" asp-action="Authorize">Quiz</a></li>
@@ -55,9 +55,21 @@
 
     @if (ViewBag.IsStartPage == true)
     {
-    <img class="img-responsive" src="~/images/QuizIT-logga-leeeets.svg"/>
+        <img class="img-responsive" src="~/images/QuizIT-logga-leeeets.svg" />
     }
 
+    @if (ViewBag.IsAbout == true)
+    {
+        <img src="~/images/OmQuizIT.svg" />
+    }
+
+    @*@if (ViewBag.IsQuiz == true)
+    {
+        <div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+            <iframe frameborder="0" height="100%" width="100%"
+                    src="https://www.youtube.com/watch?v=xDVZZQNeNUU"></iframe>
+        </div>
+    }*@
 
     <div class="container body-content">
         @RenderBody()
