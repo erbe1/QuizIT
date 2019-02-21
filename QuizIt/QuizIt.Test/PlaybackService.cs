@@ -47,7 +47,7 @@ namespace QuizIt.Test
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                string authorizationHeaderValue = "Bearer BQCJrOfTS6cvO9ISosuxLd3oHZV4ybaL9asvvg0YTjd6gDT-Ox9GbaSSbB-8z5W9487oQj7v4MiHPH7NJVUOiRUJSw8MWSx2wNKGPI2cKrCrBAeAqpOxfg0Qly5m15XLjkkreqY7Z6dRHc6ZZb0J";
+                string authorizationHeaderValue = "Bearer BQChqiEAcSSrIaEIr7U4Ib72jjZvtm_qR51mfF7KMRqa1pQH1qUzQ_oys-S9WEiDtVhnC6Jm-4cfSB0X8SUyfQijqPRzMgBnVETmn5hsJ7P5EZ4m16FzlpXhbYO6kfxrqAM7cN2EYuh23K8Yupbw";
                 //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
