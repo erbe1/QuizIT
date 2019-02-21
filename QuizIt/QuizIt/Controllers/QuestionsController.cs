@@ -47,14 +47,16 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int quizId)
+        public IActionResult Create(int quizId, string quizName)
         {
 
             var createquizvm = new CreateQuizVM
             {
                 Quiz = new Quiz
                 {
-                    Id = quizId
+                    Id = quizId,
+                    Name = quizName
+                    
                 }
             };
 
