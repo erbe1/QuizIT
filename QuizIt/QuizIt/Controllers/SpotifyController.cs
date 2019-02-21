@@ -13,7 +13,7 @@ namespace QuizIt.Controllers
     {
         private IAuthenticationService _authenticationService;
         private IPlaybackService _playbackService;
-
+        public static string _token;
 
         public SpotifyController(IAuthenticationService authenticationService, IPlaybackService playbackService)
         {
@@ -36,8 +36,8 @@ namespace QuizIt.Controllers
         {
             var user = await _authenticationService.RequestRefreshAndAccessTokens(code);
             _playbackService.SetUser(user);
-            return Ok(user.access_token);
-            //return RedirectToAction("Index");
+            _token = user.access_token;
+            return RedirectToAction("Index", "Quiz");
 
         }
 

@@ -36,7 +36,7 @@
             <div class="navbar-collapse collapse" style="height: 60px">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Om QuizIt</a></li>
-                    <li><a asp-area="" asp-controller="Quiz" asp-action="Index">Quiz</a></li>
+                    <li><a asp-controller="Spotify" asp-action="Authorize">Quiz</a></li>
                     <li><a asp-area="" asp-controller="Questions" asp-action="Index">Frågor*</a></li>
                     <li><a asp-area="" asp-controller="Tracks" asp-action="Index">Låtar*</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakta oss</a></li>
@@ -44,9 +44,7 @@
                     {
                         <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index">Admin</a></li>
                     }
-                    <li>
-                        <a asp-controller="Spotify" asp-action="Authorize">Spotify</a>
-                    </li>
+                    
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
