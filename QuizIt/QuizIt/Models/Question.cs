@@ -12,7 +12,6 @@ namespace QuizIt.Models
         public string TrackQuestion { get; set; }
         public string Answer { get; set; }
 
-        public Track Track { get; set; }
         public string TrackTitle { get; set; }
         public string TrackId { get; set; }
     }

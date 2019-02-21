@@ -62,12 +62,10 @@ namespace QuizIt.Controllers
                 _context.Add(quiz);
                 await _context.SaveChangesAsync();
 
-                ViewData["Name"] = quiz.Name; //varför funkar inte viewdata och/eller viewbag?
-                ViewBag.Name = quiz.Name;
 
                 CreateQuizVM vm = new CreateQuizVM();
                 vm.Quiz = quiz;
-                return RedirectToAction("Create","Questions",vm); //varför följer inte värdet för vm med, den är satt till null i create.cshtml??
+                return RedirectToAction("Create", "Questions", new {quizName=vm.Quiz.Name, quizId=vm.Quiz.Id}); //varför följer inte värdet för vm med, den är satt till null i create.cshtml??
             }
             return View(quiz);
         }

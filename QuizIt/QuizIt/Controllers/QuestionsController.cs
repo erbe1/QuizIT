@@ -20,10 +20,11 @@ namespace QuizIt.Controllers
             _context = context;
         }
 
+
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Question.Include(q => q.Track);
+            var applicationDbContext = _context.Question;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +37,6 @@ namespace QuizIt.Controllers
             }
 
             var question = await _context.Question
-                .Include(q => q.Track)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (question == null)
             {
@@ -47,11 +47,12 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(CreateQuizVM createquizvm)
+        public IActionResult Create(CreateQuizVM createquizvm, string quizName)
         {
             // ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id");
             //ViewBag.TrackId = new SelectList(_context.Set<Track>(), "Id", "Title");
-                        
+            ViewData["Name"] = quizName;
+
             return View(createquizvm);
         }
 
@@ -85,7 +86,6 @@ namespace QuizIt.Controllers
             {
                 return NotFound();
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
@@ -121,28 +121,26 @@ namespace QuizIt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View(question);
         }
 
         // GET: Questions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var question = await _context.Question
-                .Include(q => q.Track)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (question == null)
-            {
-                return NotFound();
-            }
+        //    var question = await _context.Question
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (question == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(question);
-        }
+        //    return View(question);
+        //}
 
         // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
