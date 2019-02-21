@@ -31,7 +31,6 @@ namespace QuizIt.Controllers
             return Redirect(_authenticationService.GetRequestURI());
         }
 
-
         public async Task<IActionResult> Callback(string code)
         {
             var user = await _authenticationService.RequestRefreshAndAccessTokens(code);
