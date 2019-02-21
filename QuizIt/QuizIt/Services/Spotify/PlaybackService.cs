@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using QuizIt.Controllers;
 using QuizIt.Models.Spotify.API;
 using System;
 using System.Collections.Generic;
@@ -38,8 +39,8 @@ namespace QuizIt.Services.Spotify
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                string authorizationHeaderValue = "Bearer BQAKW0cCXFEYehNrmhMK8So-cXwX-yhQyrZ4vDVIp90ZVKh--5s33RHGk2EoXFZeaMtCEw3hKTAs-Xz36AwQ4zeSWaKZ4rJjUnEu4MBqYBrrmpZKB6md3yCzutb3FGwA-FPZOga-K_pmOusa5IOS";
-                //string authorizationHeaderValue = ("Bearer " + "BQBBApfz2RfLzup7aJ1-TxA5UxAe067bJuXQKhsjF1ZLgKOdS0grtPsPyEYWkVhL0BMHT-1kceZI57yjfJARPu5G9MOGKlz7yuCZuHT34KhZ5FAeLEo5r79dxtoqCJFo2s3rvG4MCHEdc4jWkR2v");
+                //string authorizationHeaderValue = "Bearer BQAKW0cCXFEYehNrmhMK8So-cXwX-yhQyrZ4vDVIp90ZVKh--5s33RHGk2EoXFZeaMtCEw3hKTAs-Xz36AwQ4zeSWaKZ4rJjUnEu4MBqYBrrmpZKB6md3yCzutb3FGwA-FPZOga-K_pmOusa5IOS";
+                string authorizationHeaderValue = ("Bearer " + SpotifyController._token);
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
                 HttpResponseMessage response = await client.GetAsync(url);

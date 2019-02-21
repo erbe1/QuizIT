@@ -14,6 +14,6 @@ namespace QuizIt.Models
 
         public Track Track { get; set; }
         public string TrackTitle { get; set; }
-        public string TrackId { get; set; } //Ev behöva ändra till string, ändra i databasen i såna fall, trackid ska heller inte autogenereras
+        public string TrackId { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using QuizIt.Models;
+using QuizIt.Models.ViewModels;
 
 namespace QuizIt.Controllers
 {
@@ -46,12 +47,12 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create()
+        public IActionResult Create(CreateQuizVM createquizvm)
         {
             // ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Id");
             //ViewBag.TrackId = new SelectList(_context.Set<Track>(), "Id", "Title");
                         
-            return View();
+            return View(createquizvm);
         }
 
         // POST: Questions/Create
