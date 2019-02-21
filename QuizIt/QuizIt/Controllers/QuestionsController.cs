@@ -47,13 +47,16 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(CreateQuizVM createquizvm, string quizName, int quizId)
+        public IActionResult Create(int quizId)
         {
-            //ViewBag.TrackId = new SelectList(_context.Set<Track>(), "Id", "Title");
-            ViewData["Name"] = quizName;
 
-            createquizvm.Quiz.Name = quizName;
-            createquizvm.Quiz.Id = quizId;
+            var createquizvm = new CreateQuizVM
+            {
+                Quiz = new Quiz
+                {
+                    Id = quizId
+                }
+            };
 
             return View(createquizvm);
         }
@@ -63,16 +66,26 @@ namespace QuizIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TrackQuestion,Answer,TrackId")] Question question)
+        public async Task<IActionResult> Create(CreateQuizVM createquizvm)
         {
             if (ModelState.IsValid)
             {
+                //quizId hämta
+                var question = createquizvm.Question;
+                var quiz = await _context.Quizzes.FindAsync(createquizvm.Quiz.Id);
+
+
+
+                question.QuizQuestions.Add(new QuizQuestion { Quiz = quiz});
                 _context.Add(question);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            
             //ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
-            return View(question);
+            return View();
         }
 
         // GET: Questions/Edit/5

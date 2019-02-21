@@ -8,7 +8,7 @@ namespace QuizIt.Models.ViewModels
 {
     public class CreateQuizVM
     {
-        public Question Question { get; set; }
+        public Question Question { get; set; } 
         public Quiz Quiz { get; set; }
 
 

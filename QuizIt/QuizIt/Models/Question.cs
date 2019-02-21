@@ -14,5 +14,7 @@ namespace QuizIt.Models
 
         public string TrackTitle { get; set; }
         public string TrackId { get; set; }
+
+        public List<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
     }
 }

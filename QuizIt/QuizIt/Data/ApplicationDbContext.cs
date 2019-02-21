@@ -17,6 +17,7 @@ namespace QuizIt.Data
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuizIt.Models.Question> Question { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

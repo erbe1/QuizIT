@@ -14,6 +14,7 @@ namespace QuizIt.Controllers
     public class QuizController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public static CreateQuizVM _createquizvm;
 
         public QuizController(ApplicationDbContext context)
         {
@@ -62,10 +63,8 @@ namespace QuizIt.Controllers
                 _context.Add(quiz);
                 await _context.SaveChangesAsync();
 
-
-                CreateQuizVM vm = new CreateQuizVM();
-                vm.Quiz = quiz;
-                return RedirectToAction("Create", "Questions", new {quizName=vm.Quiz.Name, quizId=vm.Quiz.Id});
+                int quizId = quiz.Id;
+                return RedirectToAction("Create", "Questions", new { quizId = quizId });
             }
             return View(quiz);
         }
