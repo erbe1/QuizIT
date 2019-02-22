@@ -88,7 +88,7 @@ namespace QuizIt.Controllers
                 _context.Add(question);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             return View();
         }
