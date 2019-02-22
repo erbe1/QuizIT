@@ -11,22 +11,7 @@
 
     <div>
 
-        @*I den här vyn vill vi skicka in ett quiz*@
-        @*För varje fråga i List<Questions> som ett Quiz har, så ska frågan, svaret och en playknapp skrivas ut med den specifika låtens id.*@
-
-
         <iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
     </div>
-
-    @*<form asp-action="Search" method="get">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Search" class="control-label"></label>
-                <input asp-for="Search" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Ok" class="btn btn-default" />
-            </div>
-        </form>*@
 </div>

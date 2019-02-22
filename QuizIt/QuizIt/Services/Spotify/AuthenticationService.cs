@@ -16,10 +16,8 @@ namespace QuizIt.Services.Spotify
         const string BaseURL = "https://accounts.spotify.com/authorize";
         const string APITokenURL = "https://accounts.spotify.com/api/token";
         const string ClientID = "d0c8f0103d91489d8f6ec4c18e003a6d";
-
         const string ClientSecret = "b1afdacbb6e74065b586689be77528b0";
 
-        //const string RedirectURI = "https://localhost:44307/spotify/callback/";
         const string RedirectURI = "https://localhost:44353/spotify/callback/";
         const string scope_ModifyPlayback = "user-modify-playback-state";
         //public string AccessToken { get; private set; }

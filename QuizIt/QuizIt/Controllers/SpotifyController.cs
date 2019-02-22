@@ -59,9 +59,11 @@ namespace QuizIt.Controllers
             var service = new PlaybackService();
             var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
 
-            Question question = new Question();
-            question.TrackId = result.tracks.items[0].id;
-            question.TrackTitle = result.tracks.items[0].name;
+            Question question = new Question
+            {
+                TrackId = result.tracks.items[0].id,
+                TrackTitle = result.tracks.items[0].name
+            };
 
             return View("Index", question);
         }
