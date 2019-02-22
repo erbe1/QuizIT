@@ -39,7 +39,6 @@ namespace QuizIt.Services.Spotify
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Clear();
-                //string authorizationHeaderValue = "Bearer BQAKW0cCXFEYehNrmhMK8So-cXwX-yhQyrZ4vDVIp90ZVKh--5s33RHGk2EoXFZeaMtCEw3hKTAs-Xz36AwQ4zeSWaKZ4rJjUnEu4MBqYBrrmpZKB6md3yCzutb3FGwA-FPZOga-K_pmOusa5IOS";
                 string authorizationHeaderValue = ("Bearer " + SpotifyController._token);
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
@@ -60,10 +59,6 @@ namespace QuizIt.Services.Spotify
 
             return JsonConvert.DeserializeObject<Rootobject>(result);
         }
-
-        //Här göra Get metod för tracks, kolla på SMHI uppgiften
-        //Fråga Oscar hur testa på postman? Lista på det som matchar
-
 
         public async Task<HttpStatusCode> Pause(UserAccesstokenModel user)
         {
@@ -87,40 +82,18 @@ namespace QuizIt.Services.Spotify
 
         public async Task<string> Search(UserAccesstokenModel user, string search)
         {
-            //return await Get(UrlSearch, user);
             return await Get(search);
         }
 
         public async Task<string> Search(string search)
         {
-            //q=name:abacab&type=album,track
-            //return await Get(UrlSearch, User);
             return await Get(search);
         }
-
-        //public async Task<Rootobject> SearchForTrack(string search)
-        //{
-        //    //q=name:abacab&type=album,track
-        //    //return await Get(UrlSearch, User);
-        //    return await GetSpotifyTracks();
-        //}
 
         public void SetUser(UserAccesstokenModel user)
         {
             User = user;
         }
 
-        public async Task<HttpStatusCode> Horror()
-        {
-            var bodyParameters = new Dictionary<string, string>
-            {
-                { "context_uri", "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr" }
-            };
-
-            FormUrlEncodedContent body = new FormUrlEncodedContent(bodyParameters);
-
-            return await Put(UrlPlay, User, body);
-
-        }
     }
 }

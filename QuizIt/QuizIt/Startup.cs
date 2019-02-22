@@ -46,7 +46,7 @@ namespace QuizIt
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
-            services.AddSingleton<Services.Spotify.IAuthenticationService, Services.Spotify.AuthenticationService>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IPlaybackService, PlaybackService>();
 
             services.AddTransient<AuthService>();
