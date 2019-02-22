@@ -1,4 +1,4 @@
-﻿@model QuizIt.Models.Quiz
+﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
 
 @{
     ViewData["Title"] = "Details";
@@ -13,11 +13,50 @@
             Namn
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Quiz.Name)
         </dd>
     </dl>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Fråga
+            </th>
+            <th>
+                Svar
+            </th>
+            <th>
+                Låt
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Questions)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackQuestion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackTitle)
+            </td>
+            <td>
+                <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Ändra</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Quiz.Id">Ändra</a> |
     <a asp-action="Index">Se alla quiz</a>
 </div>

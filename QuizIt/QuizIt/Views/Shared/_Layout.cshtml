@@ -53,12 +53,53 @@
 
     @if (ViewBag.IsStartPage == true)
     {
+    <div class="container-startpage">
         <img class="img-responsive" src="~/images/QuizIT-logga-leeeets.svg" />
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Quizledare</h3>
+                    @*<img src="~/images/luna-smiley.png" style="width:150px;height:150px;">*@
+                </div>
+                <div class="flip-card-back">
+                    <br />
+                    <br />
+                    <button class="btn default">Logga in</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="flip-card flip-card-right">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Spelare</h3>
+                    @*<img src="~/images/luna-smiley.png" style="width:150px;height:150px;">*@
+                </div>
+                <div class="flip-card-back">
+                    <br />
+                    <br />
+                    <button class="btn default">Anslut till quizzet</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
     }
 
     @if (ViewBag.IsAbout == true)
     {
-        <img src="~/images/OmQuizIT.svg" />
+        <div class="container-about">
+            <img src="/images/OmQuizIT.svg">
+            <div class="text-block">
+                <p>QuizIt är ett sätt för dig och dina vänner att snabbt komma igång med ett kul musik-quiz!</p><br />
+                <p>
+                    Såhär går spelet till: Som quizledare loggar du in och godkänner att hemsidan får tillgång till ditt Spotify-konto.
+                    Därefter kan du som quizledare välja mellan att sätta igång ett quiz som redan finns eller generera ett nytt quiz där du väljer kategorier och antal frågor!
+                    När quizledaren valt quiz är det dags för spelarna att ansluta, det gör ni genom att få en fyrsiffrig kod från quizledaren som ni matar in i er spelar-vy.
+                </p>
+            </div>
+        </div>
+        @*<img src="~/images/OmQuizIT.svg" />*@
     }
 
     @if (ViewBag.IsQuiz == true)
@@ -66,7 +107,7 @@
         <img class="img-responsive" src="/images/musicbackground.jpg" />
     }
 
-    <div class="container body-content">
+    <div class="container-body-content">
         @RenderBody()
         <hr />
         <footer>

@@ -58,12 +58,10 @@ namespace QuizIt.Controllers
         public async Task<IActionResult> Search(CreateQuizVM createquizvm)
         {
             var service = new PlaybackService();
-            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
 
             Question question = new Question();
-            question.TrackQuestion = "Vad heter låten?";
-            question.Answer = "Popular";
-            question.TrackId = result.tracks.items[0].id; //Dessa värdena ska sparas 
+            question.TrackId = result.tracks.items[0].id;
             question.TrackTitle = result.tracks.items[0].name;
 
             return View("Index", question);
@@ -83,23 +81,5 @@ namespace QuizIt.Controllers
 
             //return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
         }
-
-
-
-
-        //public IActionResult SearchApi(string term)
-        //{
-        //    var service = new PlaybackService();
-        //    var result = service.GetSpotifyTracks(term).Result; 
-
-        //    return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
-        //}
-
-        //public async Task<IActionResult> horror()
-        //{
-        //    var statuscode = await _playbackService.Horror();
-        //    return View("Index");
-
-        //}
     }
 }
