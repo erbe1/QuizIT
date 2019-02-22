@@ -81,8 +81,6 @@ namespace QuizIt.Controllers
                 _context.Add(quiz);
                 await _context.SaveChangesAsync();
 
-                //int quizId = quiz.Id;
-                //string quizName = quiz.Name;
                 return RedirectToAction("Create", "Questions", new { quizId = quiz.Id, quizName = quiz.Name });
             }
             return View(quiz);

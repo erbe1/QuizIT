@@ -57,7 +57,6 @@ namespace QuizIt.Controllers
                 {
                     Id = quizId,
                     Name = quizName
-                    
                 }
             };
 
@@ -88,7 +87,7 @@ namespace QuizIt.Controllers
                 _context.Add(question);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction("Create", new { quizId = quiz.Id, quizName = quiz.Name });
             }
             return View();
         }
