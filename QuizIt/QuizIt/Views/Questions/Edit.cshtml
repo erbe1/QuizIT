@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-controller="Questions" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -23,9 +23,9 @@
                 <span asp-validation-for="Answer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TrackId" class="control-label">Låt</label>
-                <input asp-for="TrackId" class="form-control"/>
-                <span asp-validation-for="TrackId" class="text-danger"></span>
+                <label asp-for="TrackTitle" class="control-label">Låt</label>
+                <input asp-for="TrackTitle" class="form-control"/>
+                <span asp-validation-for="TrackTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Spara" class="btn btn-default" />

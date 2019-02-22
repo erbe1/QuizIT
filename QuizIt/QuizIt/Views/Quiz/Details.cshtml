@@ -47,9 +47,9 @@
                 @Html.DisplayFor(modelItem => item.TrackTitle)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
             </td>
         </tr>
         }

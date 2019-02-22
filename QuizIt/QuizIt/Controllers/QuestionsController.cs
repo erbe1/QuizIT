@@ -113,7 +113,7 @@ namespace QuizIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TrackQuestion,Answer,TrackId")] Question question)
+        public async Task<IActionResult> Edit(int id, Question question)
         {
             if (id != question.Id)
             {
@@ -124,6 +124,13 @@ namespace QuizIt.Controllers
             {
                 try
                 {
+
+                    var service = new PlaybackService();
+                    var result = service.GetSpotifyTracks(question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+
+                    question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                    question.TrackTitle = result.tracks.items[0].name;
+
                     _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
