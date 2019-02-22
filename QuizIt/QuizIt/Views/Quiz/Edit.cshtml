@@ -54,7 +54,7 @@
                     @Html.DisplayFor(modelItem => item.TrackTitle)
                 </td>
                 <td>
-                    <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                    <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id" asp-route-quizId="@Model.Quiz.Id" >Ändra</a> |
                     <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
                     <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
                 </td>

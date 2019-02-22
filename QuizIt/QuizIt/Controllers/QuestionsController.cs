@@ -93,7 +93,7 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int quizId) //Hit måste id följa med
         {
             if (id == null)
             {
@@ -105,7 +105,16 @@ namespace QuizIt.Controllers
             {
                 return NotFound();
             }
-            return View(question);
+
+            var vm = new QuizQuestionsVm();
+            vm.Question = question;
+
+            var quiz = await _context.Quizzes.FindAsync(quizId);
+            vm.Quiz = quiz;
+
+
+
+            return View(vm);
         }
 
         // POST: Questions/Edit/5
@@ -113,9 +122,9 @@ namespace QuizIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Question question)
+        public async Task<IActionResult> Edit(int id, QuizQuestionsVm vm, int quizId)//Här måste quizId följa med
         {
-            if (id != question.Id)
+            if (id != vm.Question.Id)
             {
                 return NotFound();
             }
@@ -126,17 +135,17 @@ namespace QuizIt.Controllers
                 {
 
                     var service = new PlaybackService();
-                    var result = service.GetSpotifyTracks(question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+                    var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
 
-                    question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
-                    question.TrackTitle = result.tracks.items[0].name;
+                    vm.Question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                    vm.Question.TrackTitle = result.tracks.items[0].name;
 
-                    _context.Update(question);
+                    _context.Update(vm.Question);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuestionExists(question.Id))
+                    if (!QuestionExists(vm.Question.Id))
                     {
                         return NotFound();
                     }
@@ -145,9 +154,11 @@ namespace QuizIt.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //Här måste quizid följa med..
+                return RedirectToAction("Edit", "Quiz", new { vm.Quiz.Id});
+
             }
-            return View(question);
+            return View(vm.Question.Id);
         }
 
         // GET: Questions/Delete/5
