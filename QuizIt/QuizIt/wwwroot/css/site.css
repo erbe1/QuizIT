@@ -24,6 +24,7 @@ body {
     background: linear-gradient(0.30turn, #7E39B0, #CE255F, #F80308, #F96501, #F8D000, 0.7);
     transition: opacity 2s;
     font-family: Bahnschrift;
+    opacity: 0.8;
 }
 
 #picturebackground {
@@ -42,6 +43,7 @@ body {
 
 .navbar-brand {
     padding: 7px 15px;
+   
 }
 
 .video-foreground,
@@ -73,7 +75,7 @@ body {
 }*/
 
 .text-block {
-    position: absolute;
+    position: fixed;
     bottom: 210px;
     right: 250px;
     left: 250px;
@@ -81,9 +83,9 @@ body {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
+    padding-top: 25px;
     padding-bottom: 20px;
     opacity: 0.8;
     border-radius: 20%;
-    
+    font-size: 18px;
 }
