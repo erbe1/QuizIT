@@ -81,8 +81,6 @@ namespace QuizIt.Controllers
                 _context.Add(quiz);
                 await _context.SaveChangesAsync();
 
-                //int quizId = quiz.Id;
-                //string quizName = quiz.Name;
                 return RedirectToAction("Create", "Questions", new { quizId = quiz.Id, quizName = quiz.Name });
             }
             return View(quiz);
@@ -101,7 +99,20 @@ namespace QuizIt.Controllers
             {
                 return NotFound();
             }
-            return View(quiz);
+
+            var questions = _context.Quizzes
+                            .Include(q => q.QuizQuestions)
+                            .ThenInclude(q => q.Question)
+                            .Single(m => m.Id == id)
+                            .QuizQuestions.Select(x => x.Question);
+
+            var vm = new QuizQuestionsVm //hämta frågorna också
+            {
+                Quiz = quiz,
+                Questions = questions.ToList()
+            };
+
+            return View(vm);
         }
 
         // POST: Quiz/Edit/5
