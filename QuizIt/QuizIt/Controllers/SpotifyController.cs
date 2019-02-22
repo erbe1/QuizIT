@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace QuizIt.Controllers
 {
     public class SpotifyController : Controller
@@ -68,12 +69,19 @@ namespace QuizIt.Controllers
             return View("Index", question);
         }
 
+
         public IActionResult SearchApi(string term)
         {
             var service = new PlaybackService();
-            var result = service.GetSpotifyTracks(term).Result; 
+            var result = service.GetSpotifyTracks(term).Result;
 
-            return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
+
+            List<string> suggestions = result.tracks.items.Select(x => x.name).ToList();
+            //return Ok(suggestions);
+
+            return PartialView("Index", suggestions);
+
+            //return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
         }
     }
 }
