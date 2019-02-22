@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using QuizIt.Models;
 using QuizIt.Models.ViewModels;
+using QuizIt.Services.Spotify;
 
 namespace QuizIt.Controllers
 {
@@ -72,21 +73,23 @@ namespace QuizIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                //quizId hämta
                 var question = createquizvm.Question;
                 var quiz = await _context.Quizzes.FindAsync(createquizvm.Quiz.Id);
 
+                var service = new PlaybackService();
+                var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
 
+                question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                question.TrackTitle = result.tracks.items[0].name;
 
+                //Fyller mellantabellen
                 question.QuizQuestions.Add(new QuizQuestion { Quiz = quiz});
+
                 _context.Add(question);
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            
-            //ViewData["TrackId"] = new SelectList(_context.Set<Track>(), "Id", "Title", question.TrackId);
             return View();
         }
 
@@ -142,22 +145,22 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var question = await _context.Question
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (question == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var question = await _context.Question
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(question);
-        //}
+            return View(question);
+        }
 
         // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
