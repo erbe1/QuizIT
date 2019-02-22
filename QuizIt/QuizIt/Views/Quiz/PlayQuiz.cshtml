@@ -1,0 +1,11 @@
+﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
+
+<h1>@Model.Quiz.Name</h1>
+
+@foreach (var question in Model.Questions)
+    {
+    <p>@question.TrackQuestion</p>
+    <p>@question.Answer</p>
+        <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+    }
