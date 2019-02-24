@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<QuizIt.Models.Quiz>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -91,9 +92,8 @@
         <div class="container-about">
             <img src="/images/OmQuizIT.svg">
             <div class="text-block">
-                <p>QuizIt är ett sätt för dig och dina vänner att snabbt komma igång med ett kul musik-quiz!</p><br />
-                <p>
-                    Såhär går spelet till: Som quizledare loggar du in och godkänner att hemsidan får tillgång till ditt Spotify-konto.
+                <p><b>QuizIt </b> är ett sätt för dig och dina vänner att snabbt komma igång med ett kul musik-quiz!</p>
+                <p><b>Såhär går spelet till:</b> Som quizledare loggar du in och godkänner att hemsidan får tillgång till ditt Spotify-konto.
                     Därefter kan du som quizledare välja mellan att sätta igång ett quiz som redan finns eller generera ett nytt quiz där du väljer kategorier och antal frågor!
                     När quizledaren valt quiz är det dags för spelarna att ansluta, det gör ni genom att få en fyrsiffrig kod från quizledaren som ni matar in i er spelar-vy.
                 </p>
@@ -104,18 +104,58 @@
 
     @if (ViewBag.IsQuiz == true)
     {
-        <img class="img-responsive" src="~/css/musik.jpg" />
+        <div class="container-quiz">
+            <img class="img-responsive" src="~/css/musik.jpg" />
+
+            @{
+                ViewData["Title"] = "Index";
+            }
+
+            <h2>Quiz</h2>
+
+            <p>
+                <a asp-action="Create">Skapa nytt quiz</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Namn
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 
     <div class="container-body-content">
         @RenderBody()
         <hr />
-        <footer>
+    </div>
+    <footer>
+        <div class="container-footer">
             <img src="~/css/quizitluna.png" style="height:50px" />
             <p>Kontakta oss: quizit@academy.se</p>
             <p>&copy; 2019 - QuizIt</p>
-        </footer>
-    </div>
+        </div>
+        
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

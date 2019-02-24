@@ -40,6 +40,7 @@ body {
     }
 }
 
+/* Fixerar quizit-loggan i linje med texten i navbar*/
 .navbar-brand {
     padding: 7px 15px;
 }
@@ -69,8 +70,9 @@ body {
     text-align: center;
 }
 
+/* Bilden i om quizit*/
 .container-about {
-    position: relative;
+    position: center;
 }
 
 /*.body-content{
@@ -79,7 +81,7 @@ body {
 
 /*Textrutan i about*/
 .text-block {
-    position: fixed;
+    position: absolute;
     bottom: 210px;
     right: 250px;
     left: 250px;
@@ -98,7 +100,7 @@ body {
 .container-startpage {
     position: relative;
 }
-/* Korten för quizledare och spelare*/
+/* Kortet för quizledare*/
 .flip-card {
     background-color: transparent;
     width: 150px;
@@ -108,7 +110,7 @@ body {
     top: 400px;
     left: 500px;
 }
-
+/* Kortet för spelare */
 .flip-card-right {
     left: 700px;
 }
@@ -152,10 +154,15 @@ body {
     opacity: 0.7;
 }
 
+/* Knappen på baksidan kortet */
 .btn {
     border: none;
     background-color: inherit;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
+}
+
+.container-footer{
+    right: 30px;
 }
