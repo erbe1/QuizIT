@@ -85,6 +85,23 @@ body {
     opacity: 0.8;
     border-radius: 20%;
     font-size: 18px;
+    font-family: "Amatic SC";
+}
+.text-block-create {
+    position: absolute;
+    bottom: 210px;
+    right: 250px;
+    left: 250px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
+    opacity: 0.8;
+    border-radius: 20%;
+    font-size: 25px;
+    font-family: "Amatic SC";
 }
 
 /* För att få bakgrundsbilden att täcka hela skärmen*/
