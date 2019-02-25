@@ -1,7 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -113,13 +112,14 @@ body {
     font-size: 18px;
     font-family: "Amatic SC";
     font-weight: bold;
+    overflow: scroll;
 }
 
 
 /*Textrutan i about*/
 .text-block-about {
     position: absolute;
-    top: 175px;
+    top: 220px;
     bottom: 220px;
     right: 250px;
     left: 250px;
@@ -219,6 +219,7 @@ body {
     cursor: pointer;
     display: inline-block;
     font-family: "Amatic SC";
+    font-weight: bold;
 }
 
 h1 {
