@@ -24,7 +24,9 @@ namespace QuizIt.Controllers
         // GET: Quiz
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Quizzes.ToListAsync());
+            QuizQuestionsVm vm = new QuizQuestionsVm();
+            vm.Quizzez = await _context.Quizzes.ToListAsync();
+            return View("Index", vm);
         }
 
         public async Task<IActionResult> PlayQuiz(int? id)

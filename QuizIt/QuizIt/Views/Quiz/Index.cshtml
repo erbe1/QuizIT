@@ -1,8 +1,8 @@
-﻿@model IEnumerable<QuizIt.Models.Quiz>
+﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
 
-    @*@{
+    @*{
         ViewData["Title"] = "Index";
-    }
+    }*@
 
     <h2>Quiz</h2>
 
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model.Quizzez) {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -33,10 +33,10 @@
             </tr>
     }
         </tbody>
-    </table>*@
+    </table>
 
-@{
+@*{
 
     ViewBag.IsQuiz = true;
 
-}
+}*@
