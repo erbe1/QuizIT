@@ -2,10 +2,20 @@
 
 <h1>@Model.Quiz.Name</h1>
 
+@{
+    int index = 1;
+}
+
 @foreach (var question in Model.Questions)
     {
+    <p>Fråga @index :</p>
     <p>@question.TrackQuestion</p>
-    <p>@question.Answer</p>
-        <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    index++;
 
-    }
+    if (User.Identity.IsAuthenticated)
+    {
+            <p>Svar: @question.Answer</p>
+            <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+        }
+}
