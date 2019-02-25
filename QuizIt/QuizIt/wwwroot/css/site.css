@@ -1,7 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -77,13 +76,12 @@ body {
     padding-right: 450px;
 }*/
 
-/*Textrutae*/
+/*Textruta*/
 .text-block {
     position: absolute;
-    top: 175px;
-    bottom: -30px;
-    right: 250px;
-    left: 250px;
+    top: 190px;
+    left: 25%;
+    width: 50%;
     background-color: black;
     color: white;
     padding-left: 20px;
@@ -91,66 +89,22 @@ body {
     padding-top: 39px;
     padding-bottom: 32px;
     opacity: 0.8;
-    /*border-radius: 20%;*/
     font-size: 18px;
     font-family: "Amatic SC";
 }
 
+/*Textrutan i skapa nytt quiz*/
 .text-block-quiz {
-    position: absolute;
-    top: 175px;
-    bottom: -30px;
-    right: 250px;
-    left: 250px;
-    background-color: black;
-    color: white;
-    padding-left: 20px;
-    padding-right: 5px;
-    padding-top: 39px;
-    padding-bottom: 32px;
-    opacity: 0.8;
-    /*border-radius: 20%;*/
-    font-size: 18px;
-    font-family: "Amatic SC";
+    font-weight: bold;
+    overflow: scroll;
+    height: 70%;
+}
+
+.text-block-create{
     font-weight: bold;
 }
-
-
-/*Textrutan i about*/
-.text-block-about {
-    position: absolute;
-    top: 175px;
-    bottom: 220px;
-    right: 250px;
-    left: 250px;
-    background-color: black;
-    color: white;
-    padding-left: 20px;
-    padding-right: 5px;
-    padding-top: 39px;
-    padding-bottom: 32px;
-    opacity: 0.8;
-    /*border-radius: 20%;*/
-    font-size: 18px;
-    font-family: "Amatic SC";
-    
-}
-.text-block-create {
-    position: absolute;
-    top: 200px;
-    bottom: 210px;
-    right: 250px;
-    left: 250px;
-    background-color: black;
-    color: white;
-    padding-left: 20px;
-    padding-right: 5px;
-    padding-top: 39px;
-    padding-bottom: 32px;
-    opacity: 0.8;
-    /*border-radius: 20%;*/
-    font-size: 25px;
-    font-family: "Amatic SC";
+.text-block-login{
+    font-size: 24px;
 }
 
 /* För att få bakgrundsbilden att täcka hela skärmen*/
@@ -160,16 +114,16 @@ body {
 /* Kortet för quizledare*/
 .flip-card {
     background-color: transparent;
-    width: 190px;
+    width: 15%;
     height: 150px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     position: absolute;
     top: 400px;
-    left: 500px;
+    left: 25%;
 }
 /* Kortet för spelare */
 .flip-card-right {
-    left: 700px;
+    left: 45%;
 }
 
 /* This container is needed to position the front and back side */
@@ -200,7 +154,7 @@ body {
     background-color: black;
     color: white;
     opacity: 0.7;
-    padding-top: 40px;
+    padding-top: 32px;
 }
 
 /* Style the back side */
@@ -209,6 +163,7 @@ body {
     color: white;
     transform: rotateY(180deg);
     opacity: 0.7;
+    
 }
 
 /* Knappen på baksidan kortet */
@@ -219,6 +174,7 @@ body {
     cursor: pointer;
     display: inline-block;
     font-family: "Amatic SC";
+    font-weight: bold;
 }
 
 h1 {
@@ -244,10 +200,21 @@ h3{
     font-size: 30px;
     font-style: normal;
     font-variant: normal;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 15.4px;
-    padding-top: 11
-px;
+    padding-top: 11px;
+}
+
+h4 {
+    font-family: "Amatic SC";
+    font-size: 45px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 600;
+    line-height: 15.4px;
+    padding-top: 11px;
+    padding-left: 150px;
+    position: center;
 }
 
 p {
@@ -284,4 +251,11 @@ table {
     font-variant: normal;
     font-weight: bold;
     line-height: 30px;
+}
+
+.form-control {
+    font-size: 22px;
+}
+.a{
+    font-size: 18px;
 }
