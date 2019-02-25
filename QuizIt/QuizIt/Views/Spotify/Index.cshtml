@@ -1,4 +1,4 @@
-﻿@model QuizIt.Models.Question
+﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
 
 <div class="centerContent">
     <div class="tileContainer">
@@ -8,16 +8,22 @@
 
         <a asp-action="Paus" class="menueButton">Paus</a>
     </div>
-
+    <input type="hidden" name="quizId" value="@Model.Quiz.Id" />
     <div>
 
         @*<iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>*@
+        @{
+            int index = 0;
+        }
 
         @foreach (var item in Model.Suggestions)
         {
-            <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            <br />
-            <button class="btn-default">Spara den här låten till quiz</button>
+            <div>
+                <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <br />
+                <a asp-controller="Questions" asp-action="Create" asp-route-id="@index">Spara den här låten till quiz</a>
+            </div>
+            index++;
         }
 
 

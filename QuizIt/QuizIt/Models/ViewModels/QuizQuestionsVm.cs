@@ -12,5 +12,7 @@ namespace QuizIt.Models.ViewModels
         public Question Question { get; set; }
         public List<Question> Questions { get; set; } = new List<Question>();
         public List<Quiz> Quizzez { get; set; } = new List<Quiz>();
+
+        public List<string> Suggestions { get; set; } = new List<string>();
     }
 }

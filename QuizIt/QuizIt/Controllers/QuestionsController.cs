@@ -48,7 +48,7 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int quizId, string quizName)
+        public IActionResult Create(int quizId, string quizName) //Hit måste man få med index-värdet från Spotify/SearchApi
         {
 
             var createquizvm = new CreateQuizVM
@@ -68,7 +68,7 @@ namespace QuizIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateQuizVM createquizvm)
+        public async Task<IActionResult> Create(CreateQuizVM createquizvm, int id)
         {
             if (ModelState.IsValid)
             {
@@ -78,8 +78,8 @@ namespace QuizIt.Controllers
                 var service = new PlaybackService();
                 var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
 
-                question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
-                question.TrackTitle = result.tracks.items[0].name;
+                question.TrackId = result.tracks.items[id].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                question.TrackTitle = result.tracks.items[id].name;
 
                 //Fyller mellantabellen
                 question.QuizQuestions.Add(new QuizQuestion { Quiz = quiz});
