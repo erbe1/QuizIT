@@ -106,6 +106,18 @@ body {
 .text-block-login{
     font-size: 24px;
 }
+.text-block-title {
+    position: absolute;
+    top: 76px;
+    left: -9%;
+    width: 50%;
+    color: white;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
+    font-family: "Amatic SC";
+}
 
 /* För att få bakgrundsbilden att täcka hela skärmen*/
 .container-startpage {

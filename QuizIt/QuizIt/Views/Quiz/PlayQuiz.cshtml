@@ -1,21 +1,31 @@
 ﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
 
-<h1>@Model.Quiz.Name</h1>
+<div class="container-quiz">
 
-@{
-    int index = 1;
-}
+    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title">
+        <h4>@Model.Quiz.Name</h4>
+    </div>
 
-@foreach (var question in Model.Questions)
-    {
-    <p>Fråga @index :</p>
-    <p>@question.TrackQuestion</p>
-    index++;
+    <div class="text-block text-block-login text-block-quiz">
 
-    if (User.Identity.IsAuthenticated)
-    {
-            <p>Svar: @question.Answer</p>
-            <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
+        @{
+            int index = 1;
         }
-}
+
+        @foreach (var question in Model.Questions)
+        {
+            <p>Fråga @index :</p>
+            <p>@question.TrackQuestion</p>
+            index++;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                <p>Svar: @question.Answer</p>
+                <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+            }
+        }
+    </div>
+
+</div>
