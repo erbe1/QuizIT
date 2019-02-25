@@ -24,9 +24,9 @@ namespace QuizIt.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(QuizQuestionsVm vm)
         {
-            return View();
+            return View(vm);
         }
 
         public IActionResult Authorize()
@@ -55,32 +55,38 @@ namespace QuizIt.Controllers
         }
 
 
-        public async Task<IActionResult> Search(CreateQuizVM createquizvm)
+        //public async Task<IActionResult> Search(CreateQuizVM createquizvm)
+        //{
+        //    var service = new PlaybackService();
+        //    var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
+
+        //    Question question = new Question
+        //    {
+        //        TrackId = result.tracks.items[0].id,
+        //        TrackTitle = result.tracks.items[0].name
+        //    };
+
+        //    return View("Index", question);
+        //}
+
+
+        public IActionResult SearchApi(CreateQuizVM createquizvm, int quizId)
         {
             var service = new PlaybackService();
             var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
-
-            Question question = new Question
+            QuizQuestionsVm vm = new QuizQuestionsVm();
+            vm.Suggestions = result.tracks.items.Select(x => x.id).ToList();
+            vm.Quiz = new Quiz
             {
-                TrackId = result.tracks.items[0].id,
-                TrackTitle = result.tracks.items[0].name
+                Id = quizId
             };
 
-            return View("Index", question);
-        }
+            //Question suggetstion = new Question
+            //{
+            //    Suggestions = result.tracks.items.Select(x => x.id).ToList()
+            //};
 
-
-        public IActionResult SearchApi(CreateQuizVM createquizvm)
-        {
-            var service = new PlaybackService();
-            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
-
-            Question suggetstion = new Question
-            {
-                Suggestions = result.tracks.items.Select(x => x.id).ToList()
-            };
-
-            return View("Index", suggetstion);
+            return View("Index", vm);
 
         }
     }

@@ -3,7 +3,8 @@
 <h4>@ViewData["Name"]</h4>
 <h4>@ViewData["ID"]</h4>
 
-<h2>Skapa ny fråga för Quiz @Model.Quiz.Name</h2>
+<h2>Skapa ny fråga för Quiz @Model.Quiz.Id</h2>
+
 
 
 <hr />
@@ -11,6 +12,8 @@
     <div class="col-md-4">
 
         <form asp-controller="Spotify" asp-action="SearchApi">
+            <input type="hidden" name="quizId" value="@Model.Quiz.Id" />
+            @*<input type="hidden" asp-for="@Model.Quiz.Id" />*@
             <div class="form-group">
                 <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
                 <input asp-for="Question.TrackTitle" asp-route="search" class="form-control" />
