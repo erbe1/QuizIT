@@ -80,6 +80,10 @@ namespace QuizIt.Controllers
             {
                 Id = quizId
             };
+            vm.Question = new Question
+            {
+                TrackTitle = createquizvm.Question.TrackTitle
+            };
 
             //Question suggetstion = new Question
             //{

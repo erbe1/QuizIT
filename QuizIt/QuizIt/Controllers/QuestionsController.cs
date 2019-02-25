@@ -48,19 +48,25 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int quizId, string quizName) //Hit måste man få med index-värdet från Spotify/SearchApi
-        {
+        public IActionResult Create(int quizId, string quizName, int trackIndex, string trackTitle) //Hit måste man få med index-värdet från Spotify/SearchApi
+        { //Nu fick vi med quizId och trackindex, name är null
 
-            var createquizvm = new CreateQuizVM
+            QuizQuestionsVm vm = new QuizQuestionsVm
             {
                 Quiz = new Quiz
                 {
                     Id = quizId,
                     Name = quizName
+                },
+                TrackIndex = trackIndex,
+                Question = new Question
+                {
+                    TrackTitle = trackTitle
                 }
+
             };
 
-            return View(createquizvm);
+            return View(vm);
         }
 
         // POST: Questions/Create
@@ -68,18 +74,20 @@ namespace QuizIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateQuizVM createquizvm, int id)
+        public async Task<IActionResult> Create(QuizQuestionsVm vm, int trackIndex, string trackTitle) //Andra gången blir trackIndex och trackTitle NULL
         {
             if (ModelState.IsValid)
             {
-                var question = createquizvm.Question;
-                var quiz = await _context.Quizzes.FindAsync(createquizvm.Quiz.Id);
+                var question = vm.Question;
+                var quiz = await _context.Quizzes.FindAsync(vm.Quiz.Id);
 
                 var service = new PlaybackService();
-                var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+                var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result; //Här behöver vi ha med titeln !! ($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+                //var result = service.GetSpotifyTracks(trackTitle).Result; //Här behöver vi ha med titeln !! ($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
 
-                question.TrackId = result.tracks.items[id].id; //Det är detta som användaren ska kunna välja bland sökresultaten
-                question.TrackTitle = result.tracks.items[id].name;
+
+                question.TrackId = result.tracks.items[trackIndex].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                question.TrackTitle = result.tracks.items[trackIndex].name;
 
                 //Fyller mellantabellen
                 question.QuizQuestions.Add(new QuizQuestion { Quiz = quiz});
