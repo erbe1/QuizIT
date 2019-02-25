@@ -19,24 +19,27 @@
             <p>@question.TrackQuestion</p>
             index++;
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated) //Man måste vara inloggad för att se mer än bara frågorna
             {
-                <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <p>Svar: @question.Answer</p>
+                if (User.IsInRole("Quizleader") || User.IsInRole("Admin"))
+                {
+                    <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    <p>Svar: @question.Answer</p>
+                    
+                }
+                else
+                {
 
-                //}
-                //else
-                //{
-                //Här kan man ha villkoret att om en vanlig spelare är inloggad ska denne se nedanstående, medan en quizledare ser ovanstående
+                    string result = "result" + index;
 
-                string result = "result" + index;
+                    <div id='@result' style="color:hotpink"> </div>
+                    <br />
+                    string name = User.Identity.Name;
+                    <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
+                }
 
-                <div id='@result' style="color:hotpink"> </div>
-                <br />
-                string name = User.Identity.Name;
-                <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
-                <hr />
             }
+                <hr />
         }
 
 

@@ -23,7 +23,7 @@ namespace QuizIt.Controllers
             _auth = auth;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var vm = new AddRoleVm
