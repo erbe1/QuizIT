@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<QuizIt.Models.Quiz>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,12 +9,14 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Amatic+SC" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Amatic+SC" />
     </environment>
 </head>
 <body>
@@ -35,12 +38,12 @@
             </div>
             <div class="navbar-collapse collapse" style="height: 50px">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Om QuizIt</a></li>
-                    <li><a asp-controller="Spotify" asp-action="Authorize">Quiz</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakta oss</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About"><b>Om QuizIt</b></a></li>
+                    <li><a asp-controller="Spotify" asp-action="Authorize"><b>Quiz</b></a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact"><b>Kontakta oss</b></a></li>
                     @if (User.IsInRole("Admin"))
                     {
-                        <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index">Admin</a></li>
+                        <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
                     }
 
                 </ul>
@@ -91,12 +94,11 @@
         <div class="container-about">
             <img src="/images/OmQuizIT.svg">
             <div class="text-block">
-                <p>QuizIt är ett sätt för dig och dina vänner att snabbt komma igång med ett kul musik-quiz!</p><br />
-                <p>
-                    Såhär går spelet till: Som quizledare loggar du in och godkänner att hemsidan får tillgång till ditt Spotify-konto.
-                    Därefter kan du som quizledare välja mellan att sätta igång ett quiz som redan finns eller generera ett nytt quiz där du väljer kategorier och antal frågor!
-                    När quizledaren valt quiz är det dags för spelarna att ansluta, det gör ni genom att få en fyrsiffrig kod från quizledaren som ni matar in i er spelar-vy.
-                </p>
+                <p><b>QuizIt </b> är ett sätt för dig och dina vänner att snabbt komma igång med ett kul musik-quiz!</p><br />
+                <p><b>Såhär går spelet till:</b> Som quizledare loggar du in och godkänner att hemsidan får tillgång till ditt Spotify-konto.</p>
+                <p>Därefter kan du som quizledare välja mellan att sätta igång ett quiz som redan finns eller generera ett nytt quiz där</p>
+                <p>du väljer kategorier och antal frågor! När quizledaren valt quiz är det dags för spelarna att ansluta, det gör ni genom</p>
+                <p>att få en fyrsiffrig kod från quizledaren som ni matar in i er spelar-vy.</p>
             </div>
         </div>
         @*<img src="~/images/OmQuizIT.svg" />*@
@@ -104,18 +106,57 @@
 
     @if (ViewBag.IsQuiz == true)
     {
-        <img class="img-responsive" src="~/css/musik.jpg" />
+        <div class="container-quiz">
+            <img class="img-responsive" src="~/images/QuizIT Quiz.svg" />
+            <div class="text-block">
+                @{
+                    ViewData["Title"] = "Index";
+                }
+
+                <p>
+                    <a asp-action="Create">Skapa nytt quiz</a>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Namn
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     }
 
     <div class="container-body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <img src="~/css/quizitluna.png" style="height:50px" />
-            <p>Kontakta oss: quizit@academy.se</p>
-            <p>&copy; 2019 - QuizIt</p>
-        </footer>
     </div>
+    <footer>
+        <div class="container-footer">
+            <img src="~/css/quizitluna.png" style="height:50px" />
+            <p><b>Kontakta oss: quizit@academy.se</b></p>
+            <p><b>&copy; 2019 - QuizIt</b></p>
+        </div>
+        
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

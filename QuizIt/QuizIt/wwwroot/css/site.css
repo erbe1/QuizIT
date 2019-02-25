@@ -23,8 +23,9 @@ body {
 .navbar {
     /*background: linear-gradient(0.30turn, #7E39B0, #CE255F, #F80308, #F96501, #F8D000, 0.7);*/
     transition: opacity 2s;
-    font-family: Bahnschrift;
+    font-family: "Amatic SC";
     opacity: 0.8;
+    font-size: 24px;
 }
 
 #picturebackground {
@@ -40,6 +41,7 @@ body {
     }
 }
 
+/* Fixerar quizit-loggan i linje med texten i navbar*/
 .navbar-brand {
     padding: 7px 15px;
 }
@@ -48,16 +50,6 @@ body {
 .navbar-brand:hover {
     filter: brightness(200%);
 }
-
-/*.video-foreground,
-.video-background iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}*/
 
 .footer {
     position: center;
@@ -69,8 +61,9 @@ body {
     text-align: center;
 }
 
+/* Bilden i om quizit*/
 .container-about {
-    position: relative;
+    position: center;
 }
 
 /*.body-content{
@@ -79,26 +72,43 @@ body {
 
 /*Textrutan i about*/
 .text-block {
-    position: fixed;
+    position: absolute;
     bottom: 210px;
     right: 250px;
     left: 250px;
     background-color: black;
     color: white;
     padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 25px;
-    padding-bottom: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
     opacity: 0.8;
     border-radius: 20%;
     font-size: 18px;
+    font-family: "Amatic SC";
+}
+.text-block-create {
+    position: absolute;
+    bottom: 210px;
+    right: 250px;
+    left: 250px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
+    opacity: 0.8;
+    border-radius: 20%;
+    font-size: 25px;
+    font-family: "Amatic SC";
 }
 
 /* För att få bakgrundsbilden att täcka hela skärmen*/
 .container-startpage {
     position: relative;
 }
-/* Korten för quizledare och spelare*/
+/* Kortet för quizledare*/
 .flip-card {
     background-color: transparent;
     width: 150px;
@@ -108,7 +118,7 @@ body {
     top: 400px;
     left: 500px;
 }
-
+/* Kortet för spelare */
 .flip-card-right {
     left: 700px;
 }
@@ -152,10 +162,82 @@ body {
     opacity: 0.7;
 }
 
+/* Knappen på baksidan kortet */
 .btn {
     border: none;
     background-color: inherit;
-    font-size: 16px;
+    font-size: 30px;
     cursor: pointer;
     display: inline-block;
+    font-family: "Amatic SC";
+}
+
+.container-footer {
+    right: 30px;
+    font-family: "Amatic SC";
+}
+
+h1 {
+    font-family: "Amatic SC";
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+}
+
+h2 {
+    font-family: "Amatic SC";
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+}
+
+h3{
+    font-family: "Amatic SC";
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 15.4px;
+    padding-top: 11
+px;
+}
+
+p {
+    font-family: "Amatic SC";
+    font-size: 26px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+blockquote {
+    font-family: "Amatic SC";
+    font-size: 21px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+pre {
+    font-family: "Amatic SC";
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+table {
+    font-family: "Amatic SC";
+    font-size: 21px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
 }

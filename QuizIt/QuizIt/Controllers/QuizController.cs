@@ -27,6 +27,43 @@ namespace QuizIt.Controllers
             return View(await _context.Quizzes.ToListAsync());
         }
 
+        public async Task<IActionResult> PlayQuiz(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Göra om nedanstående till metod
+            var quiz = _context.Quizzes
+            .FirstOrDefault(q => q.Id == id);
+
+            if (quiz == null)
+            {
+                return NotFound();
+            }
+
+            var questions = _context.Quizzes
+                .Include(q => q.QuizQuestions)
+                .ThenInclude(q => q.Question)
+                .Single(m => m.Id == id)
+                .QuizQuestions.Select(x => x.Question);
+
+            if (questions == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new QuizQuestionsVm
+            {
+                Quiz = quiz,
+                Questions = questions.ToList()
+            };
+
+            return View(vm);
+
+        }
+
         // GET: Quiz/Details/5
         public async Task<IActionResult> Details(int? id)
         {
