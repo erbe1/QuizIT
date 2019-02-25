@@ -80,7 +80,8 @@ body {
 /*Textrutan i about*/
 .text-block {
     position: absolute;
-    bottom: 210px;
+    top: 175px;
+    bottom: -30px;
     right: 250px;
     left: 250px;
     background-color: black;
@@ -93,9 +94,11 @@ body {
     /*border-radius: 20%;*/
     font-size: 18px;
     font-family: "Amatic SC";
+    
 }
 .text-block-create {
     position: absolute;
+    top: 200px;
     bottom: 210px;
     right: 250px;
     left: 250px;
