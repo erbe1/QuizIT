@@ -5,70 +5,72 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Ändra quiz</h2>
+<div class="container-quiz">
+    <img class="img-responsive" src="~/images/QuizitChangeQuiz.svg" />
+    <div class="text-block text-block-create text-block-login">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Quiz.Id" />
+                    <div class="form-group">
+                        <label asp-for="Quiz.Name" class="control-label">Namn</label>
+                        <input asp-for="Quiz.Name" class="form-control" />
+                        <span asp-validation-for="Quiz.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Spara" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Quiz.Id" />
-            <div class="form-group">
-                <label asp-for="Quiz.Name" class="control-label">Namn</label>
-                <input asp-for="Quiz.Name" class="form-control" />
-                <span asp-validation-for="Quiz.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Spara" class="btn btn-default" />
-            </div>
-        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Fråga
+                    </th>
+                    <th>
+                        Svar
+                    </th>
+                    <th>
+                        Låt
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Questions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrackQuestion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Answer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrackTitle)
+                        </td>
+                        <td>
+                            <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id" asp-route-quizId="@Model.Quiz.Id">Ändra</a> |
+                            <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                            <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div>
+            <a asp-controller="Questions" asp-action="Create" asp-route-quizId="@Model.Quiz.Id" asp-route-quizName="@Model.Quiz.Name">Lägg till frågor</a>
+            <br />
+            <a asp-action="Index">Se alla quiz</a>
+        </div>
     </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Fråga
-            </th>
-            <th>
-                Svar
-            </th>
-            <th>
-                Låt
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Questions)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TrackQuestion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Answer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TrackTitle)
-                </td>
-                <td>
-                    <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id" asp-route-quizId="@Model.Quiz.Id" >Ändra</a> |
-                    <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-                    <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
-                </td>
-            </tr>
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
         }
-    </tbody>
-</table>
-
-<div>
-    <a asp-controller="Questions" asp-action="Create" asp-route-quizId="@Model.Quiz.Id" asp-route-quizName="@Model.Quiz.Name">Lägg till frågor</a>
-    <br />
-    <a asp-action="Index">Se alla quiz</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

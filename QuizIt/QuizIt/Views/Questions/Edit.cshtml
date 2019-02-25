@@ -7,38 +7,42 @@
 
 <h2>Ändra fråga</h2>
 <h2>@Model.Quiz.Id</h2>
+<div class="container-quiz">
+    <img class="img-responsive" src="~/images/QuizitChangeQuiz.svg" />
+    <div class="text-block">
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-controller="Questions" asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Question.Id" />
+                    <input type="hidden" asp-for="Quiz.Id" />
+                    <div class="form-group">
+                        <label asp-for="Question.TrackQuestion" class="control-label">Fråga</label>
+                        <input asp-for="Question.TrackQuestion" class="form-control" />
+                        <span asp-validation-for="Question.TrackQuestion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Question.Answer" class="control-label">Svar</label>
+                        <input asp-for="Question.Answer" class="form-control" />
+                        <span asp-validation-for="Question.Answer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
+                        <input asp-for="Question.TrackTitle" class="form-control" />
+                        <span asp-validation-for="Question.TrackTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Spara" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Questions" asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Question.Id" />
-            <input type="hidden" asp-for="Quiz.Id"/>
-            <div class="form-group">
-                <label asp-for="Question.TrackQuestion" class="control-label">Fråga</label>
-                <input asp-for="Question.TrackQuestion" class="form-control" />
-                <span asp-validation-for="Question.TrackQuestion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Question.Answer" class="control-label">Svar</label>
-                <input asp-for="Question.Answer" class="form-control" />
-                <span asp-validation-for="Question.Answer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
-                <input asp-for="Question.TrackTitle" class="form-control"/>
-                <span asp-validation-for="Question.TrackTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Spara" class="btn btn-default" />
-            </div>
-        </form>
+        <div>
+            <a asp-action="Index">Se alla frågor</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Se alla frågor</a>
 </div>
 
 @section Scripts {
