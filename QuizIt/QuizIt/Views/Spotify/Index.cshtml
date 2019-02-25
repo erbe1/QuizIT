@@ -11,7 +11,16 @@
 
     <div>
 
-        <iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        @*<iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>*@
+
+        @foreach (var item in Model.Suggestions)
+        {
+            <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <br />
+            <button class="btn-default">Spara den här låten till quiz</button>
+        }
+
+
 
     </div>
 </div>

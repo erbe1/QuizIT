@@ -70,18 +70,18 @@ namespace QuizIt.Controllers
         }
 
 
-        public IActionResult SearchApi(string term)
+        public IActionResult SearchApi(CreateQuizVM createquizvm, string term)
         {
             var service = new PlaybackService();
-            var result = service.GetSpotifyTracks(term).Result;
+            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
 
+            Question suggetstion = new Question
+            {
+                Suggestions = result.tracks.items.Select(x => x.id).ToList()
+            };
 
-            List<string> suggestions = result.tracks.items.Select(x => x.name).ToList();
-            //return Ok(suggestions);
+            return View("Index", suggetstion);
 
-            return PartialView("Index", suggestions);
-
-            //return Ok(new { result.tracks.items[0].id, result.tracks.items[0].name });
         }
     }
 }
