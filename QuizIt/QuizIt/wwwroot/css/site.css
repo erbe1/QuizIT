@@ -77,11 +77,50 @@ body {
     padding-right: 450px;
 }*/
 
-/*Textrutan i about*/
+/*Textrutae*/
 .text-block {
     position: absolute;
     top: 175px;
     bottom: -30px;
+    right: 250px;
+    left: 250px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
+    opacity: 0.8;
+    /*border-radius: 20%;*/
+    font-size: 18px;
+    font-family: "Amatic SC";
+}
+
+.text-block-quiz {
+    position: absolute;
+    top: 175px;
+    bottom: -30px;
+    right: 250px;
+    left: 250px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 39px;
+    padding-bottom: 32px;
+    opacity: 0.8;
+    /*border-radius: 20%;*/
+    font-size: 18px;
+    font-family: "Amatic SC";
+    font-weight: bold;
+}
+
+
+/*Textrutan i about*/
+.text-block-about {
+    position: absolute;
+    top: 175px;
+    bottom: 220px;
     right: 250px;
     left: 250px;
     background-color: black;
@@ -240,9 +279,9 @@ pre {
 
 table {
     font-family: "Amatic SC";
-    font-size: 21px;
+    font-size: 22px;
     font-style: normal;
     font-variant: normal;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 30px;
 }
