@@ -60,62 +60,64 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
-    <div class="text-block-title">
-        <h5>Hantera ditt konto</h5>
-    </div>
 
-    <div class="text-block text-block-contact text-block-quiz">
+        <div class="hero-image">
+            <div class="hero-text">
+                <h5>Hantera ditt konto</h5>
+            </div>
 
-        <div>
-            <h3>Ändra dina kontoinställningar</h3>
-            <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    <partial name="_ManageNav" />
-                </div>
-                <div class="col-md-9">
-                    @RenderBody()
+            <div class="text-block text-block-contact text-block-quiz">
+
+                <div>
+                    <h3>Ändra dina kontoinställningar</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <partial name="_ManageNav" />
+                        </div>
+                        <div class="col-md-9">
+                            @RenderBody()
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    
+
+    <div class="container-body-content">
+        @RenderBody()
+        <hr />
     </div>
-
-
-        <div class="container-body-content">
-            @RenderBody()
-            <hr />
+    <footer>
+        <div class="container-footer">
+            <img src="~/css/quizitluna.png" style="height:50px" />
+            <p><b>Kontakta oss: quizit@academy.se</b></p>
+            <p><b>&copy; 2019 - QuizIt</b></p>
         </div>
-        <footer>
-            <div class="container-footer">
-                <img src="~/css/quizitluna.png" style="height:50px" />
-                <p><b>Kontakta oss: quizit@academy.se</b></p>
-                <p><b>&copy; 2019 - QuizIt</b></p>
-            </div>
 
-        </footer>
+    </footer>
 
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-            </script>
-            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-            </script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
-        </environment>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
 
-        @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
