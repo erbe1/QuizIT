@@ -13,15 +13,9 @@ using QuizIt.Models.ViewModels;
 
 namespace QuizIt.Controllers
 {
-    public class UserNameDate
-    {
-        public DateTime AnsweredTime { get; set; }
-        public string UserName { get; set; }
-    }
 
     public class QuizController : Controller
     {
-        public static Dictionary<int, List<UserNameDate>> Answers = new Dictionary<int, List<UserNameDate>>();
         public static int QuestionId;
         public static int CurrentQuestion;
         public static int QuizId;
@@ -55,10 +49,10 @@ namespace QuizIt.Controllers
                                 .Single(m => m.Id == QuizId)
                                 .QuizQuestions.Select(x => x.Question).ToList();
 
-            if (CurrentQuestion >= (allQuestions.Count()+1)) //Fråga Oscar
+            if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
             {
                 //_quizHub.Clients.All.SendAsync("DisplayQuestion", "Quizet är slut!").Wait();
-                return View("QuizCompleted");
+                return View("QuizCompleted"); //Kommer ej till vyn
             }
 
             var question = allQuestions[CurrentQuestion]; //outOfRange exception
@@ -70,34 +64,8 @@ namespace QuizIt.Controllers
             return Ok();
         }
 
-        public IActionResult CurrentQuizStatus() //js anropar endast denna metod; Är vi framme än?????
-        {
-            //Servern håller reda på vilken fråga vi är på mha QuestionId [DONE]
-            //Returnera nuvarande fråga questionId [DONE]
-
-            return Ok(QuestionId);
-        }
-
-        public IActionResult PlayerHasAnswered(string userName)
-        {
-            //lägga till i answers, kunna se om flera har svarat, samma användare ej kunna svara flera gånger
-
-            List<UserNameDate> playersWhoHasAnswered = new List<UserNameDate>();
-            UserNameDate user = new UserNameDate
-            {
-                UserName = userName,
-                AnsweredTime = DateTime.Now
-            };
-            playersWhoHasAnswered.Add(user);
-
-            Answers.Add(QuestionId, playersWhoHasAnswered);
-
-            return Ok();
-        }
-
         public IActionResult PlayQuiz(int id)
         {
-
             //Göra om nedanstående till metod
             var quiz = _context.Quizzes
             .FirstOrDefault(q => q.Id == id);
@@ -118,18 +86,10 @@ namespace QuizIt.Controllers
             //    return NotFound();
             //}
 
-            //var vm = new QuizQuestionsVm
-            //{
-            //    Quiz = quiz,
-            //    Questions = questions.ToList()
-            //};
-
             QuestionId = questions.First().Id;
             QuizId = id;
 
-            //return View(vm);
             return View();
-
         }
 
         // GET: Quiz/Details/5

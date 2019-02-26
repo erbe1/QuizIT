@@ -19,18 +19,14 @@ namespace QuizIt.Hubs
 
         public async Task SendMessage(string user)
         {
-
-
             string message = $" tryckte på knappen {DateTime.Now.Hour} : {DateTime.Now.Minute} : {DateTime.Now.Second} : {DateTime.Now.Millisecond}";
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
         public async Task DisplayQuestion()
         {
-            // hämta frågan
-            // skicka till klienterna
+            // Hämtar frågan, skickar ut till klienterna
 
-            //hämta nuvarande fråga från quizet
             var questionId = QuizController.QuestionId;
 
             var question = _context.Questions.Single(q => q.Id == questionId);

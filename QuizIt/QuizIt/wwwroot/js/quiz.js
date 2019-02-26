@@ -6,22 +6,13 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 //document.getElementById("sendButton").disabled = true;
 
 connection.on("DisplayQuestion", function (question,answer,trackId) {
+
     document.getElementById("question").innerText = question;
     document.getElementById("answer").innerText = answer;
     document.getElementById("resultList").innerText = "";
-
     document.getElementById("spotifyUrl").innerHTML = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width = "300" height = "80" frameborder = "0" allowtransparency = "true" allow = "encrypted-media" ></iframe >`;
 
-    //`News with id = ${state.updateArea.id} not found`)
-    //src=@string.Format("https://open.spotify.com/embed/track/" + trackId)
 });
-
-//document.getElementById("displayQuestion").addEventListener("click", function (event) {
-//    connection.invoke("DisplayQuestion").catch(function (err) {
-//        return console.error(err.toString());
-//    });
-//    event.preventDefault();
-//});
 
 connection.on("ReceiveMessage", function (user, message, result) {
     console.log(result);
