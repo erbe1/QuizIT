@@ -25,7 +25,8 @@
                 {
                     <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     <p>Svar: @question.Answer</p>
-                    
+                    <button onclick="nextQuestion()">Nästa fråga</button>
+
                 }
                 else
                 {
@@ -36,10 +37,14 @@
                     <br />
                     string name = User.Identity.Name;
                     <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
+
+                    //Prata med servern (den nya controllern); jag har svaret
+                    <button onclick="playerHasAnswered('@User.Identity.Name')">Jag kan svaret!!</button>
+
                 }
 
             }
-                <hr />
+            <hr />
         }
 
 
@@ -47,6 +52,64 @@
 </div>
 
 <script>
+
+    //set interval, anropa metod CurrentQuizStatus många gånger, fetch som loggar, jmf quizledare/tävlande vy
+    //setInterval(getCurrentQuizStatus, 500);
+
+    async function playerHasAnswered(userName) {
+
+        console.log(userName);
+
+        let response = await fetch("/quiz/playerhasanswered/?userName=" + userName,
+            {
+                method: "GET"
+            });
+
+        let message;
+
+        console.log(response.status);
+
+        if (response.status === 200) {
+            message = await response.json();
+        }
+
+        console.log(response);
+        console.log(message);
+    }
+
+    async function nextQuestion() {
+        let response = await fetch("/quiz/nextquestion",
+            {
+                method: "GET"
+            });
+
+        let currentQuestion;
+
+        if (response.status === 200) {
+            currentQuestion = response.json();
+            console.log('Fråga nr: ' + currentQuestion)
+        }
+    }
+
+
+    async function getCurrentQuizStatus() {
+
+        let response = await fetch("/quiz/currentquizstatus",
+        {
+            method: "GET"
+            });
+
+        let questionId = 0;
+
+        if (response.status === 200) {
+            questionId = await response.json();
+        }
+
+        console.log(response);
+        console.log(questionId);
+    }
+
+
 
     async function printName(name,resultIndex) {
 

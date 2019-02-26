@@ -11,8 +11,18 @@ using QuizIt.Models.ViewModels;
 
 namespace QuizIt.Controllers
 {
+    public class UserNameDate
+    {
+        public DateTime AnsweredTime { get; set; }
+        public string UserName { get; set; }
+    }
+
     public class QuizController : Controller
     {
+        public static Dictionary<int, List<UserNameDate>> Answers = new Dictionary<int, List<UserNameDate>>();
+        public static int QuestionId;
+        public static int CurrentQuestion;
+
         private readonly ApplicationDbContext _context;
         public static CreateQuizVM _createquizvm;
 
@@ -29,7 +39,47 @@ namespace QuizIt.Controllers
             return View("Index", vm);
         }
 
-        public async Task<IActionResult> PlayQuiz(int? id)
+        public IActionResult NextQuestion() //Endast quizledare anropar denna metod [DONE]
+        {
+            CurrentQuestion++;
+
+            //Kolla så man inte trillar över kanten -> måste ta reda på antalet frågor i quizet.
+            //Fråga Oscar: smidigaste sättet att komma åt quizId? Finns i url'n
+
+            //if (CurrentQuestion > Questions.Count())
+            //{
+            //    return View("QuizCompleted");
+            //}
+
+            return Ok(CurrentQuestion);
+        }
+
+        public IActionResult CurrentQuizStatus() //js anropar endast denna metod; Är vi framme än?????
+        {
+            //Servern håller reda på vilken fråga vi är på mha QuestionId [DONE]
+            //Returnera nuvarande fråga questionId [DONE]
+
+            return Ok(QuestionId);
+        }
+
+        public IActionResult PlayerHasAnswered(string userName)
+        {
+            //lägga till i answers, kunna se om flera har svarat, samma användare ej kunna svara flera gånger
+
+            List<UserNameDate> playersWhoHasAnswered = new List<UserNameDate>();
+            UserNameDate user = new UserNameDate
+            {
+                UserName = userName,
+                AnsweredTime = DateTime.Now
+            };
+            playersWhoHasAnswered.Add(user);
+
+            Answers.Add(QuestionId, playersWhoHasAnswered);
+            
+            return Ok();
+        }
+
+        public IActionResult PlayQuiz(int? id)
         {
             if (id == null)
             {
@@ -62,12 +112,13 @@ namespace QuizIt.Controllers
                 Questions = questions.ToList()
             };
 
+            QuestionId = questions.First().Id;
             return View(vm);
 
         }
 
         // GET: Quiz/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
