@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QuizIt.Services.Spotify;
 using QuizIt.Services;
 using QuizIt.Models;
+using QuizIt.Hubs;
 
 namespace QuizIt
 {
@@ -51,6 +52,8 @@ namespace QuizIt
 
             services.AddTransient<AuthService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +75,11 @@ namespace QuizIt
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<QuizHub>("/quizHub");
+            });
 
             app.UseMvc(routes =>
             {

@@ -43,6 +43,17 @@
 
                 }
 
+                <div>
+                    User..........<input type="text" id="userInput" />
+                    <br />
+                    Message...<input type="text" id="messageInput" />
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+
+                <div>
+                    <ul id="messagesList"></ul>
+                </div>
+
             }
             <hr />
         }
@@ -50,6 +61,9 @@
 
     </div>
 </div>
+
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/quiz.js"></script>
 
 <script>
 
@@ -95,8 +109,8 @@
     async function getCurrentQuizStatus() {
 
         let response = await fetch("/quiz/currentquizstatus",
-        {
-            method: "GET"
+            {
+                method: "GET"
             });
 
         let questionId = 0;
@@ -111,7 +125,7 @@
 
 
 
-    async function printName(name,resultIndex) {
+    async function printName(name, resultIndex) {
 
         console.log(name);
         console.log(resultIndex);
@@ -120,7 +134,7 @@
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + ":" + today.getMilliseconds();
 
         let result = document.getElementById(resultIndex);
-        result.innerHTML = 'Stopp!! ' + name + ' tryckte på knappen kl ' + time +' !';
+        result.innerHTML = 'Stopp!! ' + name + ' tryckte på knappen kl ' + time + ' !';
 
     }
 </script>
