@@ -17,12 +17,12 @@ namespace QuizIt.Hubs
             _context = context;
         }
 
-        public async Task SendMessage(string user, string result) //result borde vara resultList2
+        public async Task SendMessage(string user)
         {
 
 
             string message = $" tryckte på knappen {DateTime.Now.Hour} : {DateTime.Now.Minute} : {DateTime.Now.Second} : {DateTime.Now.Millisecond}";
-            await Clients.All.SendAsync("ReceiveMessage", user, message, result);
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
         public async Task DisplayQuestion()

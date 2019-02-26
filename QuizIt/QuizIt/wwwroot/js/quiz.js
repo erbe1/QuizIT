@@ -6,9 +6,8 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 //document.getElementById("sendButton").disabled = true;
 
 connection.on("DisplayQuestion", function (question) {
-    alert('går in i metoden');
-    console.log('går in i metoden');
     document.getElementById("question").innerText = question;
+    document.getElementById("resultList").innerText = "";
 });
 
 document.getElementById("displayQuestion").addEventListener("click", function (event) {
@@ -24,7 +23,7 @@ connection.on("ReceiveMessage", function (user, message, result) {
     var encodedMsg = user + msg;
     var li = document.createElement("li");
     li.textContent = encodedMsg;
-    document.getElementById("display" + result).appendChild(li); //Detta ska inte vara samma för alla frågor, varje fråga ska ha en egen result div
+    document.getElementById("resultList").appendChild(li); //Detta ska inte vara samma för alla frågor, varje fråga ska ha en egen result div
 });
 
 connection.start().then(function () {
@@ -43,9 +42,8 @@ connection.start().then(function () {
 for (let x of document.getElementsByClassName("sendButton")) {
     x.addEventListener("click", function (event) {
         var user = document.getElementById("userInput").value;
-        var result = document.getElementById("resultList3").value; //inte hårdkoda sen dårå
 
-        connection.invoke("SendMessage", user, result).catch(function (err) {
+        connection.invoke("SendMessage", user).catch(function (err) {
             return console.error(err.toString());
         });
         event.preventDefault();
