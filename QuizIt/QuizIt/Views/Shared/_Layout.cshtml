@@ -39,9 +39,10 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About"><b>Om QuizIt</b></a></li>
                     <li><a asp-controller="Spotify" asp-action="Authorize"><b>Quiz</b></a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact"><b>Kontakta oss</b></a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Photographer"><b>Photographer</b></a></li>
                     @*@if (User.IsInRole("Admin"))
-                    {*@
-                        <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
+                        {*@
+                    <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
                     @*}*@
 
                 </ul>
@@ -51,6 +52,8 @@
     </nav>
 
     <partial name="_CookieConsentPartial" />
+
+    @RenderSection("Hero", required: false)
 
     <div class="container-body-content">
         @RenderBody()
@@ -62,7 +65,7 @@
             <p><b>Kontakta oss: quizit@academy.se</b></p>
             <p><b>&copy; 2019 - QuizIt</b></p>
         </div>
-        
+
     </footer>
 
     <environment include="Development">

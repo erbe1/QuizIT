@@ -3,41 +3,45 @@
         ViewData["Title"] = "Index";
     }*@
 
-<div class="container-quiz">
-    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
-    <div class="text-block-title">
-        <h5>Quiz</h5>
-    </div>
-    <div class="text-block-quiz text-block">
+@section Hero{
 
-        <p>
-            <a asp-action="Create"><b>Skapa nytt quiz</b></a>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Namn
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Quizzez)
-                {
+
+    <div class="hero-image">
+        <div class="hero-text">
+            <h5>Quiz</h5>
+        </div>
+        <div class="text-block-quiz text-block">
+
+            <p>
+                <a asp-action="Create"><b>Skapa nytt quiz</b></a>
+            </p>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a> |
-                            <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
-                            @*<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |*@
-                            <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
-                        </td>
+                        <th>
+                            Namn
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Quizzez)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a> |
+                                <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                                @*<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |*@
+                                <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+
+}

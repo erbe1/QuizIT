@@ -4,35 +4,36 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container-createnew">
-    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
-    <div class="text-block-title">
-        <h5>Skapa nytt quiz</h5>
-    </div>
-    <hr />
-    <div class="text-block text-block-create">
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Quiz.Name" class="control-label">Namn</label>
-                        <input asp-for="Quiz.Name" class="form-control" />
-                        <span asp-validation-for="Quiz.Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Skapa quiz" class="btn btn-create" />
-                    </div>
-                </form>
+@section Hero{
+
+    <div class="hero-image">
+        <div class="hero-text">
+            <h5>Skapa nytt quiz</h5>
+        </div>
+        <hr />
+        <div class="text-block text-block-create">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Quiz.Name" class="control-label">Namn</label>
+                            <input asp-for="Quiz.Name" class="form-control" />
+                            <span asp-validation-for="Quiz.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Skapa quiz" class="btn btn-create" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Se alla quiz</a>
             </div>
         </div>
-
-        <div>
-            <a asp-action="Index">Se alla quiz</a>
-        </div>
     </div>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    }
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

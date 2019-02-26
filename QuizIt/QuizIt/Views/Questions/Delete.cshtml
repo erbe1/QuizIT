@@ -4,42 +4,43 @@
     ViewData["Title"] = "Delete";
 }
 
-<div class="container-quiz">
+@section Hero{
 
-    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
-    <div class="text-block-title text-block-text">
-        <h4>Ta bort fråga</h4>
-    </div>
-
-    <div class="text-block">
-        <div>
-            <dl class="dl-horizontal">
-                <dt>
-                    Fråga
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TrackQuestion)
-                </dd>
-                <dt>
-                    Svar
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Answer)
-                </dd>
-                <dt>
-                    Låt
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TrackTitle)
-                </dd>
-            </dl>
-
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /> <br />
-                <a asp-action="Index">Se alla frågor</a>
-            </form>
+    <div class="hero-image">
+        <div class="hero-text">
+            <h4>Ta bort fråga</h4>
         </div>
-    </div>
 
-</div>
+        <div class="text-block">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Fråga
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TrackQuestion)
+                    </dd>
+                    <dt>
+                        Svar
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Answer)
+                    </dd>
+                    <dt>
+                        Låt
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TrackTitle)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /> <br />
+                    <a asp-action="Index">Se alla frågor</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    }

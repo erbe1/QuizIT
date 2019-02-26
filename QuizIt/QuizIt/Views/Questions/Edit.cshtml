@@ -4,51 +4,52 @@
 @{
     ViewData["Title"] = "Edit";
 }
-        @*<h2>Ändra fråga</h2>
-        <h2>@Model.Quiz.Name</h2>*@
+@*<h2>Ändra fråga</h2>
+    <h2>@Model.Quiz.Name</h2>*@
 
-<div class="container-quiz">
-    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
-    <div class="text-block-title">
-        <h5>Ändra fråga</h5>
-    </div>
-    <div class="text-block">
-        <h2>Ändra fråga i Quiz "@Model.Quiz.Name"</h2>
-        <hr />
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-controller="Questions" asp-action="Edit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Question.Id" />
-                    <input type="hidden" asp-for="Quiz.Id" />
-                    <div class="form-group">
-                        <label asp-for="Question.TrackQuestion" class="control-label">Fråga</label>
-                        <input asp-for="Question.TrackQuestion" class="form-control" />
-                        <span asp-validation-for="Question.TrackQuestion" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Question.Answer" class="control-label">Svar</label>
-                        <input asp-for="Question.Answer" class="form-control" />
-                        <span asp-validation-for="Question.Answer" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
-                        <input asp-for="Question.TrackTitle" class="form-control" />
-                        <span asp-validation-for="Question.TrackTitle" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Spara" class="btn btn-default" />
-                    </div>
-                </form>
+@section Hero{
+
+    <div class="hero-image">
+        <div class="hero-text">
+            <h5>Ändra fråga</h5>
+        </div>
+        <div class="text-block">
+            <h2>Ändra fråga i Quiz "@Model.Quiz.Name"</h2>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-controller="Questions" asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Question.Id" />
+                        <input type="hidden" asp-for="Quiz.Id" />
+                        <div class="form-group">
+                            <label asp-for="Question.TrackQuestion" class="control-label">Fråga</label>
+                            <input asp-for="Question.TrackQuestion" class="form-control" />
+                            <span asp-validation-for="Question.TrackQuestion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Question.Answer" class="control-label">Svar</label>
+                            <input asp-for="Question.Answer" class="form-control" />
+                            <span asp-validation-for="Question.Answer" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Question.TrackTitle" class="control-label">Låt</label>
+                            <input asp-for="Question.TrackTitle" class="form-control" />
+                            <span asp-validation-for="Question.TrackTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Spara" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-controller="Quiz" asp-action="Edit" asp-route-id="@Model.Quiz.Id">Tillbaka</a>
             </div>
         </div>
-
-        <div>
-            <a asp-controller="Quiz" asp-action="Edit" asp-route-id="@Model.Quiz.Id">Tillbaka</a>
-        </div>
     </div>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    }
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
