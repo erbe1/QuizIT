@@ -1,24 +1,59 @@
 ﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
 
-<div class="centerContent">
-    <div class="tileContainer">
-        <a asp-action="Play" class="menueButton">Play</a>
+<div class="container-quiz">
+    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title">
+        <h5>Lägg till låt</h5>
     </div>
-    <div class="tileContainer">
+    <div class="text-block text-block-quiz">
+        <div class="centerContent">
+            <div class="tileContainer">
+                <a asp-action="Play" class="menueButton">Play</a>
+            </div>
+            <div class="tileContainer">
 
-        <a asp-action="Paus" class="menueButton">Paus</a>
-    </div>
-    @*<input type="hidden" name="quizId" value="@Model.Quiz.Id" />*@
+                <a asp-action="Paus" class="menueButton">Paus</a>
+            </div>
+            @*<input type="hidden" name="quizId" value="@Model.Quiz.Id" />*@
 
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-controller="Questions" asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Quiz.Id" />
-                <input type="hidden" asp-for="Question.TrackTitle" />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-controller="Questions" asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Quiz.Id" />
+                        <input type="hidden" asp-for="Question.TrackTitle" />
 
-                <div class="form-group">
-                    @{
+                        <div class="form-group">
+                            @{
+                                int index = 0;
+                            }
+
+                            @foreach (var item in Model.Suggestions)
+                            {
+                                <div>
+                                    <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                    <a asp-controller="Questions" asp-action="Create" asp-route-trackIndex="@index" asp-route-quizId="@Model.Quiz.Id" asp-route-trackTitle="@Model.Question.TrackTitle">Lägg till låten till quiz</a>
+                                </div>
+                                index++;
+                            }
+
+                        </div>
+                        @*<div class="form-group">
+                                <input type="submit" value="Spara" class="btn btn-default" />
+                            </div>*@
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div>
+
+                @*<iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>*@
+                @*@{
                         int index = 0;
                     }
 
@@ -27,42 +62,14 @@
                         <div>
                             <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             <br />
-                            <a asp-controller="Questions" asp-action="Create" asp-route-trackIndex="@index" asp-route-quizId="@Model.Quiz.Id" asp-route-trackTitle="@Model.Question.TrackTitle">Spara den här låten till quiz</a>
+                            <a asp-controller="Questions" asp-action="Create" asp-route-trackIndex="@index" asp-route-quizId="@Model.Quiz.Id">Spara den här låten till quiz</a>
                         </div>
                         index++;
-                    }
-
-                </div>
-                @*<div class="form-group">
-            <input type="submit" value="Spara" class="btn btn-default" />
-        </div>*@
-            </form>
-        </div>
-    </div>
+                    }*@
 
 
 
-
-
-
-    <div>
-
-        @*<iframe src=@string.Format("https://open.spotify.com/embed/track/" + Model.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>*@
-        @*@{
-            int index = 0;
-        }
-
-        @foreach (var item in Model.Suggestions)
-        {
-            <div>
-                <iframe src=@string.Format("https://open.spotify.com/embed/track/" + item) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <br />
-                <a asp-controller="Questions" asp-action="Create" asp-route-trackIndex="@index" asp-route-quizId="@Model.Quiz.Id">Spara den här låten till quiz</a>
             </div>
-            index++;
-        }*@
-
-
-
+        </div>
     </div>
 </div>

@@ -4,44 +4,50 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Frågor</h2>
+<img class="img-responsive" src="~/images/Quizit-empty.svg" />
+<div class="text-block-title">
+    <h5>Frågor</h5>
+</div>
 
-<p>
-    <a asp-action="Create">Skapa ny fråga</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Fråga
-            </th>
-            <th>
-                Svar
-            </th>
-            <th>
-                Låt
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (Question question in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => question.TrackQuestion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => question.Answer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => question.TrackTitle)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@question.Id">Ändra</a> |
-                <a asp-action="Details" asp-route-id="@question.Id">Detaljer</a> |
-                <a asp-action="Delete" asp-route-id="@question.Id">Ta bort</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="text-block text-block-contact text-block-quiz">
+    <p>
+        <a asp-action="Create">Skapa ny fråga</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Fråga
+                </th>
+                <th>
+                    Svar
+                </th>
+                <th>
+                    Låt
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Question question in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => question.TrackQuestion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => question.Answer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => question.TrackTitle)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@question.Id">Ändra</a> |
+                        <a asp-action="Details" asp-route-id="@question.Id">Detaljer</a> |
+                        <a asp-action="Delete" asp-route-id="@question.Id">Ta bort</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
