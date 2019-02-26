@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
+using QuizIt.Hubs;
 using QuizIt.Models;
 using QuizIt.Models.ViewModels;
 
@@ -22,13 +24,16 @@ namespace QuizIt.Controllers
         public static Dictionary<int, List<UserNameDate>> Answers = new Dictionary<int, List<UserNameDate>>();
         public static int QuestionId;
         public static int CurrentQuestion;
+        public static int QuizId;
 
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<QuizHub> _quizHub;
         public static CreateQuizVM _createquizvm;
 
-        public QuizController(ApplicationDbContext context)
+        public QuizController(ApplicationDbContext context, IHubContext<QuizHub> quizHub)
         {
             _context = context;
+            _quizHub = quizHub;
         }
 
         // GET: Quiz
@@ -43,6 +48,18 @@ namespace QuizIt.Controllers
         {
             CurrentQuestion++;
 
+
+            var allQuestions = _context.Quizzes
+    .Include(q => q.QuizQuestions)
+    .ThenInclude(q => q.Question)
+    .Single(m => m.Id == QuizId)
+    .QuizQuestions.Select(x => x.Question).ToList();
+
+            var question = allQuestions[CurrentQuestion]; //felhantering om frågan inte finns!!!
+            QuestionId = question.Id;
+
+            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion).Wait();
+
             //Kolla så man inte trillar över kanten -> måste ta reda på antalet frågor i quizet.
             //Fråga Oscar: smidigaste sättet att komma åt quizId? Finns i url'n
 
@@ -51,7 +68,7 @@ namespace QuizIt.Controllers
             //    return View("QuizCompleted");
             //}
 
-            return Ok(CurrentQuestion);
+            return Ok();
         }
 
         public IActionResult CurrentQuizStatus() //js anropar endast denna metod; Är vi framme än?????
@@ -75,16 +92,12 @@ namespace QuizIt.Controllers
             playersWhoHasAnswered.Add(user);
 
             Answers.Add(QuestionId, playersWhoHasAnswered);
-            
+
             return Ok();
         }
 
-        public IActionResult PlayQuiz(int? id)
+        public IActionResult PlayQuiz(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             //Göra om nedanstående till metod
             var quiz = _context.Quizzes
@@ -101,19 +114,22 @@ namespace QuizIt.Controllers
                 .Single(m => m.Id == id)
                 .QuizQuestions.Select(x => x.Question);
 
-            if (questions == null)
-            {
-                return NotFound();
-            }
+            //if (questions == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var vm = new QuizQuestionsVm
-            {
-                Quiz = quiz,
-                Questions = questions.ToList()
-            };
+            //var vm = new QuizQuestionsVm
+            //{
+            //    Quiz = quiz,
+            //    Questions = questions.ToList()
+            //};
 
             QuestionId = questions.First().Id;
-            return View(vm);
+            QuizId = id;
+
+            //return View(vm);
+            return View();
 
         }
 

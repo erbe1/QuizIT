@@ -4,7 +4,7 @@
 
     <img class="img-responsive" src="~/images/Quizit-empty.svg" />
     <div class="text-block-title">
-        <h4>@Model.Quiz.Name</h4>
+        @*<h4>@Model.Quiz.Name</h4>*@
     </div>
 
     <div class="text-block text-block-login text-block-quiz">
@@ -16,8 +16,13 @@
         Skriv ditt namn <input type="text" id="userInput" style="color:black" />
         <hr />
 
+        <input type="button" id="displayQuestion" value="Visa fråga" style="color:black" />
+        <div id="question"></div>
 
-        @foreach (var question in Model.Questions)
+        <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
+
+
+        @*@foreach (var question in Model.Questions)
         {
             <p>Fråga @index :</p>
             <p>@question.TrackQuestion</p>
@@ -33,31 +38,36 @@
 
                 }
                 else
-                {
+                {*@
 
-                    @*string result = "result" + index;
+        @*string result = "result" + index;
 
-                    <div id='@result' style="color:hotpink"> </div>
-                    <br />
-                    string name = User.Identity.Name;
-                    <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
+        <div id='@result' style="color:hotpink"> </div>
+        <br />
+        string name = User.Identity.Name;
+        <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
 
-                    //Prata med servern (den nya controllern); jag har svaret
-                    <button onclick="playerHasAnswered('@User.Identity.Name')">Jag kan svaret!!</button>*@
+        //Prata med servern (den nya controllern); jag har svaret
+        <button onclick="playerHasAnswered('@User.Identity.Name')">Jag kan svaret!!</button>*@
 
-                }
+        @*}
+
+                var resultList = "resultList" + index;
+
+                    <div>
+                        <input type="hidden" value="@resultList" id="@resultList"/>
+                        <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
+                    </div>
+
+                var displayResultList = "display" + resultList;
 
                 <div>
-                    <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
-                </div>
-
-                <div>
-                    <ul id="messagesList"></ul>
+                    <ul id="@displayResultList"></ul>
                 </div>
 
             }
             <hr />
-        }
+        }*@
 
 
     </div>
