@@ -13,6 +13,10 @@
             int index = 1;
         }
 
+        Skriv ditt namn <input type="text" id="userInput" style="color:black" />
+        <hr />
+
+
         @foreach (var question in Model.Questions)
         {
             <p>Fråga @index :</p>
@@ -43,14 +47,8 @@
 
                 }
 
-                var time2 = $"{DateTime.Now.Hour} : {DateTime.Now.Minute} : {DateTime.Now.Second} : {DateTime.Now.Millisecond}";
-                    var time = DateTime.Now.ToLongTimeString();
-                    var message = $" tryckte på knappen {time2}";
-
                 <div>
-                    Skriv ditt namn <input type="text" id="userInput" style="color:black"/>
-                    <input type="hidden" id="messageInput" value="@message"/>
-                    <input type="button" id="sendButton" value="Jag kan svaret!!" style="color:black" />
+                    <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
                 </div>
 
                 <div>
@@ -65,8 +63,6 @@
     </div>
 </div>
 
-<script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/quiz.js"></script>
 
 <script>
 

@@ -40,8 +40,8 @@
                     <li><a asp-controller="Spotify" asp-action="Authorize"><b>Quiz</b></a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact"><b>Kontakta oss</b></a></li>
                     @*@if (User.IsInRole("Admin"))
-                    {*@
-                        <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
+                        {*@
+                    <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
                     @*}*@
 
                 </ul>
@@ -62,8 +62,10 @@
             <p><b>Kontakta oss: quizit@academy.se</b></p>
             <p><b>&copy; 2019 - QuizIt</b></p>
         </div>
-        
+
     </footer>
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -84,8 +86,11 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
+
+    </environment>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/quiz.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
