@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
+        @*<h2>Ändra fråga</h2>
+        <h2>@Model.Quiz.Name</h2>*@
 
 <div class="container-quiz">
     <img class="img-responsive" src="~/images/Quizit-empty.svg" />
@@ -11,6 +13,7 @@
         <h5>Ändra fråga</h5>
     </div>
     <div class="text-block">
+        <h2>Ändra fråga i Quiz "@Model.Quiz.Name"</h2>
         <hr />
         <div class="row">
             <div class="col-md-4">
@@ -41,7 +44,7 @@
         </div>
 
         <div>
-            <a asp-action="Index">Se alla frågor</a>
+            <a asp-controller="Quiz" asp-action="Edit" asp-route-id="@Model.Quiz.Id">Tillbaka</a>
         </div>
     </div>
 </div>

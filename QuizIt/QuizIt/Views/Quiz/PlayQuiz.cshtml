@@ -19,13 +19,45 @@
             <p>@question.TrackQuestion</p>
             index++;
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated) //Man måste vara inloggad för att se mer än bara frågorna
             {
-                <p>Svar: @question.Answer</p>
-                <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                if (User.IsInRole("Quizleader") || User.IsInRole("Admin"))
+                {
+                    <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    <p>Svar: @question.Answer</p>
+                    
+                }
+                else
+                {
+
+                    string result = "result" + index;
+
+                    <div id='@result' style="color:hotpink"> </div>
+                    <br />
+                    string name = User.Identity.Name;
+                    <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
+                }
 
             }
+                <hr />
         }
-    </div>
 
+
+    </div>
 </div>
+
+<script>
+
+    async function printName(name,resultIndex) {
+
+        console.log(name);
+        console.log(resultIndex);
+
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + ":" + today.getMilliseconds();
+
+        let result = document.getElementById(resultIndex);
+        result.innerHTML = 'Stopp!! ' + name + ' tryckte på knappen kl ' + time +' !';
+
+    }
+</script>

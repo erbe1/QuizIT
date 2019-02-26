@@ -70,7 +70,7 @@ namespace QuizIt.Controllers
         //}
 
 
-        public IActionResult SearchApi(CreateQuizVM createquizvm, int quizId)
+        public IActionResult Search(CreateQuizVM createquizvm, int quizId)
         {
             var service = new PlaybackService();
             var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
