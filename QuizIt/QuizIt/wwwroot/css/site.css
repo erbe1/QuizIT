@@ -92,7 +92,7 @@ body {
     padding-right: 5px;
     padding-top: 39px;
     padding-bottom: 32px;
-    opacity: 0.7;
+    opacity: 0.8;
     font-size: 22px;
     font-family: "Amatic SC";
 }
@@ -138,10 +138,6 @@ body {
     width: 85%;
 }
 
-.col-md-9{
-   
-}
-
 .text-block-title {
     position: absolute;
     top: 76px;
@@ -155,7 +151,6 @@ body {
     font-family: "Amatic SC";
     font-size: 36px;
 }
-
 
 /* För att få bakgrundsbilden att täcka hela skärmen*/
 .container-startpage {
@@ -203,7 +198,7 @@ body {
 .flip-card-front {
     background-color: black;
     color: white;
-    opacity: 0.7;
+    opacity: 0.8;
     padding-top: 32px;
 }
 
@@ -212,7 +207,7 @@ body {
     background-color: black;
     color: white;
     transform: rotateY(180deg);
-    opacity: 0.7;
+    opacity: 0.8;
     
 }
 
