@@ -24,14 +24,14 @@ namespace QuizIt.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
-            return View();
+            return View("About");
         }
 
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
+            return View("Contact");
         }
 
         public IActionResult Privacy()
