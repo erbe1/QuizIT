@@ -4,22 +4,31 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Ta bort quiz</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Namn
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /> |
-        <a asp-action="Index">Se alla quiz</a>
-    </form>
+<div class="container-quiz">
+
+    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title text-block-text">
+        <h5>Ta bort Quizzet @Model.Name</h5>
+    </div>
+
+    <div class="text-block">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Namn
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Ta bort" class="btn btn-default alert-danger" /><br />  
+                <a asp-action="Index">Se alla quiz</a>
+            </form>
+        </div>
+    </div>
+
 </div>

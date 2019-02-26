@@ -6,8 +6,11 @@
 }
 
 <div class="container-quiz">
-    <img class="img-responsive" src="~/images/QuizitChangeQuiz.svg" />
-    <div class="text-block text-block-create text-block-login">
+    <img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title">
+        <h5>@Model.Quiz.Name</h5>
+    </div>
+    <div class="text-block text-block-create">
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Edit">
