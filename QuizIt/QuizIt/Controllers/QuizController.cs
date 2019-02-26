@@ -44,29 +44,28 @@ namespace QuizIt.Controllers
             return View("Index", vm);
         }
 
-        public IActionResult NextQuestion() //Endast quizledare anropar denna metod [DONE]
+        //Testa denna metod i testprojekt!!
+        public IActionResult NextQuestion() //Endast quizledare anropar denna metod
         {
             CurrentQuestion++;
 
-
             var allQuestions = _context.Quizzes
-    .Include(q => q.QuizQuestions)
-    .ThenInclude(q => q.Question)
-    .Single(m => m.Id == QuizId)
-    .QuizQuestions.Select(x => x.Question).ToList();
+                                .Include(q => q.QuizQuestions)
+                                .ThenInclude(q => q.Question)
+                                .Single(m => m.Id == QuizId)
+                                .QuizQuestions.Select(x => x.Question).ToList();
 
-            var question = allQuestions[CurrentQuestion]; //felhantering om frågan inte finns!!!
+            if (CurrentQuestion >= (allQuestions.Count()+1)) //Fråga Oscar
+            {
+                //_quizHub.Clients.All.SendAsync("DisplayQuestion", "Quizet är slut!").Wait();
+                return View("QuizCompleted");
+            }
+
+            var question = allQuestions[CurrentQuestion]; //outOfRange exception
+
             QuestionId = question.Id;
 
-            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion).Wait();
-
-            //Kolla så man inte trillar över kanten -> måste ta reda på antalet frågor i quizet.
-            //Fråga Oscar: smidigaste sättet att komma åt quizId? Finns i url'n
-
-            //if (CurrentQuestion > Questions.Count())
-            //{
-            //    return View("QuizCompleted");
-            //}
+            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId).Wait();
 
             return Ok();
         }

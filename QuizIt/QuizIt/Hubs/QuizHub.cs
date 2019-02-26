@@ -33,11 +33,9 @@ namespace QuizIt.Hubs
             //hämta nuvarande fråga från quizet
             var questionId = QuizController.QuestionId;
 
-            //int questionId = 23; //OBS hårdkodat frågeId
-
             var question = _context.Questions.Single(q => q.Id == questionId);
 
-            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion);
+            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId);
         }
     }
 }
