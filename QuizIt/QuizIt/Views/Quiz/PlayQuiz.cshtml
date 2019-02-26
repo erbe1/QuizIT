@@ -31,7 +31,7 @@
                 else
                 {
 
-                    string result = "result" + index;
+                    @*string result = "result" + index;
 
                     <div id='@result' style="color:hotpink"> </div>
                     <br />
@@ -39,15 +39,18 @@
                     <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
 
                     //Prata med servern (den nya controllern); jag har svaret
-                    <button onclick="playerHasAnswered('@User.Identity.Name')">Jag kan svaret!!</button>
+                    <button onclick="playerHasAnswered('@User.Identity.Name')">Jag kan svaret!!</button>*@
 
                 }
 
+                var time2 = $"{DateTime.Now.Hour} : {DateTime.Now.Minute} : {DateTime.Now.Second} : {DateTime.Now.Millisecond}";
+                    var time = DateTime.Now.ToLongTimeString();
+                    var message = $" tryckte på knappen {time2}";
+
                 <div>
-                    User..........<input type="text" id="userInput" />
-                    <br />
-                    Message...<input type="text" id="messageInput" />
-                    <input type="button" id="sendButton" value="Send Message" />
+                    <input type="hidden" id="userInput" value="@User.Identity.Name"/>
+                    <input type="hidden" id="messageInput" value="@message"/>
+                    <input type="button" id="sendButton" value="Jag kan svaret!!" style="color:black" />
                 </div>
 
                 <div>
