@@ -23,7 +23,6 @@ namespace QuizIt.Controllers
             _playbackService = playbackService;
         }
 
-
         public IActionResult Index(QuizQuestionsVm vm)
         {
             return View(vm);
@@ -53,22 +52,6 @@ namespace QuizIt.Controllers
             var statuscode = await _playbackService.Pause();
             return View("Index");
         }
-
-
-        //public async Task<IActionResult> Search(CreateQuizVM createquizvm)
-        //{
-        //    var service = new PlaybackService();
-        //    var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
-
-        //    Question question = new Question
-        //    {
-        //        TrackId = result.tracks.items[0].id,
-        //        TrackTitle = result.tracks.items[0].name
-        //    };
-
-        //    return View("Index", question);
-        //}
-
 
         public IActionResult Search(CreateQuizVM createquizvm, int quizId)
         {
