@@ -5,8 +5,9 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 //Disable send button until connection is established
 //document.getElementById("sendButton").disabled = true;
 
-connection.on("DisplayQuestion", function (question,answer,trackId,currentQuestion) {
-
+connection.on("DisplayQuestion", function (question, answer, trackId, currentQuestion) {
+    document.getElementById("answerButton").disabled = "";
+    //document.getElementById("quizFinished").innerHTML = 'none';
     document.getElementById("playQuiz").style.display = 'block';
     document.getElementById("question").innerText = question;
     document.getElementById("questionNumber").innerText = currentQuestion;
@@ -45,6 +46,7 @@ connection.start().then(function () {
 
 for (let x of document.getElementsByClassName("sendButton")) {
     x.addEventListener("click", function (event) {
+        event.srcElement.disabled = "disabled";
         var user = document.getElementById("userInput").value;
 
         connection.invoke("SendMessage", user).catch(function (err) {
