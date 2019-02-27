@@ -9,8 +9,8 @@ connection.on("DisplayQuestion", function (question,answer,trackId) {
 
     document.getElementById("playQuiz").style.display = 'block';
     document.getElementById("question").innerText = question;
-    document.getElementById("answer").innerText = answer;
     document.getElementById("resultList").innerText = "";
+    document.getElementById("answer").innerText = answer;
     document.getElementById("spotifyUrl").innerHTML = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width = "300" height = "80" frameborder = "0" allowtransparency = "true" allow = "encrypted-media" ></iframe >`;
 
 });

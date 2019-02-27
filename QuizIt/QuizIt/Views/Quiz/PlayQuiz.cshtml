@@ -10,29 +10,47 @@
 
             <div id="playQuiz">
 
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <p>Skriv ditt namn </p><input type="text" id="userInput" style="color:black" />
+                    <hr />
+                }
 
-                Skriv ditt namn <input type="text" id="userInput" style="color:black" />
-                <hr />
 
                 <div>Fråga: <span id="question"></span></div>
-
-                @*if (User.Identity.IsAuthenticated) //Man måste vara inloggad för att se mer än bara frågorna*@
-                <div>Svar: <span id="answer"></span></div>
-                <div id="spotifyUrl"></div>
-
                 <hr />
 
-                <div>
-                    <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
-                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div>Svar: <span id="answer"></span></div>
+                    <div id="spotifyUrl"></div>
+                    <hr />
 
+
+                }
+                else
+                {
+                    <div>
+                        <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
+                    </div>
+                    <hr />
+
+                }
+
+
+                <p>Spelare som tryckt på knappen:</p>
                 <div>
                     <ul id="resultList"></ul>
                 </div>
 
-                <hr />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <hr />
+                    <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
 
-                <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
+                }
+
+
             </div>
 
             <div id="quizFinished">
@@ -52,8 +70,6 @@
         let currentQuestion;
 
         if (response.status === 200) {
-            //currentQuestion = response.json();
-            //console.log('Fråga nr: ' + currentQuestion)
         }
     }
     </script>
