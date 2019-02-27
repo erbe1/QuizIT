@@ -1,64 +1,58 @@
-﻿@model QuizIt.Models.ViewModels.QuizQuestionsVm
-
+﻿
 @section Hero{
 
     <div class="hero-image">
         <div class="hero-text">
-            <h5>@Model.Quiz.Name</h5>
         </div>
 
         <div class="text-block text-block-contact text-block-quiz">
 
-            @{
-                int index = 1;
-            }
+            <div id="playQuiz">
 
-            @foreach (var question in Model.Questions)
-            {
-                <p>Fråga @index :</p>
-                <p>@question.TrackQuestion</p>
-                index++;
 
-                if (User.Identity.IsAuthenticated) //Man måste vara inloggad för att se mer än bara frågorna
-                {
-                    if (User.IsInRole("Quizleader") || User.IsInRole("Admin"))
-                    {
-                        <iframe src=@string.Format("https://open.spotify.com/embed/track/" + question.TrackId) width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        <p>Svar: @question.Answer</p>
-
-                    }
-                    else
-                    {
-
-                        string result = "result" + index;
-
-                        <div id='@result' style="color:hotpink"> </div>
-                        <br />
-                        string name = User.Identity.Name;
-                        <button onclick="printName('@User.Identity.Name','@result')">@User.Identity.Name kan svaret!!</button>
-                    }
-
-                }
+                Skriv ditt namn <input type="text" id="userInput" style="color:black" />
                 <hr />
-            }
 
-            <a asp-action="Index">Tillbaka</a>
+                <div>Fråga: <span id="question"></span></div>
+
+                @*if (User.Identity.IsAuthenticated) //Man måste vara inloggad för att se mer än bara frågorna*@
+                <div>Svar: <span id="answer"></span></div>
+                <div id="spotifyUrl"></div>
+
+                <hr />
+
+                <div>
+                    <input type="button" class="sendButton" value="Jag kan svaret!!" style="color:black" />
+                </div>
+
+                <div>
+                    <ul id="resultList"></ul>
+                </div>
+
+                <hr />
+
+                <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
+            </div>
+
+            <div id="quizFinished">
+            </div>
         </div>
     </div>
-    }
-    <script>
+}
 
-        async function printName(name, resultIndex) {
+<script>
 
-            console.log(name);
-            console.log(resultIndex);
+    async function nextQuestion() {
+        let response = await fetch("/quiz/nextquestion",
+            {
+                method: "GET"
+            });
 
-            var today = new Date();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + ":" + today.getMilliseconds();
+        let currentQuestion;
 
-            let result = document.getElementById(resultIndex);
-            result.innerHTML = 'Stopp!! ' + name + ' tryckte på knappen kl ' + time + ' !';
-
+        if (response.status === 200) {
+            //currentQuestion = response.json();
+            //console.log('Fråga nr: ' + currentQuestion)
         }
     </script>
-    
+    }
