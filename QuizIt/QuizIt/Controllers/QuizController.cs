@@ -52,6 +52,7 @@ namespace QuizIt.Controllers
             if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
             {
                 _quizHub.Clients.All.SendAsync("QuizFinished").Wait();
+                CurrentQuestion = 0;
                 //return View("QuizCompleted"); //Kommer ej till vyn
                 return Ok();
             }
@@ -89,7 +90,6 @@ namespace QuizIt.Controllers
 
             QuestionId = questions.First().Id;
             QuizId = id;
-            CurrentQuestion = 0;
 
 
             return View();
