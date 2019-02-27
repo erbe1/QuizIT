@@ -400,6 +400,14 @@ body, html {
     background-size: cover;
     position: relative;
 }
+.hero-image3 {
+    background-image: url('../images/quizit-omoss.svg');
+    height: 125%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
 
 .hero-text {
     text-align: center;
