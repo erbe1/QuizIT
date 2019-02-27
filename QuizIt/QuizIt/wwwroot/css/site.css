@@ -66,6 +66,7 @@ body {
 .container-footer {
     right: 30px;
     font-family: "Amatic SC";
+    padding-left: 2%;
 }
 
 /* Bilden i om quizit*/
@@ -129,7 +130,7 @@ body {
 .text-block-login{
     font-size: 24px;
     width: 25%;
-    left: 40%;
+    left: 37%;
 }
 .col-md-4{
     width: 85%;
@@ -160,7 +161,7 @@ body {
     height: 150px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     position: absolute;
-    top: 425px;
+    top: 65%;
     left: 25%;
 }
 /* Kortet för spelare */
@@ -249,17 +250,13 @@ h3 {
 }
 
 h4 {
-    font-family: "Amatic SC";
+    
     font-size: 40px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 600;
-    line-height: 15.4px;
-    padding-top: 11px;
+    
     text-align: left;
 }
 
-h5,h6 {
+h4,h5,h6 {
     font-family: "Amatic SC";
     font-size: 60px;
     font-style: normal;
@@ -268,25 +265,16 @@ h5,h6 {
     line-height: 15.4px;
     padding-top: 11px;
     text-align: center;
-    /*width: 50%;*/
+    
 }
 
 h6 {
-    font-family: "Amatic SC";
-    font-size: 60px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 600;
-    line-height: 15.4px;
-    padding-top: 11px;
-    padding-left: 3%;
-    position: center;
-    /*width: 50%;*/
+    font-size: 40px;
 }
 
 p {
     font-family: "Amatic SC";
-    
+    font-size: 22px;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
@@ -385,6 +373,23 @@ body, html {
 
 .hero-image {
     background-image: url('../images/quizit-empty.svg');
+    height: 125%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.hero-image2 {
+    
+    background-image: url('../images/quizit-logga-hero.svg');
+    height: 125%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.hero-image3 {
+    background-image: url('../images/quizit-omoss.svg');
     height: 125%;
     background-position: center;
     background-repeat: no-repeat;
