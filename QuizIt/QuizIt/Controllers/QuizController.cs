@@ -4,21 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
+using QuizIt.Hubs;
 using QuizIt.Models;
 using QuizIt.Models.ViewModels;
 
 namespace QuizIt.Controllers
 {
+
     public class QuizController : Controller
     {
+        public static int QuestionId;
+        public static int CurrentQuestion;
+        public static int QuizId;
+
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<QuizHub> _quizHub;
         public static CreateQuizVM _createquizvm;
 
-        public QuizController(ApplicationDbContext context)
+        public QuizController(ApplicationDbContext context, IHubContext<QuizHub> quizHub)
         {
             _context = context;
+            _quizHub = quizHub;
         }
 
         // GET: Quiz
@@ -29,13 +38,35 @@ namespace QuizIt.Controllers
             return View("Index", vm);
         }
 
-        public async Task<IActionResult> PlayQuiz(int? id)
+        //Testa denna metod i testprojekt!!
+        public IActionResult NextQuestion() //Endast quizledare anropar denna metod
         {
-            if (id == null)
+            CurrentQuestion++;
+
+            var allQuestions = _context.Quizzes
+                                .Include(q => q.QuizQuestions)
+                                .ThenInclude(q => q.Question)
+                                .Single(m => m.Id == QuizId)
+                                .QuizQuestions.Select(x => x.Question).ToList();
+
+            if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
             {
-                return NotFound();
+                _quizHub.Clients.All.SendAsync("QuizFinished").Wait();
+                //return View("QuizCompleted"); //Kommer ej till vyn
+                return Ok();
             }
 
+            var question = allQuestions[CurrentQuestion]; //outOfRange exception
+
+            QuestionId = question.Id;
+
+            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId).Wait();
+
+            return Ok();
+        }
+
+        public IActionResult PlayQuiz(int id)
+        {
             //Göra om nedanstående till metod
             var quiz = _context.Quizzes
             .FirstOrDefault(q => q.Id == id);
@@ -51,23 +82,21 @@ namespace QuizIt.Controllers
                 .Single(m => m.Id == id)
                 .QuizQuestions.Select(x => x.Question);
 
-            if (questions == null)
-            {
-                return NotFound();
-            }
+            //if (questions == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var vm = new QuizQuestionsVm
-            {
-                Quiz = quiz,
-                Questions = questions.ToList()
-            };
+            QuestionId = questions.First().Id;
+            QuizId = id;
+            CurrentQuestion = 0;
 
-            return View(vm);
 
+            return View();
         }
 
         // GET: Quiz/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
