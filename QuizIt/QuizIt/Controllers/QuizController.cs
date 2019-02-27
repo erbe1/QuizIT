@@ -51,8 +51,10 @@ namespace QuizIt.Controllers
 
             if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
             {
-                //_quizHub.Clients.All.SendAsync("DisplayQuestion", "Quizet är slut!").Wait();
-                return View("QuizCompleted"); //Kommer ej till vyn
+                _quizHub.Clients.All.SendAsync("QuizFinished").Wait();
+                CurrentQuestion = 0;
+                //return View("QuizCompleted"); //Kommer ej till vyn
+                return Ok();
             }
 
             var question = allQuestions[CurrentQuestion]; //outOfRange exception
