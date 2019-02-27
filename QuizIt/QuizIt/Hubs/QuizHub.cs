@@ -28,10 +28,11 @@ namespace QuizIt.Hubs
             // Hämtar frågan, skickar ut till klienterna
 
             var questionId = QuizController.QuestionId;
+            var currentQuestion = QuizController.CurrentQuestion+1;
 
             var question = _context.Questions.Single(q => q.Id == questionId);
 
-            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId);
+            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId, currentQuestion);
         }
     }
 }

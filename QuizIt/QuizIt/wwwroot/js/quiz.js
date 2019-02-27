@@ -5,10 +5,11 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 //Disable send button until connection is established
 //document.getElementById("sendButton").disabled = true;
 
-connection.on("DisplayQuestion", function (question,answer,trackId) {
+connection.on("DisplayQuestion", function (question,answer,trackId,currentQuestion) {
 
     document.getElementById("playQuiz").style.display = 'block';
     document.getElementById("question").innerText = question;
+    document.getElementById("questionNumber").innerText = currentQuestion;
     document.getElementById("resultList").innerText = "";
     document.getElementById("answer").innerText = answer;
     document.getElementById("spotifyUrl").innerHTML = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width = "300" height = "80" frameborder = "0" allowtransparency = "true" allow = "encrypted-media" ></iframe >`;

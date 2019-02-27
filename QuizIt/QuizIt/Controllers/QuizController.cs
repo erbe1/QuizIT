@@ -61,7 +61,7 @@ namespace QuizIt.Controllers
 
             QuestionId = question.Id;
 
-            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId).Wait();
+            _quizHub.Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId, CurrentQuestion+1).Wait();
 
             return Ok();
         }
