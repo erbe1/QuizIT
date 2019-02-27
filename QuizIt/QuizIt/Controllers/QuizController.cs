@@ -90,6 +90,7 @@ namespace QuizIt.Controllers
 
             QuestionId = questions.First().Id;
             QuizId = id;
+            CurrentQuestion = 0;
 
 
             return View();
