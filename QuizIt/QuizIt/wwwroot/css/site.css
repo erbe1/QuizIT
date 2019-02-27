@@ -364,6 +364,9 @@ table {
     }
 }
 
+@media (max-width: 760px){
+
+}
 
 body, html {
     height: 100%;
