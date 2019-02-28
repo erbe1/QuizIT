@@ -169,7 +169,7 @@ body {
     left: 45%;
 }
 
-/* This container is needed to position the front and back side */
+/* Positionerar fram- och baksida */
 .flip-card-inner {
     position: relative;
     width: 100%;
@@ -179,12 +179,12 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+/* Horizontell flipp när man hovrar över kortet */
 .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
+/* Positionerar fram och baksida */
 .flip-card-front, .flip-card-back {
     position: absolute;
     width: 100%;
@@ -203,11 +203,15 @@ body {
 /* Style the back side */
 .flip-card-back {
     background-color: black;
-    color: white;
     transform: rotateY(180deg);
     opacity: 0.8;
     
 }
+
+    .flip-card-back a {
+        color: white;
+        font-family: "Amatic SC";
+    }
 
 /* Knappen på baksidan kortet */
 .btn {
@@ -230,33 +234,20 @@ h1 {
 }
 
 h2 {
-    font-family: "Amatic SC";
     font-size: 36px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 700;
     line-height: 26.4px;
 }
 
 h3 {
-    font-family: "Amatic SC";
     font-size: 40px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 600;
-    line-height: 15.4px;
-    padding-top: 11px;
-    text-align: center;
 }
 
 h4 {
-    
     font-size: 40px;
-    
     text-align: left;
 }
 
-h4,h5,h6 {
+h2,h3,h4,h5,h6,h7,h8 {
     font-family: "Amatic SC";
     font-size: 60px;
     font-style: normal;
@@ -270,6 +261,12 @@ h4,h5,h6 {
 
 h6 {
     font-size: 40px;
+}
+h7{
+    font-size: 50px;
+}
+h8{
+    font-size: 30px;
 }
 
 p {
@@ -315,6 +312,8 @@ table {
 
 .a{
     font-size: 22px;
+    color: white;
+    text-align: center;
 }
 
 /* Tidig hamburgarmeny */
@@ -362,6 +361,20 @@ table {
     .collapse.in {
         display: block !important;
     }
+
+    h2,h3,h4,h5,h6,h7 {
+        font-family: "Amatic SC";
+        font-size: 40px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 600;
+        line-height: 15.4px;
+        padding-top: 11px;
+        text-align: center;
+    }
+    h7{
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 760px){
@@ -408,19 +421,3 @@ body, html {
     transform: translate(-50%, -50%);
     color: white;
 }
-
-    .hero-text button {
-        border: none;
-        outline: 0;
-        display: inline-block;
-        padding: 10px 25px;
-        color: black;
-        background-color: #ddd;
-        text-align: center;
-        cursor: pointer;
-    }
-
-        .hero-text button:hover {
-            background-color: #555;
-            color: white;
-        }

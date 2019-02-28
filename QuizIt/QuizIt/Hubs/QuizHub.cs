@@ -23,6 +23,12 @@ namespace QuizIt.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
+        public async Task SendName(string user)
+        {
+            //Spara namnet i static dictionary userName,score?
+            await Clients.All.SendAsync("ReceiveName", user);
+        }
+
         public async Task DisplayQuestion()
         {
             // Hämtar frågan, skickar ut till klienterna
