@@ -45,10 +45,10 @@
                     @*<li><a data-toggle="modal" asp-controller="Spotify" asp-action="Authorize"><b>TEST</b></a></li>*@
 
 
-                    @if (User.IsInRole("Admin"))
-                    {
+                    @*@if (User.IsInRole("Admin"))
+                    {*@
                         <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
-                    }
+                    @*}*@
 
                 </ul>
                 <partial name="_LoginPartial" />

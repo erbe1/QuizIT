@@ -7,9 +7,22 @@
 
 @section Hero{
 
-    <div class="hero-image">
+    @*<div class="hero-image">
         <div class="hero-text">
             <h5>Ändra Quizzet @Model.Quiz.Name</h5>
+        </div>*@
+
+    <div class="herooo">
+    </div>
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Ändra Quizzet @Model.Quiz.Name
+                </h5>
+            </div>
         </div>
         <div class="text-block text-block-create">
             <div class="row">
@@ -71,13 +84,14 @@
                 <a asp-controller="Questions" asp-action="Create" asp-route-quizId="@Model.Quiz.Id" asp-route-quizName="@Model.Quiz.Name">Lägg till frågor</a>
                 <br />
                 <a asp-action="Index">Se alla quiz</a>
-                
+
 
             </div>
         </div>
     </div>
+    <div style="height:380px"></div>
 
-    }
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
