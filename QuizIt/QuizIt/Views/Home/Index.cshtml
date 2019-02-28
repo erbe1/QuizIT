@@ -1,45 +1,98 @@
-﻿@*@{
-
-        ViewBag.IsStartPage = true;
-
-    }*@
-
-
-
+﻿
 @section Hero{
 
-    <div class="hero-image2">
-        
+    <style>
+        .herooo {
+            background-image: url('../images/quizit-empty.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 900px;
+        }
+        .leeeets {
+            font-family: "Amatic SC";
+            font-size: 50px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 600;
+            line-height: 15.4px;
+        }
+    </style>
+
+
+    <div class="herooo">
     </div>
+
+    <div class="container" style="margin-top:-600px;">
+
+        <div class="row">
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-10" style="color:#fff">
+                <div style="margin-top:-110px;" class="leeeets">
+                    LEEEEEET's
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12" style="text-align:center">
+                <h9>
+                    <span style='color: #1E3062; text-shadow: 4px 2px #fff;'>Q</span>
+                    <span style='color: #9FD960; text-shadow: 4px 2px #fff;'>u</span>
+                    <span style='color: #FFF663; text-shadow: 4px 2px #fff;'>i</span>
+                    <span style='color: #1BD6F5; text-shadow: 4px 2px #fff;'>z</span>
+                    <span style='color: #E16096; text-shadow: 4px 2px #fff;'>I</span>
+                    <span style='color: #016d9c; text-shadow: 4px 2px #fff;'>T</span>
+                </h9>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top:80px">
+
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h2>Quizledare</h2>
+                        </div>
+                        <div class="flip-card-back">
+                            <br />
+                            <br />
+                            <a asp-area="Identity" asp-page="/Account/Login"><b>Logga in</b></a>
+                            @*<button class="btn default">Logga in</button>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="flip-card flip-card-right">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h2>Spelare</h2>
+                        </div>
+                        <div class="flip-card-back">
+                            <br />
+                            <br />
+                            <a asp-controller="Quiz" asp-action="Index"><b>Anslut till quizzet</b></a>
+                            @*<a href="~/Views/Quiz/Index.cshtml"><button class="btn default">Anslut till quizzet</button></a>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+
+    </div>
+
 }
 
-<div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <h2>Quizledare</h2>
-        </div>
-        <div class="flip-card-back">
-            <br />
-            <br />
-            <a asp-area="Identity" asp-page="/Account/Login"><b>Logga in</b></a>
-            @*<button class="btn default">Logga in</button>*@
-
-        </div>
-    </div>
-</div>
-<div class="flip-card flip-card-right">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <h2>Spelare</h2>
-        </div>
-        <div class="flip-card-back">
-            <br />
-            <br />
-            <a asp-controller="Quiz" asp-action="Index"><b>Anslut till quizzet</b></a>
-            @*<a href="~/Views/Quiz/Index.cshtml"><button class="btn default">Anslut till quizzet</button></a>*@
-
-        </div>
-    </div>
-</div>
 
 
