@@ -46,9 +46,5 @@ namespace QuizIt.Controllers
         }
 
 
-        public IActionResult Photographer()
-        {
-            return View();
-        }
     }
 }

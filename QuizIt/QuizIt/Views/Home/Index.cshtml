@@ -16,12 +16,13 @@
 <div class="flip-card">
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <h3>Quizledare</h3>
+            <h2>Quizledare</h2>
         </div>
         <div class="flip-card-back">
             <br />
             <br />
-            <button class="btn default">Logga in</button>
+            <a asp-area="Identity" asp-page="/Account/Login"><b>Logga in</b></a>
+            @*<button class="btn default">Logga in</button>*@
 
         </div>
     </div>
@@ -29,12 +30,13 @@
 <div class="flip-card flip-card-right">
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <h3>Spelare</h3>
+            <h2>Spelare</h2>
         </div>
         <div class="flip-card-back">
             <br />
             <br />
-            <button class="btn default">Anslut till quizzet</button>
+            <a asp-controller="Quiz" asp-action="Index"><b>Anslut till quizzet</b></a>
+            @*<a href="~/Views/Quiz/Index.cshtml"><button class="btn default">Anslut till quizzet</button></a>*@
 
         </div>
     </div>
