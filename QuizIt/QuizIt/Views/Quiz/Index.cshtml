@@ -11,10 +11,13 @@
             <h5>Quiz</h5>
         </div>
         <div class="text-block-quiz text-block">
+            @if (User.IsInRole("Admin"))
+            {
+                <p>
+                    <a asp-action="Create"><b>Skapa nytt quiz</b></a>
+                </p>
 
-            <p>
-                <a asp-action="Create"><b>Skapa nytt quiz</b></a>
-            </p>
+            }
             <table class="table">
                 <thead>
                     <tr>
@@ -32,10 +35,12 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a> |
-                                <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
-                                @*<a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |*@
-                                <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                                <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a> 
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <span> | </span><a asp-action="Edit" asp-route-id="@item.Id">Ändra</a><span> | </span>
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                                }
                             </td>
                         </tr>
                     }
