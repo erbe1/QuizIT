@@ -101,6 +101,7 @@ namespace QuizIt.Controllers
             QuizId = id;
             CurrentQuestion = 0;
 
+            PlayersScore = new Dictionary<string, int>();
 
             return View();
         }

@@ -157,6 +157,10 @@ if (nameButton) {
             event.srcElement.disabled = "";
             //return console.error(err.toString());
         });
+        let userEntersName = document.getElementById("userEntersName");
+        if (userEntersName) {
+            userEntersName.style.display = "none";
+        }
         event.preventDefault();
     });
 }
