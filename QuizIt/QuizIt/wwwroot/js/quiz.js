@@ -37,10 +37,30 @@ connection.on("DisplayQuestion", function (question, answer, trackId, currentQue
 
 });
 
-connection.on("ReceiveName", function (user, score) {
-    var li = document.createElement("li");
-    li.textContent = user + " " + score + " poäng";
-    document.getElementById("joinedPlayers").appendChild(li);
+connection.on("ReceiveName", function (userScores) { //(user, score) {
+    console.log("userScores", userScores);
+    let jp = document.getElementById("joinedPlayers");
+    jp.innerHTML = "";
+
+    for (let userScore of userScores) {
+        let userName = userScore.name; //  Object.keys(userScore)[0]
+        let score = userScore.score; // userScore[userName];
+        jp.innerHTML += `<li>${userName} ${score} poäng</li>`;
+    }
+
+
+    //let userId = document.getElementById("user");
+
+    //if (userId) {
+    //    userId.textContent = user + " " + score + " poäng";
+    //} else {
+    //    let li = document.createElement("li");
+    //    li.id = user;
+    //    li.textContent = user + " " + score + " poäng";
+    //    document.getElementById("joinedPlayers").appendChild(li);
+    //}
+
+
 
 });
 
@@ -78,6 +98,7 @@ connection.on("ReceiveMessage", function (user, message, result) {
 });
 
 connection.on("QuizFinished", function () {
+    //skicka med playersscore så det skrivs ut när quizet är slut
     document.getElementById("quizFinished").style.display = 'block';
     document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
     document.getElementById("playQuiz").style.display = 'none';
