@@ -32,6 +32,15 @@ connection.on("ReceiveName", function (user) {
     var li = document.createElement("li");
     li.textContent = user;
     document.getElementById("joinedPlayers").appendChild(li);
+
+    var button = document.createElement("button");
+    button.style.color = "black";
+    button.innerHTML = user;
+
+    let playersScore = document.getElementById("playersScore");
+    if (playersScore) {
+        playersScore.appendChild(button);
+    }
 });
 
 connection.on("ReceiveMessage", function (user, message, result) {
