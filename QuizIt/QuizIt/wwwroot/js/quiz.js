@@ -83,7 +83,6 @@ connection.on("ReceiveMessage", function (user, message, result) {
         button.className = "scoreButton";
 
         button.addEventListener("click", function (event) {
-            alert('går in i score metoden');
             event.srcElement.disabled = "disabled";
             //var user = document.getElementById("userInput").value;
 
@@ -158,6 +157,10 @@ if (nameButton) {
             event.srcElement.disabled = "";
             //return console.error(err.toString());
         });
+        let userEntersName = document.getElementById("userEntersName");
+        if (userEntersName) {
+            userEntersName.style.display = "none";
+        }
         event.preventDefault();
     });
 }
