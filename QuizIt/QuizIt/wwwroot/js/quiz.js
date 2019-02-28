@@ -42,14 +42,7 @@ connection.on("ReceiveName", function (user) {
     li.textContent = user;
     document.getElementById("joinedPlayers").appendChild(li);
 
-    var button = document.createElement("button");
-    button.style.color = "black";
-    button.innerHTML = user;
 
-    let playerButtons = document.getElementById("playerButtons");
-    if (playerButtons) {
-        playerButtons.appendChild(button);
-    }
 });
 
 connection.on("ReceiveMessage", function (user, message, result) {
@@ -59,6 +52,15 @@ connection.on("ReceiveMessage", function (user, message, result) {
     var li = document.createElement("li");
     li.textContent = encodedMsg;
     document.getElementById("resultList").appendChild(li);
+
+    var button = document.createElement("button");
+    button.style.color = "black";
+    button.innerHTML = user;
+
+    let playerButtons = document.getElementById("playerButtons");
+    if (playerButtons) {
+        playerButtons.appendChild(button);
+    }
 });
 
 connection.on("QuizFinished", function () {
@@ -80,17 +82,17 @@ connection.start().then(function () {
 });
 
 
-for (let x of document.getElementsByClassName("sendButton")) {
-    x.addEventListener("click", function (event) {
-        event.srcElement.disabled = "disabled";
-        var user = document.getElementById("userInput").value;
+//for (let x of document.getElementsByClassName("sendButton")) {
+//    x.addEventListener("click", function (event) {
+//        event.srcElement.disabled = "disabled";
+//        var user = document.getElementById("userInput").value;
 
-        connection.invoke("SendMessage", user).catch(function (err) {
-            return console.error(err.toString());
-        });
-        event.preventDefault();
-    });
-}
+//        connection.invoke("SendMessage", user).catch(function (err) {
+//            return console.error(err.toString());
+//        });
+//        event.preventDefault();
+//    });
+//}
 
 let answerButton = document.getElementById("answerButton");
 
@@ -98,11 +100,27 @@ let answerButton = document.getElementById("answerButton");
 if (answerButton) {
     answerButton.addEventListener("click", function (event) {
         var user = document.getElementById("userInput").value;
-        connection.invoke("SendName", user).catch(function (err) {
+        event.srcElement.disabled = "disabled";
+        connection.invoke("SendMessage", user).catch(function (err) {
             return console.error(err.toString());
         });
         event.preventDefault();
     });
 }
 
+
+//nameButton sparar spelarens namn
+let nameButton = document.getElementById("nameButton");
+
+//Om "nameButton" är något vettigt, dvs inte null/undefined osv
+if (nameButton) {
+    nameButton.addEventListener("click", function (event) {
+        var user = document.getElementById("userInput").value;
+        event.srcElement.disabled = "disabled";
+        connection.invoke("SendName", user).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+}
 
