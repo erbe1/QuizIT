@@ -101,6 +101,23 @@ connection.on("QuizFinished", function () {
     document.getElementById("quizFinished").style.display = 'block';
     document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
     document.getElementById("playQuiz").style.display = 'none';
+
+
+    let quizFinished = document.getElementById("quizFinished");
+    quizFinished.style.display = 'block';
+    quizFinished.innerHTML = '<h1>Quizet är slut!</h1></br><h1>Resultat</h1>';
+
+    for (let userScore of userScores) {
+        let userName = userScore.name; //  Object.keys(userScore)[0]
+        let score = userScore.score; // userScore[userName];
+        quizFinished.innerHTML += `<li>${userName} ${score} poäng</li>`;
+    }
+
+    quizFinished.innerHTML += '</br > <a href="/quiz/index">Tillbaka till quizen</a>';
+
+
+});
+
 });
 
 connection.start().then(function () {
