@@ -10,14 +10,21 @@
 
             <div id="playQuiz">
 
+                <div>
+                    <p>Anslutna spelare:</p>
+                    <ul id="joinedPlayers"></ul>
+                </div>
+                <hr />
+
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <p>Skriv ditt namn </p><input type="text" id="userInput" style="color:black" />
+                    <input id="nameButton" type="button" value="Spara namn" style="color:black" />
                     <hr />
                 }
 
 
-                    <div>Fråga <span id="questionNumber"></span><div id="question"></div></div>
+                <div>Fråga <span id="questionNumber"></span><div id="question"></div></div>
                 <hr />
 
                 @if (User.Identity.IsAuthenticated)
@@ -42,6 +49,8 @@
                 <div>
                     <ul id="resultList"></ul>
                 </div>
+
+
 
                 @if (User.Identity.IsAuthenticated)
                 {
