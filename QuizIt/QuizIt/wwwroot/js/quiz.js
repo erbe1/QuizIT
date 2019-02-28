@@ -7,7 +7,6 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 //document.getElementById("sendButton").disabled = true;
 
 connection.on("DisplayQuestion", function (question, answer, trackId, currentQuestion) {
-    //document.getElementById("answerButton").disabled = ""; funkar ej..?
     document.getElementById("quizFinished").style.display = 'none';
     document.getElementById("playQuiz").style.display = 'block';
     document.getElementById("question").innerText = question;
@@ -16,6 +15,8 @@ connection.on("DisplayQuestion", function (question, answer, trackId, currentQue
 
     let answerSection = document.getElementById("answer");
     let spotifyUrl = document.getElementById("spotifyUrl");
+    let answerButton = document.getElementById("answerButton");
+    let playerButtons = document.getElementById("playerButtons");
 
     //Om answerSection och SpotifyUrl inte är null/undefined
     if (answerSection) {
@@ -24,6 +25,14 @@ connection.on("DisplayQuestion", function (question, answer, trackId, currentQue
 
     if (spotifyUrl) {
         spotifyUrl.innerHTML = `<iframe src="https://open.spotify.com/embed/track/${trackId}" width = "300" height = "80" frameborder = "0" allowtransparency = "true" allow = "encrypted-media" ></iframe >`;
+    }
+
+    if (answerButton) {
+        answerButton.disabled = "";
+    }
+
+    if (playerButtons) {
+        playerButtons.innerText = "";
     }
 
 });
@@ -37,9 +46,9 @@ connection.on("ReceiveName", function (user) {
     button.style.color = "black";
     button.innerHTML = user;
 
-    let playersScore = document.getElementById("playersScore");
-    if (playersScore) {
-        playersScore.appendChild(button);
+    let playerButtons = document.getElementById("playerButtons");
+    if (playerButtons) {
+        playerButtons.appendChild(button);
     }
 });
 

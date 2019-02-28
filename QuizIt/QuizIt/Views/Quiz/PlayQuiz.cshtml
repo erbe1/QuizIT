@@ -48,13 +48,18 @@
                 <p>Spelare som tryckt på knappen:</p>
                 <div>
                     <ul id="resultList"></ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div id="playerButtons"></div>
+                    }
                 </div>
 
 
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <div id="playersScore"></div>
+                    @*<div id="playersScore"></div>*@
                     <hr />
                     <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
 
