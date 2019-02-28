@@ -39,16 +39,16 @@
             <div class="navbar-collapse collapse" style="height: 50px">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About"><b>Om QuizIt</b></a></li>
-                    @*<li><a asp-controller="Spotify" asp-action="Authorize"><b>Quiz</b></a></li>*@
+                    <li><a asp-controller="Spotify" asp-action="Authorize"><b>Quiz</b></a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact"><b>Kontakta oss</b></a></li>
 
                     @*<li><a data-toggle="modal" asp-controller="Spotify" asp-action="Authorize"><b>TEST</b></a></li>*@
 
 
-                    @if (User.IsInRole("Admin"))
-                    {
+                    @*@if (User.IsInRole("Admin"))
+                    {*@
                         <li><a asp-area="" asp-controller="Admins" id="togreen" asp-action="Index"><b>Admin</b></a></li>
-                    }
+                    @*}*@
 
                 </ul>
                 <partial name="_LoginPartial" />

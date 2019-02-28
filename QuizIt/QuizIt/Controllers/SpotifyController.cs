@@ -53,10 +53,14 @@ namespace QuizIt.Controllers
             return View("Index");
         }
 
-        public IActionResult Search(CreateQuizVM createquizvm, int quizId)
+        public async Task<IActionResult> Search(CreateQuizVM createquizvm, int quizId)
         {
+            if (string.IsNullOrWhiteSpace(createquizvm.Question.TrackTitle))
+            {
+                return RedirectToAction("Index", "Quiz");
+            }
             var service = new PlaybackService();
-            var result = service.GetSpotifyTracks(createquizvm.Question.TrackTitle).Result;
+            var result = await service.GetSpotifyTracks(createquizvm.Question.TrackTitle);
             QuizQuestionsVm vm = new QuizQuestionsVm();
             vm.Suggestions = result.tracks.items.Select(x => x.id).ToList();
             vm.Quiz = new Quiz

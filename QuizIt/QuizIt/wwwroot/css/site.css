@@ -68,7 +68,7 @@ body {
 .container-footer {
     right: 30px;
     font-family: "Amatic SC";
-    padding-left: 2%;
+    padding-right: 2%;
     padding-top: 12%;
     text-align: end;
 }
@@ -296,10 +296,6 @@ p {
 input{
     font-family: "Armata";
     font-size: 18px;
-}
-
-button{
-    font-family: "Amatic SC";
 }
 
 blockquote {

@@ -4,54 +4,69 @@
     ViewData["Title"] = "Details";
 }
 
-<img class="img-responsive" src="~/images/Quizit-empty.svg" />
-<div class="text-block-title">
-    <h5>Detaljer för Quizzet @Model.Quiz.Name</h5>
+@*<img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title">
+        <h5>Detaljer för Quizzet @Model.Quiz.Name</h5>
+    </div>*@
+
+<div class="herooo">
 </div>
 
-<div class="text-block">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Fråga
-                </th>
-                <th>
-                    Svar
-                </th>
-                <th>
-                    Låt
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Questions)
-            {
+<div class="container" style="margin-top:-600px;">
+    <div class="row">
+
+        <div class="col-sm-12" style="color:#fff">
+            <h5>
+                Detaljer för Quizzet @Model.Quiz.Name
+            </h5>
+        </div>
+    </div>
+
+    <div class="text-block">
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrackQuestion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Answer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrackTitle)
-                    </td>
-                    <td>
-                        <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
-                        <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-                        <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
-                    </td>
+                    <th>
+                        Fråga
+                    </th>
+                    <th>
+                        Svar
+                    </th>
+                    <th>
+                        Låt
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Questions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrackQuestion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Answer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrackTitle)
+                        </td>
+                        <td>
+                            <a asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id">Ändra</a> |
+                            <a asp-controller="Questions" asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                            <a asp-controller="Questions" asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
 
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Quiz.Id">Ändra</a> |
-        <a asp-action="Index">Se alla quiz</a>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Quiz.Id">Ändra</a> |
+            <a asp-action="Index">Se alla quiz</a>
+        </div>
     </div>
 </div>

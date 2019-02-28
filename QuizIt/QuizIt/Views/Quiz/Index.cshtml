@@ -5,48 +5,65 @@
 
 @section Hero{
 
-
-    <div class="hero-image">
-        <div class="hero-text">
-            <h5>Quiz</h5>
-        </div>
-        <div class="text-block-quiz text-block">
-            @if (User.IsInRole("Admin"))
-            {
-                <p>
-                    <a asp-action="Create"><b>Skapa nytt quiz</b></a>
-                </p>
-
-            }
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Namn
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Quizzez)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a> 
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <span> | </span><a asp-action="Edit" asp-route-id="@item.Id">Ändra</a><span> | </span>
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+    <div class="herooo">
     </div>
 
+    @*<div class="hero-image">
+        <div class="hero-text">
+            <h5>Quiz</h5>
+        </div>*@
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Alla Quiz
+                </h5>
+            </div>
+        </div>
+
+        <div class="text-block-quiz text-block">
+            <div class="row">
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create"><b>Skapa nytt quiz</b></a>
+                    </p>
+
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Namn
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Quizzez)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    <a asp-action="PlayQuiz" asp-route-id="@item.Id">Kör quiz</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <span> | </span><a asp-action="Edit" asp-route-id="@item.Id">Ändra</a><span> | </span>
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div style="height:380px"></div>
 }
