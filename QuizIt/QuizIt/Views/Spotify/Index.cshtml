@@ -2,19 +2,31 @@
 
 @section Hero{
 
-    <div class="hero-image">
+    @*<div class="hero-image">
         <div class="hero-text">
             <h5>Lägg till låt</h5>
+        </div>*@
+    <div class="herooo">
+    </div>
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Lägg till låt
+                </h5>
+            </div>
         </div>
         <div class="text-block text-block-quiz">
             <div class="centerContent">
                 @*<div class="tileContainer">
-                    <a asp-action="Play" class="menueButton">Play</a>
-                </div>
-                <div class="tileContainer">
+                        <a asp-action="Play" class="menueButton">Play</a>
+                    </div>
+                    <div class="tileContainer">
 
-                    <a asp-action="Paus" class="menueButton">Paus</a>
-                </div>*@
+                        <a asp-action="Paus" class="menueButton">Paus</a>
+                    </div>*@
                 @*<input type="hidden" name="quizId" value="@Model.Quiz.Id" />*@
 
                 <div class="row">
@@ -41,15 +53,11 @@
                             </div>
                             <a asp-controller="Quiz" asp-action="Index">Tillbaka</a>
                             @*<div class="form-group">
-            <input type="submit" value="Spara" class="btn btn-default" />
-        </div>*@
+                                    <input type="submit" value="Spara" class="btn btn-default" />
+                                </div>*@
                         </form>
                     </div>
                 </div>
-
-
-
-
 
 
                 <div>
@@ -75,4 +83,4 @@
             </div>
         </div>
     </div>
-    }
+}

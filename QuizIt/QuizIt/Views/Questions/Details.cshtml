@@ -4,39 +4,52 @@
     ViewData["Title"] = "Details";
 }
 
-<img class="img-responsive" src="~/images/Quizit-empty.svg" />
-<div class="text-block-title">
-    <h5>Detaljer</h5>
+@*<img class="img-responsive" src="~/images/Quizit-empty.svg" />
+    <div class="text-block-title">
+        <h5>Detaljer</h5>
+    </div>*@
+<div class="herooo">
 </div>
 
-<div class="text-block">
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Fråga
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.TrackQuestion)
-            </dd>
-            <dt>
-                Svar
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Answer)
-            </dd>
-            <dt>
-                Låt
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.TrackTitle)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Ändra</a> |
-        <a asp-action="Index">Se alla frågor</a> |
-        <a asp-controller="Quiz" asp-action="Index">Tillbaka</a>
+<div class="container" style="margin-top:-600px;">
+    <div class="row">
 
+        <div class="col-sm-12" style="color:#fff">
+            <h5>
+                Detaljer
+            </h5>
+        </div>
+    </div>
+
+    <div class="text-block">
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Fråga
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TrackQuestion)
+                </dd>
+                <dt>
+                    Svar
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Answer)
+                </dd>
+                <dt>
+                    Låt
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TrackTitle)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">Ändra</a> |
+            <a asp-action="Index">Se alla frågor</a> |
+            <a asp-controller="Quiz" asp-action="Index">Tillbaka</a>
+
+        </div>
     </div>
 </div>

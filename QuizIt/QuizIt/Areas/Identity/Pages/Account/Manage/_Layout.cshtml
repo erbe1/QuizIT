@@ -61,32 +61,44 @@
     <partial name="_CookieConsentPartial" />
 
 
-        <div class="hero-image">
-            <div class="hero-text">
-                <h5>Hantera ditt konto</h5>
+    @*<div class="hero-image">
+        <div class="hero-text">
+            <h5>Hantera ditt konto</h5>
+        </div>*@
+    <div class="herooo">
+    </div>
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Hantera ditt konto
+                </h5>
             </div>
+        </div>
 
-            <div class="text-block text-block-contact text-block-quiz">
+        <div class="text-block text-block-contact text-block-quiz">
 
-                <div>
-                    <h3>Ändra dina kontoinställningar</h3>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">
-                            <partial name="_ManageNav" />
-                        </div>
-                        <div class="col-md-9">
-                            @RenderBody()
-                        </div>
-                    </div>
+            <div class="row">
+                <h6>Ändra dina kontoinställningar</h6>
+            </div>
+            <hr />  
+            <div class="row-body">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
                 </div>
             </div>
         </div>
-    
+    </div>
 
+    <div style="height:380px"></div>
     <div class="container-body-content">
         @RenderBody()
-        <hr />
+
     </div>
     <footer>
         <div class="container-footer">
