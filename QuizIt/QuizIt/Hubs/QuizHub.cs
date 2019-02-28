@@ -17,6 +17,18 @@ namespace QuizIt.Hubs
             _context = context;
         }
 
+        public async Task UpdateScore(string user)
+        {
+            int score = QuizController.PlayersScore[user];
+            score++;
+            QuizController.PlayersScore[user] = score;
+            //QuizController.PlayersScore[user] = QuizController.PlayersScore[user] + 1;
+            //hämta user från dic, sätt score till score++
+
+            await Clients.All.SendAsync("ReceiveName", user,score); //Skicka med score också
+            //Ändra i ReceiveName metoden så score skrivs ut också =) 
+        }
+
         public async Task SendMessage(string user)
         {
             string message = $" tryckte på knappen {DateTime.Now.Hour} : {DateTime.Now.Minute} : {DateTime.Now.Second} : {DateTime.Now.Millisecond}";
@@ -26,7 +38,10 @@ namespace QuizIt.Hubs
         public async Task SendName(string user)
         {
             //Spara namnet i static dictionary userName,score?
-            await Clients.All.SendAsync("ReceiveName", user);
+            int score = 0;
+            QuizController.PlayersScore.Add(user, score);
+
+            await Clients.All.SendAsync("ReceiveName", user,score);
         }
 
         public async Task DisplayQuestion()

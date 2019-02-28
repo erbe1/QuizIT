@@ -19,6 +19,7 @@ namespace QuizIt.Controllers
         public static int QuestionId;
         public static int CurrentQuestion;
         public static int QuizId;
+        public static Dictionary<string, int> PlayersScore = new Dictionary<string, int>();
 
         private readonly ApplicationDbContext _context;
         private readonly IHubContext<QuizHub> _quizHub;
@@ -36,6 +37,14 @@ namespace QuizIt.Controllers
             QuizQuestionsVm vm = new QuizQuestionsVm();
             vm.Quizzez = await _context.Quizzes.ToListAsync();
             return View("Index", vm);
+        }
+
+        public IActionResult AddScoreToPlayer(string user, int score) //ta in user
+        {
+            score++;
+            PlayersScore.Add(user, score);
+
+            return Ok();
         }
 
         //Testa denna metod i testprojekt!!
