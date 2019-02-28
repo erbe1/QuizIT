@@ -77,7 +77,7 @@ namespace QuizIt.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return Redirect("/Quiz");
+                    return Redirect("/Spotify/Authorize");
                 }
                 if (result.RequiresTwoFactor)
                 {
