@@ -23,15 +23,22 @@ namespace QuizIt.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
+        public async Task SendName(string user)
+        {
+            //Spara namnet i static dictionary userName,score?
+            await Clients.All.SendAsync("ReceiveName", user);
+        }
+
         public async Task DisplayQuestion()
         {
             // Hämtar frågan, skickar ut till klienterna
 
             var questionId = QuizController.QuestionId;
+            var currentQuestion = QuizController.CurrentQuestion+1;
 
             var question = _context.Questions.Single(q => q.Id == questionId);
 
-            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId);
+            await Clients.All.SendAsync("DisplayQuestion", question.TrackQuestion, question.Answer, question.TrackId, currentQuestion);
         }
     }
 }
