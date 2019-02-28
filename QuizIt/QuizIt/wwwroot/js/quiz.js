@@ -42,24 +42,37 @@ connection.on("ReceiveName", function (user, score) {
     li.textContent = user + " " + score + " poäng";
     document.getElementById("joinedPlayers").appendChild(li);
 
-
 });
 
 connection.on("ReceiveMessage", function (user, message, result) {
     console.log(result);
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user + msg;
-    var li = document.createElement("li");
+    let msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let encodedMsg = user + msg;
+    let li = document.createElement("li");
     li.textContent = encodedMsg;
     document.getElementById("resultList").appendChild(li);
 
-    var button = document.createElement("button");
-    button.style.color = "black";
-    button.innerHTML = user;
-    button.className = "scoreButton";
+
 
     let playerButtons = document.getElementById("playerButtons");
     if (playerButtons) {
+
+        let button = document.createElement("button");
+        button.style.color = "black";
+        button.innerHTML = user;
+        button.className = "scoreButton";
+
+        button.addEventListener("click", function (event) {
+            alert('går in i score metoden');
+            event.srcElement.disabled = "disabled";
+            //var user = document.getElementById("userInput").value;
+
+            connection.invoke("UpdateScore", user).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+
         playerButtons.appendChild(button);
     }
 });
@@ -120,7 +133,9 @@ if (nameButton) {
         var user = document.getElementById("userInput").value;
         event.srcElement.disabled = "disabled";
         connection.invoke("SendName", user).catch(function (err) {
-            return console.error(err.toString());
+            alert("namnet '" +user+ "' upptaget!")
+            event.srcElement.disabled = "";
+            //return console.error(err.toString());
         });
         event.preventDefault();
     });

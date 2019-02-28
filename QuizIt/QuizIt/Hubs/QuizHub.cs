@@ -39,6 +39,9 @@ namespace QuizIt.Hubs
         {
             //Spara namnet i static dictionary userName,score?
             int score = 0;
+
+
+
             QuizController.PlayersScore.Add(user, score);
 
             await Clients.All.SendAsync("ReceiveName", user,score);
