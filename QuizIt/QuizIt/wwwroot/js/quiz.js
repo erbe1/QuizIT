@@ -118,7 +118,7 @@ connection.on("QuizFinished", function () {
 
 });
 
-});
+
 
 connection.start().then(function () {
 

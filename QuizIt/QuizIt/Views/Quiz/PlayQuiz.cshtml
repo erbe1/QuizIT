@@ -30,9 +30,12 @@
 
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <p>Skriv ditt namn </p><input type="text" id="userInput" style="color:black" />
-                    <input id="nameButton" type="button" value="Spara namn" style="color:black" />
-                    <hr />
+                    <div id="userEntersName">
+
+                        <p>Skriv ditt namn </p><input type="text" id="userInput" style="color:black" />
+                        <input id="nameButton" type="button" value="Spara namn" style="color:black" />
+                        <hr />
+                    </div>
                 }
 
 
@@ -71,7 +74,7 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @*<div id="playersScore"></div>*@
+                    <div id="playersScore"></div>
                     <hr />
                     <button onclick="nextQuestion()" style="color:black">Nästa fråga</button>
 
