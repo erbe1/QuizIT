@@ -96,7 +96,7 @@ connection.on("ReceiveMessage", function (user, message, result) {
     }
 });
 
-connection.on("QuizFinished", function () {
+connection.on("QuizFinished", function (userScores) {
     //skicka med playersscore så det skrivs ut när quizet är slut
     document.getElementById("quizFinished").style.display = 'block';
     document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
