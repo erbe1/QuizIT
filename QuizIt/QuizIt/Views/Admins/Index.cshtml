@@ -23,9 +23,9 @@
 
                         <div class="form-group">
                             <label asp-for="Role">Roller</label>
-                            <select class="form-control" asp-for="Role" asp-items="@Model.AllRoles">
-                                <option>Välj roll</option>
-                            </select>
+                            <input class="form-control" asp-for="Role" asp-items="@Model.AllRoles">
+                               @* <option>Välj roll</option>*@
+                            </>
                         </div>
 
                         <div class="form-group">
