@@ -293,6 +293,10 @@ p {
     line-height: 20px;
 }
 
+input{
+    font-family: "Armata";
+}
+
 blockquote {
     font-family: "Amatic SC";
     font-size: 21px;

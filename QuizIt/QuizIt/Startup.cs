@@ -16,6 +16,7 @@ using QuizIt.Services.Spotify;
 using QuizIt.Services;
 using QuizIt.Models;
 using QuizIt.Hubs;
+using QuizIt.Models.Spotify;
 
 namespace QuizIt
 {
@@ -54,6 +55,9 @@ namespace QuizIt
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSignalR();
+
+            services.Configure<SpotifyApiConfig>(Configuration.GetSection("SpotifyApiConfig"));
+            services.Configure<SiteConfig>(Configuration.GetSection("SiteConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using QuizIt.Models;
+using QuizIt.Models.Spotify;
 using QuizIt.Models.Spotify.API;
 using System;
 using System.Collections.Generic;
@@ -15,17 +18,23 @@ namespace QuizIt.Services.Spotify
         //AUTHENTICATION 
         const string BaseURL = "https://accounts.spotify.com/authorize";
         const string APITokenURL = "https://accounts.spotify.com/api/token";
-        const string ClientID = "d0c8f0103d91489d8f6ec4c18e003a6d";
-        const string ClientSecret = "b1afdacbb6e74065b586689be77528b0";
+        const string ClientID = "3477b483f7e1404ea1c8d6061ff5d815";
 
-        const string RedirectURI = "https://localhost:44353/spotify/callback/";
         const string scope_ModifyPlayback = "user-modify-playback-state";
+        private readonly IOptions<SpotifyApiConfig> _spotifyapiconfig;
+        private readonly IOptions<SiteConfig> _siteconfig;
+
         //public string AccessToken { get; private set; }
         //public DateTime TokenValidTo { get; private set; }
+        public AuthenticationService(IOptions<SpotifyApiConfig> spotifyapiconfig, IOptions<SiteConfig> siteconfig)
+        {
+            _spotifyapiconfig = spotifyapiconfig;
+            _siteconfig = siteconfig;
+        }
 
         public string GetRequestURI()
         {
-            return $"{BaseURL}?client_id={ClientID}&response_type=code&redirect_uri={RedirectURI}&scope={scope_ModifyPlayback}&show_dialog=true";
+            return $"{BaseURL}?client_id={ClientID}&response_type=code&redirect_uri={_siteconfig.Value.SpotifyApiRedirectURI}&scope={scope_ModifyPlayback}&show_dialog=true";
         }
 
         public async Task<UserAccesstokenModel> RequestRefreshAndAccessTokens(string authorizationCode)
@@ -36,7 +45,7 @@ namespace QuizIt.Services.Spotify
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/x-www-form-urlencoded");
 
 
-            var keyAndSecret = Encoding.UTF8.GetBytes(ClientID + ":" + ClientSecret);
+            var keyAndSecret = Encoding.UTF8.GetBytes(ClientID + ":" + _spotifyapiconfig.Value.ClientSecret);
             string authorizationHeaderValue = ("Basic " + Convert.ToBase64String(keyAndSecret));
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorizationHeaderValue);
 
@@ -44,7 +53,7 @@ namespace QuizIt.Services.Spotify
             {
                 { "grant_type", "authorization_code" },
                 { "code", authorizationCode },
-                { "redirect_uri", RedirectURI }
+                { "redirect_uri", _siteconfig.Value.SpotifyApiRedirectURI }
             };
 
             var content = new FormUrlEncodedContent(bodyParameters);
