@@ -3,10 +3,23 @@
 
 @section Hero{
 
-    <div class="hero-image">
+    @*<div class="hero-image">
         <div class="hero-text">
             <h5>Skapa ny fråga för Quizzet "@Model.Quiz.Name"</h5>
+        </div>*@
+    <div class="herooo">
+    </div>
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Skapa ny fråga för Quizzet "@Model.Quiz.Name"
+                </h5>
+            </div>
         </div>
+
         <div class="text-block text-block-quiz">
 
             <div class="row">
@@ -62,16 +75,17 @@
             </form>
 
             @*<div>
-            <a asp-action="Index">Se alla frågor</a>
-        </div>*@
+                    <a asp-action="Index">Se alla frågor</a>
+                </div>*@
             <a asp-controller="Quiz" asp-action="Index">Tillbaka</a>
 
         </div>
     </div>
+    <div style="height:380px"></div>
 
-    }
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
-    
+

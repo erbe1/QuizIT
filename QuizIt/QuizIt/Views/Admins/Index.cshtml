@@ -3,9 +3,20 @@
 @section Hero{
 
 
-    <div class="hero-image">
+    @*<div class="hero-image">
         <div class="hero-text">
             <h5>Admin</h5>
+        </div>*@
+    <div class="herooo">
+    </div>
+
+    <div class="container" style="margin-top:-600px;">
+        <div class="row">
+            <div class="col-sm-12" style="color:#fff">
+                <h5>
+                    Om QuizIT
+                </h5>
+            </div>
         </div>
 
         <div class="text-block">
@@ -24,7 +35,7 @@
                         <div class="form-group">
                             <label asp-for="Role">Roller</label>
                             <input class="form-control" asp-for="Role" asp-items="@Model.AllRoles">
-                               @* <option>Välj roll</option>*@
+                            @* <option>Välj roll</option>*@
                             </>
                         </div>
 
@@ -40,4 +51,5 @@
             </div>
         </div>
     </div>
+    <div style="height:380px"></div>
 }
