@@ -554,14 +554,15 @@ table {
         background-attachment: fixed;
     }
 
-    .leeeets {
-        font-family: "Amatic SC";
-        font-size: 50px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 600;
-        line-height: 15.4px;
-    }
+.leeeets {
+    font-family: "Amatic SC";
+    font-size: 50px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 600;
+    line-height: 15.4px;
+    margin-top:-110px;
+}
 
     .row-body {
         margin-top: 20px;
