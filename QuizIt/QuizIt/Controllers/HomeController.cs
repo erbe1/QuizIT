@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuizIt.Models;
+using System.Diagnostics;
 
 namespace QuizIt.Controllers
 {
@@ -15,22 +11,13 @@ namespace QuizIt.Controllers
             return View();
         }
 
-        public IActionResult Test()
-        {
-            return Ok("test");
-        }
-
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View("About");
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View("Contact");
         }
 

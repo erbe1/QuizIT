@@ -42,11 +42,6 @@ namespace QuizIt.Services
             return await _roleManager.RoleExistsAsync(rolename);
         }
 
-        //public async Task CreateRoleAsync(string rolename)
-        //{
-        //    await _roleManager.CreateAsync(new ApplicationRole(rolename));
-        //}
-
         public async Task AddToRoleAsync(string email, string rolename)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -60,12 +55,7 @@ namespace QuizIt.Services
                 {
                     throw new Exception("Couldn't create role");
                 }
-                //IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole(role));
-                //if (!result.Succeeded)
-                //    throw new Exception("Couldn't create role");
             }
-
-            // Sätt användare till rollen
 
             if (!await _userManager.IsInRoleAsync(user, rolename))
             {
@@ -73,18 +63,13 @@ namespace QuizIt.Services
                 if (!result.Succeeded)
                     throw new Exception("Couldn't set user for role");
             }
-
-            //await _userManager.AddToRoleAsync(user, rolename);
         }
 
         public async Task CreateAdminIfNotExist()
         {
-            // todo: gör nåt med denna :)
             const string email = "admin@quizit.com";
             const string role = "Admin";
             const string password = "aQ!234567890";
-
-            // Skapa användare
 
             IdentityUser user = await _userManager.FindByNameAsync(email);
 

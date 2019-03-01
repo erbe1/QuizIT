@@ -24,8 +24,6 @@ namespace QuizIt.Services.Spotify
         private readonly IOptions<SpotifyApiConfig> _spotifyapiconfig;
         private readonly IOptions<SiteConfig> _siteconfig;
 
-        //public string AccessToken { get; private set; }
-        //public DateTime TokenValidTo { get; private set; }
         public AuthenticationService(IOptions<SpotifyApiConfig> spotifyapiconfig, IOptions<SiteConfig> siteconfig)
         {
             _spotifyapiconfig = spotifyapiconfig;
@@ -43,7 +41,6 @@ namespace QuizIt.Services.Spotify
 
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/x-www-form-urlencoded");
-
 
             var keyAndSecret = Encoding.UTF8.GetBytes(ClientID + ":" + _spotifyapiconfig.Value.ClientSecret);
             string authorizationHeaderValue = ("Basic " + Convert.ToBase64String(keyAndSecret));

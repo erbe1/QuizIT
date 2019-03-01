@@ -22,11 +22,8 @@ namespace QuizIt.Hubs
             int score = QuizController.PlayersScore[user];
             score++;
             QuizController.PlayersScore[user] = score;
-            //QuizController.PlayersScore[user] = QuizController.PlayersScore[user] + 1;
-            //hämta user från dic, sätt score till score++
 
             await Clients.All.SendAsync("ReceiveName", QuizController.PlayersScore.Select(x=>new { name=x.Key, score=x.Value }).ToList()); // user,score); //Skicka med score också
-            //Ändra i ReceiveName metoden så score skrivs ut också =) 
         }
 
         public async Task SendMessage(string user)
@@ -37,10 +34,7 @@ namespace QuizIt.Hubs
 
         public async Task SendName(string user)
         {
-            //Spara namnet i static dictionary userName,score?
             int score = 0;
-
-
 
             QuizController.PlayersScore.Add(user, score);
 
@@ -49,8 +43,6 @@ namespace QuizIt.Hubs
 
         public async Task DisplayQuestion()
         {
-            // Hämtar frågan, skickar ut till klienterna
-
             var questionId = QuizController.QuestionId;
             var currentQuestion = QuizController.CurrentQuestion+1;
 

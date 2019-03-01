@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using QuizIt.Models.ViewModels;
 using QuizIt.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace QuizIt.Controllers
@@ -29,6 +25,7 @@ namespace QuizIt.Controllers
             _context.Database.Migrate();
             return Ok("Migrate done");
         }
+
         //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
