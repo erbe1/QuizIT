@@ -96,11 +96,21 @@ connection.on("ReceiveMessage", function (user, message, result) {
     }
 });
 
-connection.on("QuizFinished", function () {
+connection.on("QuizFinished", function (userScores) {
     //skicka med playersscore så det skrivs ut när quizet är slut
-    document.getElementById("quizFinished").style.display = 'block';
-    document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
     document.getElementById("playQuiz").style.display = 'none';
+    document.getElementById("quizFinished").style.display = 'block';
+    let quizFinished = document.getElementById("quizFinished");
+    quizFinished.innerHTML = '<h1>Quizet är slut!</h1></br><h1>Resultat</h1>';
+
+    for (let userScore of userScores) {
+        let userName = userScore.name;
+        let score = userScore.score;
+        quizFinished.innerHTML += `<li>${userName} ${userScore} poäng</li>`;
+    }
+
+    quizFinished.innerHTML += '</br><a href="/quiz/index">Tillbaka till quizen</a>';
+
 });
 
 connection.start().then(function () {

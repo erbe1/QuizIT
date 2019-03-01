@@ -60,9 +60,9 @@ namespace QuizIt.Controllers
 
             if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
             {
-                _quizHub.Clients.All.SendAsync("QuizFinished").Wait();
+                PlayersScore.OrderByDescending(s => s.Value);
+                _quizHub.Clients.All.SendAsync("QuizFinished", PlayersScore.Select(x => new { name = x.Key, score = x.Value}).ToList()).Wait();
                 CurrentQuestion = 0;
-                //return View("QuizCompleted"); //Kommer ej till vyn
                 return Ok();
             }
 
