@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using QuizIt.Hubs;
 using QuizIt.Models;
 using QuizIt.Models.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizIt.Controllers
 {
@@ -34,12 +32,14 @@ namespace QuizIt.Controllers
         // GET: Quiz
         public async Task<IActionResult> Index()
         {
-            QuizQuestionsVm vm = new QuizQuestionsVm();
-            vm.Quizzez = await _context.Quizzes.ToListAsync();
+            QuizQuestionsVm vm = new QuizQuestionsVm
+            {
+                Quizzez = await _context.Quizzes.ToListAsync()
+            };
             return View("Index", vm);
         }
 
-        public IActionResult AddScoreToPlayer(string user, int score) //ta in user
+        public IActionResult AddScoreToPlayer(string user, int score)
         {
             score++;
             PlayersScore.Add(user, score);
@@ -48,7 +48,7 @@ namespace QuizIt.Controllers
         }
 
         //Testa denna metod i testprojekt!!
-        public IActionResult NextQuestion() //Endast quizledare anropar denna metod
+        public IActionResult NextQuestion()
         {
             CurrentQuestion++;
 
@@ -58,12 +58,11 @@ namespace QuizIt.Controllers
                                 .Single(m => m.Id == QuizId)
                                 .QuizQuestions.Select(x => x.Question).ToList();
 
-            if (CurrentQuestion >= allQuestions.Count()) //Fråga Oscar
+            if (CurrentQuestion >= allQuestions.Count())
             {
                 PlayersScore.OrderByDescending(s => s.Value);
                 _quizHub.Clients.All.SendAsync("QuizFinished", PlayersScore.Select(x => new { name = x.Key, score = x.Value }).ToList()).Wait();
                 CurrentQuestion = 0;
-                //return View("QuizCompleted"); //Kommer ej till vyn
                 return Ok();
             }
 
@@ -93,10 +92,10 @@ namespace QuizIt.Controllers
                 .Single(m => m.Id == id)
                 .QuizQuestions.Select(x => x.Question);
 
-            //if (questions == null)
-            //{
-            //    return NotFound();
-            //}
+            if (questions == null)
+            {
+                return NotFound();
+            }
 
             QuestionId = questions.First().Id;
             QuizId = id;
@@ -150,8 +149,6 @@ namespace QuizIt.Controllers
         }
 
         // POST: Quiz/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Quiz quiz)
@@ -186,7 +183,7 @@ namespace QuizIt.Controllers
                             .Single(m => m.Id == id)
                             .QuizQuestions.Select(x => x.Question);
 
-            var vm = new QuizQuestionsVm //hämta frågorna också
+            var vm = new QuizQuestionsVm
             {
                 Quiz = quiz,
                 Questions = questions.ToList()
@@ -196,8 +193,6 @@ namespace QuizIt.Controllers
         }
 
         // POST: Quiz/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Quiz quiz)

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuizIt.Data;
 using QuizIt.Models;
 using QuizIt.Models.ViewModels;
 using QuizIt.Services.Spotify;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizIt.Controllers
 {
@@ -48,8 +45,8 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Create
-        public IActionResult Create(int quizId, string quizName, int trackIndex, string trackTitle) //Hit måste man få med index-värdet från Spotify/SearchApi
-        { //Nu fick vi med quizId och trackindex, name är null
+        public IActionResult Create(int quizId, string quizName, int trackIndex, string trackTitle)
+        {
 
             QuizQuestionsVm vm = new QuizQuestionsVm
             {
@@ -70,11 +67,9 @@ namespace QuizIt.Controllers
         }
 
         // POST: Questions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(QuizQuestionsVm vm, int trackIndex, string trackTitle) //Andra gången blir trackIndex och trackTitle NULL
+        public async Task<IActionResult> Create(QuizQuestionsVm vm, int trackIndex, string trackTitle)
         {
             if (ModelState.IsValid)
             {
@@ -82,14 +77,11 @@ namespace QuizIt.Controllers
                 var quiz = await _context.Quizzes.FindAsync(vm.Quiz.Id);
 
                 var service = new PlaybackService();
-                var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result; //Här behöver vi ha med titeln !! ($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
-                //var result = service.GetSpotifyTracks(trackTitle).Result; //Här behöver vi ha med titeln !! ($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+                var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result;
 
-
-                question.TrackId = result.tracks.items[trackIndex].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                question.TrackId = result.tracks.items[trackIndex].id;
                 question.TrackTitle = result.tracks.items[trackIndex].name;
 
-                //Fyller mellantabellen
                 question.QuizQuestions.Add(new QuizQuestion { Quiz = quiz});
 
                 _context.Add(question);
@@ -101,7 +93,7 @@ namespace QuizIt.Controllers
         }
 
         // GET: Questions/Edit/5
-        public async Task<IActionResult> Edit(int? id, int quizId) //Hit måste id följa med
+        public async Task<IActionResult> Edit(int? id, int quizId)
         {
             if (id == null)
             {
@@ -114,23 +106,21 @@ namespace QuizIt.Controllers
                 return NotFound();
             }
 
-            var vm = new QuizQuestionsVm();
-            vm.Question = question;
+            var vm = new QuizQuestionsVm
+            {
+                Question = question
+            };
 
             var quiz = await _context.Quizzes.FindAsync(quizId);
             vm.Quiz = quiz;
-
-
 
             return View(vm);
         }
 
         // POST: Questions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, QuizQuestionsVm vm, int quizId)//Här måste quizId följa med
+        public async Task<IActionResult> Edit(int id, QuizQuestionsVm vm, int quizId)
         {
             if (id != vm.Question.Id)
             {
@@ -141,11 +131,10 @@ namespace QuizIt.Controllers
             {
                 try
                 {
-
                     var service = new PlaybackService();
-                    var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result; //($"https://api.spotify.com/v1/search?q={q.TrackTitle}&type=track").Result;
+                    var result = service.GetSpotifyTracks(vm.Question.TrackTitle).Result;
 
-                    vm.Question.TrackId = result.tracks.items[0].id; //Det är detta som användaren ska kunna välja bland sökresultaten
+                    vm.Question.TrackId = result.tracks.items[0].id;
                     vm.Question.TrackTitle = result.tracks.items[0].name;
 
                     _context.Update(vm.Question);
@@ -162,9 +151,7 @@ namespace QuizIt.Controllers
                         throw;
                     }
                 }
-                //Här måste quizid följa med..
                 return RedirectToAction("Edit", "Quiz", new { vm.Quiz.Id});
-
             }
             return View(vm.Question.Id);
         }

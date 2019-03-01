@@ -61,24 +61,20 @@ namespace QuizIt.Controllers
             }
             var service = new PlaybackService();
             var result = await service.GetSpotifyTracks(createquizvm.Question.TrackTitle);
-            QuizQuestionsVm vm = new QuizQuestionsVm();
-            vm.Suggestions = result.tracks.items.Select(x => x.id).ToList();
-            vm.Quiz = new Quiz
+            QuizQuestionsVm vm = new QuizQuestionsVm
             {
-                Id = quizId
+                Suggestions = result.tracks.items.Select(x => x.id).ToList(),
+                Quiz = new Quiz
+                {
+                    Id = quizId
+                },
+                Question = new Question
+                {
+                    TrackTitle = createquizvm.Question.TrackTitle
+                }
             };
-            vm.Question = new Question
-            {
-                TrackTitle = createquizvm.Question.TrackTitle
-            };
-
-            //Question suggetstion = new Question
-            //{
-            //    Suggestions = result.tracks.items.Select(x => x.id).ToList()
-            //};
 
             return View("Index", vm);
-
         }
     }
 }

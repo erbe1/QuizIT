@@ -3,9 +3,7 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/quizHub").build();
 
-//Disable send button until connection is established
-//document.getElementById("sendButton").disabled = true;
-
+//När en ny fråga visas körs nedanstående
 connection.on("DisplayQuestion", function (question, answer, trackId, currentQuestion) {
     document.getElementById("quizFinished").style.display = 'none';
     document.getElementById("playQuiz").style.display = 'block';
@@ -37,33 +35,21 @@ connection.on("DisplayQuestion", function (question, answer, trackId, currentQue
 
 });
 
-connection.on("ReceiveName", function (userScores) { //(user, score) {
+//När en ny spelare sparat sitt namn läggs det till i dictionairy och skrivs ut enligt nedan
+connection.on("ReceiveName", function (userScores) {
     console.log("userScores", userScores);
     let jp = document.getElementById("joinedPlayers");
     jp.innerHTML = "";
 
     for (let userScore of userScores) {
-        let userName = userScore.name; //  Object.keys(userScore)[0]
-        let score = userScore.score; // userScore[userName];
+        let userName = userScore.name;
+        let score = userScore.score;
         jp.innerHTML += `<li>${userName} ${score} poäng</li>`;
     }
 
-
-    //let userId = document.getElementById("user");
-
-    //if (userId) {
-    //    userId.textContent = user + " " + score + " poäng";
-    //} else {
-    //    let li = document.createElement("li");
-    //    li.id = user;
-    //    li.textContent = user + " " + score + " poäng";
-    //    document.getElementById("joinedPlayers").appendChild(li);
-    //}
-
-
-
 });
 
+//När en spelare tryckt på "Jag kan svaret" skrivs det ut enligt nedan
 connection.on("ReceiveMessage", function (user, message, result) {
     console.log(result);
     let msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -72,8 +58,7 @@ connection.on("ReceiveMessage", function (user, message, result) {
     li.textContent = encodedMsg;
     document.getElementById("resultList").appendChild(li);
 
-
-
+    //När spelaren tryckt på kan svaret skapas en knapp med spelarens namn på
     let playerButtons = document.getElementById("playerButtons");
     if (playerButtons) {
 
@@ -84,8 +69,6 @@ connection.on("ReceiveMessage", function (user, message, result) {
 
         button.addEventListener("click", function (event) {
             event.srcElement.disabled = "disabled";
-            //var user = document.getElementById("userInput").value;
-
             connection.invoke("UpdateScore", user).catch(function (err) {
                 return console.error(err.toString());
             });
@@ -96,46 +79,41 @@ connection.on("ReceiveMessage", function (user, message, result) {
     }
 });
 
+//När quizet är slut skrivs nedanstående ut
 connection.on("QuizFinished", function (userScores) {
-    //skicka med playersscore så det skrivs ut när quizet är slut
-    document.getElementById("quizFinished").style.display = 'block';
-    document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
+    //document.getElementById("quizFinished").style.display = 'block';
+    //document.getElementById("quizFinished").innerHTML = '<h1>Quizet är slut!</h1></br><a href="/quiz/index">Tillbaka till quizen</a>';
     document.getElementById("playQuiz").style.display = 'none';
-
 
     let quizFinished = document.getElementById("quizFinished");
     quizFinished.style.display = 'block';
     quizFinished.innerHTML = '<h1>Quizet är slut!</h1></br><h1>Resultat</h1>';
 
     for (let userScore of userScores) {
-        let userName = userScore.name; //  Object.keys(userScore)[0]
-        let score = userScore.score; // userScore[userName];
+        let userName = userScore.name;
+        let score = userScore.score;
         quizFinished.innerHTML += `<li>${userName} ${score} poäng</li>`;
     }
 
     quizFinished.innerHTML += '</br > <a href="/quiz/index">Tillbaka till quizen</a>';
-
-
 });
 
 
-
+//När sidan laddas skapas kopplingen som sedan kallar på funktionen DisplayQuestion
 connection.start().then(function () {
 
     connection.invoke("DisplayQuestion").catch(function (err) {
         return console.error(err.toString());
     });
 
-
-   // document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
 
+//Varje knapp som skapas lyssnar efter klick, då går den in i score-metoden
 for (let x of document.getElementsByClassName("scoreButton")) {
     x.addEventListener("click", function (event) {
-        alert('går in i score metoden');
         event.srcElement.disabled = "disabled";
         var user = document.getElementById("userInput").value;
 
@@ -148,7 +126,8 @@ for (let x of document.getElementsByClassName("scoreButton")) {
 
 let answerButton = document.getElementById("answerButton");
 
-//Om "answerButton" är något vettigt, dvs inte null/undefined osv
+//Om "answerButton" är något vettigt, dvs inte null/undefined osv,
+//Då lyssnar den efter klick och kallas på SendMessage-funktionen
 if (answerButton) {
     answerButton.addEventListener("click", function (event) {
         var user = document.getElementById("userInput").value;
